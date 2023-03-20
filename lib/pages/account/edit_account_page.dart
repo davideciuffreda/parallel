@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class EditAccountPage extends StatefulWidget {
-  
   @override
   State<EditAccountPage> createState() => _EditAccountPageState();
 }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:parallel/app_widgets/main_drawer.dart';
 
 class BookingsPage extends StatefulWidget {
-  static String routeName = "/bookings";
-
   @override
   State<BookingsPage> createState() => _BookingsPage();
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
 import 'package:parallel/pages/headquarters/favorites_headquarters_page.dart';
+import 'package:parallel/routing/router_constants.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ class MainDrawer extends StatelessWidget {
               child: Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/profile.jpg"),
+                    backgroundImage: AssetImage("assets/images/profile.png"),
                   ),
                   SizedBox(
                     width: 10,
@@ -36,7 +37,7 @@ class MainDrawer extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.of(context)
-                          .pushReplacementNamed(AccountPage.routeName);
+                          .pushReplacementNamed(accountPageRoute);
                     },
                   ),
                 ],
@@ -47,14 +48,14 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text("Home"),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed("/");
+              Navigator.of(context).pushReplacementNamed(homePageUserRoute);
             },
           ),
           ListTile(
             leading: Icon(Icons.manage_accounts),
             title: Text("Profilo"),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(AccountPage.routeName);
+              Navigator.of(context).pushReplacementNamed(accountPageRoute);
             },
           ),
           ListTile(
@@ -62,7 +63,7 @@ class MainDrawer extends StatelessWidget {
             title: Text("Sedi preferite"),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(FavoritesHeadquartersPage.routeName);
+                  .pushReplacementNamed(favHeadquartersPageRoute);
             },
           ),
           ListTile(
@@ -70,7 +71,7 @@ class MainDrawer extends StatelessWidget {
             title: Text("Prenotazioni"),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(BookingsPage.routeName);
+                  .pushReplacementNamed(bookingsPageRoute);
             },
           ),
           SizedBox(

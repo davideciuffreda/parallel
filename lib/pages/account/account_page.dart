@@ -1,12 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 import 'package:parallel/app_widgets/main_drawer.dart';
+import 'package:parallel/routing/router_constants.dart';
 
 class AccountPage extends StatelessWidget {
-  static String routeName = '/profile';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +26,7 @@ class AccountPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                         child: CircleAvatar(
                           backgroundImage:
-                              AssetImage("assets/images/profile.jpg"),
+                              AssetImage("assets/images/profile.png"),
                         ),
                       ),
                     ),

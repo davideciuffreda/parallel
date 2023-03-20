@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:parallel/app_widgets/main_drawer.dart';
 
 class FavoritesHeadquartersPage extends StatefulWidget {
-  static String routeName = "/fav-headquarters";
-
   @override
   State<FavoritesHeadquartersPage> createState() =>
       _FavoritesHeadquartersPageState();
