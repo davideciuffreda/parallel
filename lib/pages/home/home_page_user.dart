@@ -4,7 +4,7 @@ import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
 import 'package:parallel/pages/notifications/notifications_page.dart';
-import 'package:parallel/app_widgets/main_drawer.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class HomePageUser extends StatefulWidget {

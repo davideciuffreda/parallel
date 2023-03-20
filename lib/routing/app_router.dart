@@ -8,14 +8,11 @@ import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/headquarters/favorites_headquarters_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
-import 'package:parallel/pages/login/login_page.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case loginPageRoute:
-        return MaterialPageRoute(builder: (context) => LoginPage());
       case homePageUserRoute:
         return MaterialPageRoute(builder: (context) => HomePageUser());
       case homePageManagerRoute:
@@ -36,7 +33,7 @@ class AppRouter {
       case editAccountPageRoute:
         return MaterialPageRoute(builder: (context) => EditAccountPage());
       default:
-        return MaterialPageRoute(builder: (context) => LoginPage());
+        return MaterialPageRoute(builder: (context) => HomePageUser());
     }
   }
 }

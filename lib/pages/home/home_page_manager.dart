@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:parallel/app_widgets/drawer/main_drawer_manager.dart';
 import 'package:parallel/pages/events/events_page.dart';
-import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
-import 'package:parallel/pages/notifications/notifications_page.dart';
-import 'package:parallel/app_widgets/main_drawer.dart';
 
 class HomePageManager extends StatefulWidget {
   @override
@@ -13,22 +11,18 @@ class HomePageManager extends StatefulWidget {
 
 class _HomePageManager extends State<HomePageManager> {
   late List<Map<String, Object>> _pages;
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     _pages = [
       {
         'page': EventsPage(),
-        'title': 'Eventi',
+        'title': 'Ingressi',
       },
       {
         'page': HeadquartersPage(),
-        'title': 'Sedi',
-      },
-      {
-        'page': ForumPage(),
-        'title': 'Forum',
+        'title': 'Prenotazioni',
       },
     ];
     super.initState();
@@ -43,59 +37,22 @@ class _HomePageManager extends State<HomePageManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(),
+      drawer: MainDrawerManager(),
       appBar: AppBar(
         title: Text(
           _pages[_selectedIndex]['title'].toString(),
         ),
-        actions: <Widget>[
-          Stack(
-            children: [
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(NotificationsPage.routeName);
-                    },
-                    child: Icon(
-                      Icons.notifications_none,
-                      size: 28,
-                    ),
-                  ),
-                ),
-              ),
-              /* Positioned(
-                bottom: 15,
-                left: 0,
-                child: Container(
-                  height: 12,
-                  width: 12,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ), */
-            ],
-          ),
-        ],
       ),
       body: _pages[_selectedIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_outlined),
-            label: "Eventi",
+            icon: Icon(Icons.login_outlined),
+            label: "Ingressi",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place_outlined),
-            label: "Sedi",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.forum_outlined),
-            label: "Forum",
+            icon: Icon(Icons.book_outlined),
+            label: "Prenotazioni",
           ),
         ],
         onTap: _selectPage,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parallel/app_widgets/main_drawer.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer.dart';
 
 class FavoritesHeadquartersPage extends StatefulWidget {
   @override

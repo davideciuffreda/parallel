@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:parallel/app_widgets/main_drawer.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class AccountPage extends StatelessWidget {
