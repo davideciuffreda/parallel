@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
 import 'package:parallel/pages/headquarters/favorites_headquarters_page.dart';
+import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -70,19 +72,25 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.assignment_outlined),
             title: Text("Prenotazioni"),
             onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(bookingsPageRoute);
+              Navigator.of(context).pushReplacementNamed(bookingsPageRoute);
             },
           ),
           SizedBox(
-            height: 400,
+            height: 300,
           ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "Log out",
-              style: TextStyle(color: Colors.red),
-            ),
+          BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              return TextButton(
+                onPressed: () {
+                  BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                  Navigator.of(context).pushReplacementNamed(loginPageRoute);
+                },
+                child: Text(
+                  "Log out",
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+            },
           ),
         ],
       ),

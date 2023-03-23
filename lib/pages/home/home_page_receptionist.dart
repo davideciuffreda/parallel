@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/app_widgets/drawer/main_drawer_manager.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer_receptionist.dart';
 import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
+import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
-class HomePageManager extends StatefulWidget {
+class HomePageReceptionist extends StatefulWidget {
   @override
-  State<HomePageManager> createState() => _HomePageManager();
+  State<HomePageReceptionist> createState() => _HomePageReceptionist();
 }
 
-class _HomePageManager extends State<HomePageManager> {
+class _HomePageReceptionist extends State<HomePageReceptionist> {
   late List<Map<String, Object>> _pages;
   int _selectedIndex = 0;
 
@@ -37,7 +39,10 @@ class _HomePageManager extends State<HomePageManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawerManager(),
+      drawer: BlocProvider(
+        create: (context) => LoginBloc(),
+        child: MainDrawerReceptionist(),
+      ),
       appBar: AppBar(
         title: Text(
           _pages[_selectedIndex]['title'].toString(),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
-import 'package:parallel/pages/notifications/notifications_page.dart';
 import 'package:parallel/app_widgets/drawer/main_drawer.dart';
+import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class HomePageUser extends StatefulWidget {
@@ -44,32 +45,14 @@ class _HomePageUser extends State<HomePageUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(),
+      drawer: BlocProvider(
+        create: (context) => LoginBloc(),
+        child: MainDrawer(),
+      ),
       appBar: AppBar(
         title: Text(
           _pages[_selectedIndex]['title'].toString(),
         ),
-        actions: <Widget>[
-          Stack(
-            children: [
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(NotificationsPage.routeName);
-                    },
-                    child: Icon(
-                      Icons.notifications_none,
-                      size: 28,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
       body: _pages[_selectedIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(

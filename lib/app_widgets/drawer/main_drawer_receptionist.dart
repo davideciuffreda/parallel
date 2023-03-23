@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 import 'package:parallel/routing/router_constants.dart';
 
-class MainDrawerManager extends StatelessWidget {
+class MainDrawerReceptionist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -39,18 +41,33 @@ class MainDrawerManager extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text("Home"),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(homePageManagerRoute);
+              Navigator.of(context)
+                  .pushReplacementNamed(homePageReceptionistRoute);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.manage_accounts),
+            title: Text("Profilo"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(accountPageRoute);
             },
           ),
           SizedBox(
             height: 400,
           ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "Log out",
-              style: TextStyle(color: Colors.red),
-            ),
+          BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              return TextButton(
+                onPressed: () {
+                  BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                  Navigator.of(context).pushReplacementNamed(loginPageRoute);
+                },
+                child: Text(
+                  "Log out",
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+            },
           ),
         ],
       ),
