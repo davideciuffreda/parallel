@@ -47,6 +47,7 @@ class _AppState extends State<App> {
     return BlocProvider(
       create: (context) => LoginBloc(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "Parallel",
         navigatorKey: navigatorKey,
         home: LoginPage(),

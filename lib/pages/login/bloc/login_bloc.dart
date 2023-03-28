@@ -10,17 +10,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginErrorState("Please, enter a valid username!"));
       } else if (event.passwordValue.length < 8) {
         emit(LoginErrorState("Please, enter a valid password!"));
-      } else if (event.usernameValue == 'admin') {
-        emit(LoginAdminState());
-      } else if (event.usernameValue == 'user') {
-        emit(LoginUserState());
       } else {
-        emit(LoginErrorState("Username o passowrd errati!"));
+        emit(LoginLoadingState());
       }
     });
 
     on<LoginSubmittedEvent>((event, emit) {
-      emit(LoginLoadingState());
+      if (event.username == 'admin' && event.password == 'adminpass') {
+        emit(LoginAdminState());
+      } else if (event.username == 'user' && event.password == 'userpass') {
+        emit(LoginUserState());
+      } else {
+        emit(LoginErrorState("Username o passowrd errati!"));
+      }
     });
 
     on<LogoutEvent>((event, emit) {

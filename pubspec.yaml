@@ -12,7 +12,7 @@ dependencies:
   flutter_bloc: ^8.0.0
   bloc: ^8.1.1
   flutter_screenutil: 5.0.0+2
-  shared_preferences: ^2.0.18
+  shared_preferences: ^2.0.20
   http: ^0.13.5
   flutter_dotenv: ^5.0.2
   fluttertoast: ^8.2.1
@@ -23,6 +23,8 @@ dependencies:
   permission_handler: ^10.2.0
   location: ^4.4.0
   email_validator: ^2.1.17
+  firebase_database: ^10.0.16
+  firebase_core: ^2.8.0
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +38,7 @@ flutter:
   assets:
     - assets/images/profile.png
     - assets/images/logo.png
+    - assets/images/splash.png
 
   fonts:
     - family: Lato
