@@ -23,8 +23,7 @@ dependencies:
   permission_handler: ^10.2.0
   location: ^4.4.0
   email_validator: ^2.1.17
-  firebase_database: ^10.0.16
-  firebase_core: ^2.8.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

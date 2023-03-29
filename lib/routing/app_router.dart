@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/account/edit_account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
+import 'package:parallel/pages/events/event_details_page.dart';
+import 'package:parallel/pages/headquarters/headquarter_details_page.dart';
 import 'package:parallel/pages/home/home_page_user.dart';
 import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
-import 'package:parallel/pages/headquarters/favorites_headquarters_page.dart';
+import 'package:parallel/pages/headquarters/favorite_headquarters/favorites_headquarters_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
 import 'package:parallel/pages/login/view/login_page.dart';
 import 'package:parallel/routing/router_constants.dart';
@@ -22,6 +24,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => HomePageReceptionist());
       case headquartersPageRoute:
         return MaterialPageRoute(builder: (context) => HeadquartersPage());
+      case headquarterDetailsPageRoute:
+        return MaterialPageRoute(
+            builder: (context) => HeadquarterDetailsPage());
+      case eventDetailsPageRoute:
+        return MaterialPageRoute(
+            builder: (context) => EventDetailsPage());
       case favHeadquartersPageRoute:
         return MaterialPageRoute(
             builder: (context) => FavoritesHeadquartersPage());

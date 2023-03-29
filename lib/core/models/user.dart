@@ -5,6 +5,7 @@ class User {
   String lastName;
   String email;
   String token;
+  
   User({
     required this.firstName,
     required this.lastName,

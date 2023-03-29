@@ -8,52 +8,56 @@ class MainDrawerReceptionist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: [
-          // UserAccountsDrawerHeader(
-          SizedBox(
-            height: 100,
-            width: double.infinity,
-            child: DrawerHeader(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/profile.png"),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Nome Cognome",
-                    style: TextStyle(
-                      color: Colors.white,
+          Expanded(
+            child: ListView(
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: DrawerHeader(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/images/profile.png"),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Nome Cognome",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text("Home"),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(homePageReceptionistRoute);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.manage_accounts),
+                  title: Text("Profilo"),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(accountPageRoute);
+                  },
+                ),
+              ],
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text("Home"),
-            onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(homePageReceptionistRoute);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.manage_accounts),
-            title: Text("Profilo"),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(accountPageRoute);
-            },
-          ),
-          SizedBox(
-            height: 400,
           ),
           BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
@@ -63,12 +67,13 @@ class MainDrawerReceptionist extends StatelessWidget {
                   Navigator.of(context).pushReplacementNamed(loginPageRoute);
                 },
                 child: Text(
-                  "Log out",
+                  "Logout",
                   style: TextStyle(color: Colors.red),
                 ),
               );
             },
           ),
+          SizedBox(height: 10),
         ],
       ),
     );

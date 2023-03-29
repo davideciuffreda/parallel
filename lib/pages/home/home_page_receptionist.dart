@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/app_widgets/drawer/main_drawer_receptionist.dart';
 import 'package:parallel/pages/events/events_page.dart';
-import 'package:parallel/pages/headquarters/headquarters_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class HomePageReceptionist extends StatefulWidget {
@@ -23,7 +22,7 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
         'title': 'Ingressi',
       },
       {
-        'page': HeadquartersPage(),
+        'page': EventsPage(),
         'title': 'Prenotazioni',
       },
     ];
