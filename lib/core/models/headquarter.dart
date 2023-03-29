@@ -20,7 +20,7 @@ class Headquarter {
       name: name ?? this.name,
       city: city ?? this.city,
       workstations: workstations ?? this.workstations,
-      image: image ?? this.image,
+      image: image,
     );
   }
 }
