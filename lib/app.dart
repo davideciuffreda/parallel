@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/pages/headquarters/headquarters_page.dart';
-import 'package:parallel/pages/home/home_page_user.dart';
 
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/pages/login/view/login_page.dart';
@@ -52,7 +50,7 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: "Parallel",
         navigatorKey: navigatorKey,
-        home: HomePageUser(),
+        home: LoginPage(),
         onGenerateRoute: appRouter.onGenerateRoute,
       ),
     );

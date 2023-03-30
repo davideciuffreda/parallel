@@ -56,12 +56,12 @@ class AuthRepository {
 
   /// This method return the user saved on the local storage , null if none
   Future<User> getUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    /* SharedPreferences prefs = await SharedPreferences.getInstance();
     var userRaw = prefs.getString('user');
     if (userRaw != null) {
       return User.fromJson(userRaw);
-    }
-
+    } */
+    
     return User(firstName: '', lastName: '', email: '', token: '');
   }
 }
