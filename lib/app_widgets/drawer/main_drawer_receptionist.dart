@@ -40,12 +40,21 @@ class MainDrawerReceptionist extends StatelessWidget {
                     ),
                   ),
                 ),
-                ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text("Home"),
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(homePageReceptionistRoute);
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return ListTile(
+                      leading: Icon(Icons.home),
+                      title: Text("Home"),
+                      onTap: () {
+                        if (state is LoginUserState) {
+                          Navigator.of(context)
+                              .pushReplacementNamed(homePageUserRoute);
+                        } else if (state is LoginAdminState) {
+                          Navigator.of(context)
+                              .pushReplacementNamed(homePageReceptionistRoute);
+                        }
+                      },
+                    );
                   },
                 ),
                 ListTile(

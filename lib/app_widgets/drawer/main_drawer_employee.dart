@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawerEmployee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,28 +30,31 @@ class MainDrawer extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-                        TextButton(
-                          child: Text(
-                            "Nome Cognome",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                        Text(
+                          "Nome Cognome",
+                          style: TextStyle(
+                            color: Colors.white,
                           ),
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(accountPageRoute);
-                          },
                         ),
                       ],
                     ),
                   ),
                 ),
-                ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text("Home"),
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(homePageUserRoute);
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return ListTile(
+                      leading: Icon(Icons.home),
+                      title: Text("Home"),
+                      onTap: () {
+                        if (state is LoginUserState) {
+                          Navigator.of(context)
+                              .pushReplacementNamed(homePageUserRoute);
+                        } else if (state is LoginAdminState) {
+                          Navigator.of(context)
+                              .pushReplacementNamed(homePageReceptionistRoute);
+                        }
+                      },
+                    );
                   },
                 ),
                 ListTile(

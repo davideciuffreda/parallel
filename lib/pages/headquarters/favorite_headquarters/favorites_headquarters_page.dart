@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parallel/app_widgets/drawer/main_drawer.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer_employee.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_card.dart';
 
 class FavoritesHeadquartersPage extends StatefulWidget {
@@ -15,7 +15,7 @@ class _FavoritesHeadquartersPageState extends State<FavoritesHeadquartersPage> {
       appBar: AppBar(
         title: Text("Sedi preferite"),
       ),
-      drawer: MainDrawer(),
+      drawer: MainDrawerEmployee(),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: 3,

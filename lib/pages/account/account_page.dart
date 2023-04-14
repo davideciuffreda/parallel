@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/app_widgets/drawer/main_drawer.dart';
-import 'package:parallel/routing/router_constants.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer_employee.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer_receptionist.dart';
+import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class AccountPage extends StatelessWidget {
   @override
@@ -10,7 +12,17 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profilo"),
       ),
-      drawer: MainDrawer(),
+      drawer: BlocBuilder<LoginBloc, LoginState>(
+        builder: (context, state) {
+          if (state is LoginUserState) {
+            return MainDrawerEmployee();
+          } else if (state is LoginAdminState) {
+            return MainDrawerReceptionist();
+          } else {
+            return Text("Non dovresti essere arrivato a questo punto!");
+          }
+        },
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -72,9 +84,7 @@ class AccountPage extends StatelessWidget {
                   width: 150,
                   child: ElevatedButton(
                     child: Text("Modifica"),
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 SizedBox(

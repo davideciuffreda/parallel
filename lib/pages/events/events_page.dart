@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:parallel/app_widgets/event/event_card.dart';
 import 'package:intl/intl.dart';
+import 'package:parallel/core/repositories/main_repository.dart';
 
 class EventsPage extends StatelessWidget {
+  MainRepository mainRepository = MainRepository();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

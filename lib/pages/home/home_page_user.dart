@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
-import 'package:parallel/app_widgets/drawer/main_drawer.dart';
+import 'package:parallel/app_widgets/drawer/main_drawer_employee.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 
@@ -47,7 +47,7 @@ class _HomePageUser extends State<HomePageUser> {
     return Scaffold(
       drawer: BlocProvider(
         create: (context) => LoginBloc(),
-        child: MainDrawer(),
+        child: MainDrawerEmployee(),
       ),
       appBar: AppBar(
         title: Text(
