@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
+
 import 'package:parallel/routing/router_constants.dart';
 
-class MainDrawerEmployee extends StatelessWidget {
+class DrawerReceptionist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -63,22 +63,6 @@ class MainDrawerEmployee extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context)
                         .pushReplacementNamed(accountPageRoute);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.stars_rounded),
-                  title: Text("Sedi preferite"),
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(favHeadquartersPageRoute);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.assignment_outlined),
-                  title: Text("Prenotazioni"),
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(bookingsPageRoute);
                   },
                 ),
               ],

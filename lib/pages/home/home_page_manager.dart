@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/pages/events/events_page.dart';
-import 'package:parallel/pages/forum/forum_page.dart';
-import 'package:parallel/pages/headquarters/headquarters_page.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
+import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
-import 'package:parallel/routing/router_constants.dart';
 
-class HomePageUser extends StatefulWidget {
+class HomePageManager extends StatefulWidget {
   @override
-  State<HomePageUser> createState() => _HomePageUser();
+  State<HomePageManager> createState() => _HomePageManager();
 }
 
-class _HomePageUser extends State<HomePageUser> {
+class _HomePageManager extends State<HomePageManager> {
   late List<Map<String, Object>> _pages;
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     _pages = [
       {
         'page': EventsPage(),
-        'title': 'Eventi',
+        'title': 'Ingressi',
       },
       {
-        'page': HeadquartersPage(),
-        'title': 'Sedi',
+        'page': EventsPage(),
+        'title': 'Prenotazioni',
       },
       {
-        'page': ForumPage(),
-        'title': 'Forum',
+        'page': EventsPage(),
+        'title': 'Prenotazioni',
       },
     ];
     super.initState();
@@ -58,16 +55,16 @@ class _HomePageUser extends State<HomePageUser> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_outlined),
-            label: "Eventi",
+            icon: Icon(Icons.login_outlined),
+            label: "Ingressi",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place_outlined),
-            label: "Sedi",
+            icon: Icon(Icons.book_outlined),
+            label: "Prenotazioni",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.forum_outlined),
-            label: "Forum",
+            icon: Icon(Icons.book_outlined),
+            label: "Random",
           ),
         ],
         onTap: _selectPage,

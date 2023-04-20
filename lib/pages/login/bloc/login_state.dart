@@ -10,6 +10,8 @@ class LoginUserState extends LoginState {}
 
 class LoginAdminState extends LoginState {}
 
+class LoginManagerState extends LoginState {}
+
 class LoginErrorState extends LoginState {
   final String errorMessage;
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/app_widgets/drawer/main_drawer_employee.dart';
-import 'package:parallel/app_widgets/drawer/main_drawer_receptionist.dart';
+import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
+import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
+import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class AccountPage extends StatelessWidget {
@@ -15,9 +16,11 @@ class AccountPage extends StatelessWidget {
       drawer: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state is LoginUserState) {
-            return MainDrawerEmployee();
+            return DrawerEmployee();
           } else if (state is LoginAdminState) {
-            return MainDrawerReceptionist();
+            return DrawerReceptionist();
+          } else if (state is LoginManagerState) {
+            return DrawerManager();
           } else {
             return Text("Non dovresti essere arrivato a questo punto!");
           }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/app_widgets/drawer/main_drawer_receptionist.dart';
+import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
 import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
@@ -40,7 +40,7 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
     return Scaffold(
       drawer: BlocProvider(
         create: (context) => LoginBloc(),
-        child: MainDrawerReceptionist(),
+        child: DrawerReceptionist(),
       ),
       appBar: AppBar(
         title: Text(

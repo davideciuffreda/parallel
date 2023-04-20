@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parallel/app_widgets/drawer/main_drawer_employee.dart';
+import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 
 class BookingsPage extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _BookingsPage extends State<BookingsPage> {
       appBar: AppBar(
         title: Text("Prenotazioni"),
       ),
-      drawer: MainDrawerEmployee(),
+      drawer: DrawerEmployee(),
     );
   }
 }

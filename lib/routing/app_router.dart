@@ -4,6 +4,7 @@ import 'package:parallel/pages/account/edit_account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
 import 'package:parallel/pages/events/event_details_page.dart';
 import 'package:parallel/pages/headquarters/headquarter_details_page.dart';
+import 'package:parallel/pages/home/home_page_manager.dart';
 import 'package:parallel/pages/home/home_page_user.dart';
 import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
@@ -22,14 +23,15 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => HomePageUser());
       case homePageReceptionistRoute:
         return MaterialPageRoute(builder: (context) => HomePageReceptionist());
+      case homePageManagerRoute:
+        return MaterialPageRoute(builder: (context) => HomePageManager());
       case headquartersPageRoute:
         return MaterialPageRoute(builder: (context) => HeadquartersPage());
       case headquarterDetailsPageRoute:
         return MaterialPageRoute(
             builder: (context) => HeadquarterDetailsPage());
       case eventDetailsPageRoute:
-        return MaterialPageRoute(
-            builder: (context) => EventDetailsPage());
+        return MaterialPageRoute(builder: (context) => EventDetailsPage());
       case favHeadquartersPageRoute:
         return MaterialPageRoute(
             builder: (context) => FavoritesHeadquartersPage());

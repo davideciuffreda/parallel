@@ -20,6 +20,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginAdminState());
       } else if (event.username == 'user' && event.password == 'userpass') {
         emit(LoginUserState());
+      } else if (event.username == 'manager' && event.password == 'managerpass') {
+        emit(LoginManagerState());
       } else {
         emit(LoginErrorState("Username o passowrd errati!"));
       }

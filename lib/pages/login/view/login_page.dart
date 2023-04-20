@@ -115,6 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).pushReplacementNamed(
                               homePageUserRoute,
                             );
+                          } else if (state is LoginManagerState) {
+                            Navigator.of(context).pushReplacementNamed(
+                              homePageManagerRoute,
+                            );
                           }
                         },
                         child: ElevatedButton(
