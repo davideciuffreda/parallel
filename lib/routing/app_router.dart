@@ -4,6 +4,7 @@ import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/account/edit_account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
 import 'package:parallel/pages/events/event_details_page.dart';
+import 'package:parallel/pages/events/new_event_page.dart';
 import 'package:parallel/pages/headquarters/headquarter_details_page.dart';
 import 'package:parallel/pages/home/home_page_manager.dart';
 import 'package:parallel/pages/home/home_page_user.dart';
@@ -46,6 +47,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => AccountPage());
       case editAccountPageRoute:
         return MaterialPageRoute(builder: (context) => EditAccountPage());
+      case newEventPageRoute:
+        return MaterialPageRoute(builder: (context) => NewEventPage());
       default:
         return MaterialPageRoute(builder: (context) => LoginPage());
     }

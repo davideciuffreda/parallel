@@ -84,6 +84,14 @@ class DrawerManager extends StatelessWidget {
                         .pushReplacementNamed(bookingsPageRoute);
                   },
                 ),
+                ListTile(
+                  leading: Icon(Icons.event),
+                  title: Text("Crea evento"),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(newEventPageRoute);
+                  },
+                ),
               ],
             ),
           ),
