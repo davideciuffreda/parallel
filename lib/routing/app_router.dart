@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parallel/pages/access_log/access_log_page.dart';
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/account/edit_account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
@@ -46,7 +47,7 @@ class AppRouter {
       case editAccountPageRoute:
         return MaterialPageRoute(builder: (context) => EditAccountPage());
       default:
-        return MaterialPageRoute(builder: (context) => HomePageUser());
+        return MaterialPageRoute(builder: (context) => LoginPage());
     }
   }
 }

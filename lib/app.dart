@@ -51,7 +51,7 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: "Parallel",
         navigatorKey: navigatorKey,
-        home: HomePageReceptionist(),
+        home: LoginPage(),
         onGenerateRoute: appRouter.onGenerateRoute,
       ),
     );

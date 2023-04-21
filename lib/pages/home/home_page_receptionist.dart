@@ -23,8 +23,8 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
         'title': 'Ingressi',
       },
       {
-        'page': EventsPage(),
-        'title': 'Prenotazioni',
+        'page': AccessLogPage(),
+        'title': 'Storico prenotazioni',
       },
     ];
     super.initState();
@@ -57,7 +57,7 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book_outlined),
-            label: "Prenotazioni",
+            label: "Registro",
           ),
         ],
         onTap: _selectPage,
