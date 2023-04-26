@@ -109,16 +109,13 @@ class _LoginPageState extends State<LoginPage> {
                         listener: (context, state) {
                           if (state is LoginAdminState) {
                             Navigator.of(context).pushReplacementNamed(
-                              homePageReceptionistRoute,
-                            );
+                                homePageReceptionistRoute);
                           } else if (state is LoginUserState) {
-                            Navigator.of(context).pushReplacementNamed(
-                              homePageUserRoute,
-                            );
+                            Navigator.of(context)
+                                .pushReplacementNamed(homePageUserRoute);
                           } else if (state is LoginManagerState) {
-                            Navigator.of(context).pushReplacementNamed(
-                              homePageManagerRoute,
-                            );
+                            Navigator.of(context)
+                                .pushReplacementNamed(homePageManagerRoute);
                           }
                         },
                         child: ElevatedButton(
