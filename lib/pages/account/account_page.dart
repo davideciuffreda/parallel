@@ -5,6 +5,7 @@ import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
+import 'package:parallel/routing/router_constants.dart';
 
 class AccountPage extends StatelessWidget {
   @override
@@ -90,17 +91,20 @@ class AccountPage extends StatelessWidget {
                     onPressed: () {},
                   ),
                 ),
-                SizedBox(
-                  height: 380,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Log out",
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return TextButton(
+                      onPressed: () {
+                        BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                        Navigator.of(context)
+                            .pushReplacementNamed(loginPageRoute);
+                      },
+                      child: Text(
+                        "Logout",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

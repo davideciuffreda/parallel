@@ -12,6 +12,7 @@ class _NewEventPage extends State<NewEventPage> {
   TextEditingController headquarterController = TextEditingController();
   TextEditingController cityController = TextEditingController();
   TextEditingController ticketsController = TextEditingController();
+  TextEditingController imageUrlController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +71,15 @@ class _NewEventPage extends State<NewEventPage> {
                         labelText: 'Numero di posti',
                         hintText:
                             'Inserisci il numero massimo di posti per l\'evento',
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: imageUrlController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Locandina',
+                        hintText: 'Inserisci l\'url della locandina dell\'evento',
                       ),
                     ),
                     SizedBox(height: 10),
