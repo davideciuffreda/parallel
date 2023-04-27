@@ -76,6 +76,7 @@ class _NewEventPage extends State<NewEventPage> {
                     SizedBox(height: 10),
                     TextField(
                       controller: imageUrlController,
+                      keyboardType: TextInputType.url,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Locandina',

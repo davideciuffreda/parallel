@@ -3,27 +3,35 @@ import 'dart:convert';
 class User {
   String firstName;
   String lastName;
-  String email;
-  String token;
-  
+  String birthDate;
+  String phoneNumber;
+  String city;
+  String address;
+
   User({
     required this.firstName,
     required this.lastName,
-    required this.email,
-    required this.token,
+    required this.birthDate,
+    required this.phoneNumber,
+    required this.city,
+    required this.address,
   });
 
   User copyWith({
     String? firstName,
     String? lastName,
-    String? email,
-    String? token,
+    String? birthDate,
+    String? phoneNumber,
+    String? address,
+    String? city,
   }) {
     return User(
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      email: email ?? this.email,
-      token: token ?? this.token,
+      address: address ?? this.address,
+      birthDate: birthDate ?? this.birthDate,
+      city: city ?? this.city,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
@@ -31,17 +39,21 @@ class User {
     return {
       'firstName': firstName,
       'lastName': lastName,
-      'email': email,
-      'token': token,
+      'address': address,
+      'city': city,
+      'phoneNumber': phoneNumber,
+      'birthDate': birthDate,
     };
   }
 
-  factory User.fromMapAPI(Map<String, dynamic> map, String token) {
+  factory User.fromMapAPI(Map<String, dynamic> map) {
     return User(
       firstName: map['firstName'],
       lastName: map['lastName'],
-      email: map['email'],
-      token: token,
+      address: map['address'],
+      city: map['city'],
+      phoneNumber: map['phoneNumber'],
+      birthDate: map['birthDate'],
     );
   }
 
@@ -49,8 +61,10 @@ class User {
     return User(
       firstName: map['firstName'],
       lastName: map['lastName'],
-      email: map['email'],
-      token: map['token'],
+      address: map['address'],
+      city: map['city'],
+      phoneNumber: map['phoneNumber'],
+      birthDate: map['birthDate'],
     );
   }
 
@@ -60,25 +74,6 @@ class User {
 
   @override
   String toString() {
-    return 'User(firstName: $firstName, lastName: $lastName, email: $email, token: $token)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is User &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
-        other.email == email &&
-        other.token == token;
-  }
-
-  @override
-  int get hashCode {
-    return firstName.hashCode ^
-        lastName.hashCode ^
-        email.hashCode ^
-        token.hashCode;
+    return 'User(firstName: $firstName, lastName: $lastName, address: $address, city: $city, phoneNumber: $phoneNumber, birthDate: $birthDate)';
   }
 }

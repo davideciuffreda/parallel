@@ -67,28 +67,37 @@ class AccountPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Text(
                   "Nome Cognome",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
+                SizedBox(height: 8),
                 Text(
                   "nomecognome@mail.com",
                   style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
                 ),
-                SizedBox(
-                  height: 15,
+                Text(
+                  "+39 3369773608",
+                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
                 ),
+                Text(
+                  "01/01/2000",
+                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  "Via Sandro Sandri 81, 00159, Roma",
+                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                ),
+                SizedBox(height: 15),
                 SizedBox(
                   width: 150,
                   child: ElevatedButton(
                     child: Text("Modifica"),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                            .pushReplacementNamed(editAccountPageRoute);
+                    },
                   ),
                 ),
                 BlocBuilder<LoginBloc, LoginState>(

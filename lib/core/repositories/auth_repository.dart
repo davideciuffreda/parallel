@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../response_message.dart';
 
 ///This class manages the authentication request and local storage
-class AuthRepository {
+/*class AuthRepository {
   Map<String, String> headers = {'Content-Type': 'application/json'};
 
   ///This method execute the login if is successfully completed returns the user information
@@ -64,4 +64,4 @@ class AuthRepository {
     
     return User(firstName: '', lastName: '', email: '', token: '');
   }
-}
+}*/
