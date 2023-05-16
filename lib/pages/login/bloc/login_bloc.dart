@@ -27,6 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
 
+    ///Logout the user
     on<LogoutEvent>((event, emit) {
       emit(LogoutState());
     });

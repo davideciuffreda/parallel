@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:parallel/app_widgets/card_label.dart';
+import 'package:parallel/core/models/headquarter.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class HeadquarterCard extends StatefulWidget {
-  final String image;
-  final String name;
-  final String city;
-  final int workstations;
+  Headquarter hq;
 
-  const HeadquarterCard({
-    required this.name,
-    required this.city,
-    required this.workstations,
-    required this.image,
-  });
+  HeadquarterCard({required this.hq, required BuildContext context});
 
   @override
   State<HeadquarterCard> createState() => _HeadquarterCardState();
@@ -48,7 +42,7 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                     topRight: Radius.circular(16),
                   ),
                   child: Image.network(
-                    widget.image,
+                    widget.hq.imageUrl,
                     width: double.infinity,
                     height: 280,
                     fit: BoxFit.cover,
@@ -83,7 +77,7 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget.name,
+                    widget.hq.name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -95,11 +89,11 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                     children: [
                       CardLabel(
                         icon: Icon(Icons.share_location_sharp),
-                        title: widget.city,
+                        title: widget.hq.city,
                       ),
                       CardLabel(
                         icon: Icon(Icons.computer_sharp),
-                        title: widget.workstations.toString(),
+                        title: widget.hq.workstations.toString(),
                       ),
                     ],
                   ),

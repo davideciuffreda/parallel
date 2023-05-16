@@ -24,6 +24,7 @@ dependencies:
   location: ^4.4.0
   email_validator: ^2.1.17
   intl: ^0.18.0
+  dio: any
 
 dev_dependencies:
   flutter_test:

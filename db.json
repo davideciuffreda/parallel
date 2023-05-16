@@ -1,0 +1,25 @@
+{
+  "hq": [
+    {
+      "id": 1,
+      "imageUrl": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1096&q=80",
+      "name": "ELIS",
+      "city": "Roma",
+      "workstations": 200
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/View_on_Trapani.jpg/390px-View_on_Trapani.jpg",
+      "name": "Beehive",
+      "city": "Trapani",
+      "workstations": 100
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYXujno7jHSZgNAt3Bl6y7qPJMroSSS2K7Ag&usqp=CAU",
+      "name": "ELIS",
+      "city": "Milano",
+      "workstations": 130
+    }
+  ]
+}

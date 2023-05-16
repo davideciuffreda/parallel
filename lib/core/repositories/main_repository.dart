@@ -1,28 +1,28 @@
 import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import 'package:parallel/core/models/event.dart';
+import 'package:dio/dio.dart';
+import 'package:parallel/core/models/headquarter.dart';
 
 class MainRepository {
-  Future<List<Event>> fetchEvents() async {
-    List<Event> events = [];
-    var eventsResponse;
+  MainRepository();
 
+  final String baseUrl = "http://172.16.217.236:3000";
+
+  Future<List<Headquarter>> getHeadquarters() async {
+    List<Headquarter> headquarters = [];
+    var hqResponse;
     try {
-      eventsResponse = await http.get(Uri.parse(
-          'https://parallel-test-797b5-default-rtdb.europe-west1.firebasedatabase.app/parallel/events'));
+      hqResponse = await Dio().get("$baseUrl/hq");
 
-      if (eventsResponse.statusCode == 200) {
-        var parsedEvents =
-            json.decode(utf8.decode(eventsResponse.body.codeUnits)) as List;
-        events =
-            parsedEvents.map((rawEvents) => Event.fromJson(rawEvents)).toList();
+      if (hqResponse.statusCode == 200) {
+        var parsedResponse =
+            hqResponse.data.map((hq) => Headquarter.fromJson(hq)).toList();
+        headquarters = List<Headquarter>.from(parsedResponse);
+        return headquarters;
       }
-
-      return events;
-    } catch (err) {
-      print("Errore in GET events");
+    } catch (e) {
+      print(e.toString());
+      return headquarters;
     }
-    return events;
+    return headquarters;
   }
 }

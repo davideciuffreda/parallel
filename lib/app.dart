@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/pages/home/home_page_receptionist.dart';
 
+import 'package:parallel/core/repositories/main_repository.dart';
+import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/pages/login/view/login_page.dart';
 import 'package:parallel/routing/app_router.dart';
@@ -12,11 +13,17 @@ final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 class AppInitializer extends StatelessWidget {
   //Defining the Repositories
+  late MainRepository mainRepository;
   //Defining the Blocs/Cubits
+  late HeadquarterCubit headquarterCubit;
+  late LoginBloc loginBloc;
 
   AppInitializer() {
     //Repositories init
+    mainRepository = MainRepository();
     //Bloc or Cubit init
+    headquarterCubit = HeadquarterCubit(mainRepository);
+    loginBloc = LoginBloc();
   }
 
   @override
@@ -24,8 +31,15 @@ class AppInitializer extends StatelessWidget {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    return BlocProvider(
-      create: (context) => LoginBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) => loginBloc,
+        ),
+        BlocProvider<HeadquarterCubit>(
+          create: (context) => headquarterCubit,
+        ),
+      ],
       child: App(),
     );
   }

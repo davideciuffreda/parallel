@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/pages/events/events_page.dart';
-import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/headquarters/headquarters_page.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
-import 'package:parallel/routing/router_constants.dart';
 
 class HomePageUser extends StatefulWidget {
   @override
@@ -27,10 +25,6 @@ class _HomePageUser extends State<HomePageUser> {
       {
         'page': HeadquartersPage(),
         'title': 'Sedi',
-      },
-      {
-        'page': ForumPage(),
-        'title': 'Forum',
       },
     ];
     super.initState();
@@ -64,10 +58,6 @@ class _HomePageUser extends State<HomePageUser> {
           BottomNavigationBarItem(
             icon: Icon(Icons.place_outlined),
             label: "Sedi",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.forum_outlined),
-            label: "Forum",
           ),
         ],
         onTap: _selectPage,

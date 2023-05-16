@@ -5,8 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../response_message.dart';
-
 ///This class manages the authentication request and local storage
 /*class AuthRepository {
   Map<String, String> headers = {'Content-Type': 'application/json'};
