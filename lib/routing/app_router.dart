@@ -9,7 +9,6 @@ import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
 import 'package:parallel/pages/headquarters/view/favorite_headquarters_page.dart';
 import 'package:parallel/pages/home/home_page_manager.dart';
 import 'package:parallel/pages/home/home_page_user.dart';
-import 'package:parallel/pages/forum/forum_page.dart';
 import 'package:parallel/pages/login/view/login_page.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:parallel/pages/home/home_page_receptionist.dart';
@@ -33,8 +32,6 @@ class AppRouter {
       case favHeadquartersPageRoute:
         return MaterialPageRoute(
             builder: (context) => FavoriteHeadquartersPage());
-      case forumPageRoute:
-        return MaterialPageRoute(builder: (context) => ForumPage());
       case eventsPageRoute:
         return MaterialPageRoute(builder: (context) => EventsPage());
       case bookingsPageRoute:

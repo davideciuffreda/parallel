@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/pages/access_log/access_log_page.dart';
+import 'package:parallel/pages/access_log/view/access_log_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 import 'package:parallel/routing/router_constants.dart';

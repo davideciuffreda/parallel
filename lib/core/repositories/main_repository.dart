@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:parallel/core/models/access.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/headquarter.dart';
 
@@ -43,5 +44,24 @@ class MainRepository {
       return events;
     }
     return events;
+  }
+
+  Future<List<Access>> getAccessLog() async {
+    List<Access> accessLog = [];
+    var accessRespons;
+    try {
+      accessRespons = await Dio().get("$baseUrl/accesses");
+
+      if (accessRespons.statusCode == 200) {
+        var parsedResponse =
+            accessRespons.data.map((access) => Access.fromJson(access)).toList();
+        accessLog = List<Access>.from(parsedResponse);
+        return accessLog;
+      }
+    } catch (e) {
+      print(e.toString());
+      return accessLog;
+    }
+    return accessLog;
   }
 }

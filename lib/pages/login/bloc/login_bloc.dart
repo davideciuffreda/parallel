@@ -16,7 +16,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
 
     on<LoginSubmittedEvent>((event, emit) {
-      if (event.username == 'admin' && event.password == 'adminpass') {
+      if (event.username == 'receptionist' && event.password == 'receptionistpass') {
         emit(LoginAdminState());
       } else if (event.username == 'user' && event.password == 'userpass') {
         emit(LoginUserState());

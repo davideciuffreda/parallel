@@ -1,79 +1,61 @@
 import 'dart:convert';
 
+User userFromJson(String str) => User.fromJson(json.decode(str));
+
+String userToJson(User data) => json.encode(data.toJson());
+
 class User {
-  String firstName;
-  String lastName;
-  String birthDate;
-  String phoneNumber;
-  String city;
-  String address;
+    final int id;
+    final String firstName;
+    final String lastName;
+    final String email;
+    final String address;
+    final String city;
+    final String phoneNumber;
+    final String birthDate;
+    final String password;
+    final String token;
+    final String profileImg;
 
-  User({
-    required this.firstName,
-    required this.lastName,
-    required this.birthDate,
-    required this.phoneNumber,
-    required this.city,
-    required this.address,
-  });
+    User({
+        required this.id,
+        required this.firstName,
+        required this.lastName,
+        required this.email,
+        required this.address,
+        required this.city,
+        required this.phoneNumber,
+        required this.birthDate,
+        required this.password,
+        required this.token,
+        required this.profileImg,
+    });
 
-  User copyWith({
-    String? firstName,
-    String? lastName,
-    String? birthDate,
-    String? phoneNumber,
-    String? address,
-    String? city,
-  }) {
-    return User(
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      address: address ?? this.address,
-      birthDate: birthDate ?? this.birthDate,
-      city: city ?? this.city,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+    factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"] as int,
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        email: json["email"],
+        address: json["address"],
+        city: json["city"],
+        phoneNumber: json["phoneNumber"],
+        birthDate: json["birthDate"],
+        password: json["password"],
+        token: json["token"],
+        profileImg: json["profileImg"],
     );
-  }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'firstName': firstName,
-      'lastName': lastName,
-      'address': address,
-      'city': city,
-      'phoneNumber': phoneNumber,
-      'birthDate': birthDate,
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "address": address,
+        "city": city,
+        "phoneNumber": phoneNumber,
+        "birthDate": birthDate,
+        "password": password,
+        "token": token,
+        "profileImg": profileImg,
     };
-  }
-
-  factory User.fromMapAPI(Map<String, dynamic> map) {
-    return User(
-      firstName: map['firstName'],
-      lastName: map['lastName'],
-      address: map['address'],
-      city: map['city'],
-      phoneNumber: map['phoneNumber'],
-      birthDate: map['birthDate'],
-    );
-  }
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      firstName: map['firstName'],
-      lastName: map['lastName'],
-      address: map['address'],
-      city: map['city'],
-      phoneNumber: map['phoneNumber'],
-      birthDate: map['birthDate'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'User(firstName: $firstName, lastName: $lastName, address: $address, city: $city, phoneNumber: $phoneNumber, birthDate: $birthDate)';
-  }
 }

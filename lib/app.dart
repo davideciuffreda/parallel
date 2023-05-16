@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/core/repositories/main_repository.dart';
+import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
@@ -16,17 +17,19 @@ class AppInitializer extends StatelessWidget {
   //Defining the Repositories
   late MainRepository mainRepository;
   //Defining the Blocs/Cubits
+  late LoginBloc loginBloc;
   late HeadquarterCubit headquarterCubit;
   late EventCubit eventCubit;
-  late LoginBloc loginBloc;
+  late AccessLogCubit accessLogCubit;
 
   AppInitializer() {
     //Repositories init
     mainRepository = MainRepository();
     //Bloc or Cubit init
+    loginBloc = LoginBloc();
     headquarterCubit = HeadquarterCubit(mainRepository);
     eventCubit = EventCubit(mainRepository);
-    loginBloc = LoginBloc();
+    accessLogCubit = AccessLogCubit(mainRepository);
   }
 
   @override
@@ -44,6 +47,9 @@ class AppInitializer extends StatelessWidget {
         ),
         BlocProvider<EventCubit>(
           create: (context) => eventCubit,
+        ),
+        BlocProvider<AccessLogCubit>(
+          create: (context) => accessLogCubit,
         ),
       ],
       child: App(),

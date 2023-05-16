@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
-import 'package:parallel/pages/access_log/access_log_page.dart';
+import 'package:parallel/pages/access_log/view/access_log_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class HomePageReceptionist extends StatefulWidget {
@@ -19,10 +19,10 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
     _pages = [
       {
         'page': AccessLogPage(),
-        'title': 'Ingressi',
+        'title': 'Ingressi odierni',
       },
       {
-        'page': AccessLogPage(),
+        'page': Scaffold(),
         'title': 'Storico prenotazioni',
       },
     ];
@@ -52,11 +52,11 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.login_outlined),
-            label: "Ingressi",
+            label: "Registro",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book_outlined),
-            label: "Registro",
+            label: "Random",
           ),
         ],
         onTap: _selectPage,
