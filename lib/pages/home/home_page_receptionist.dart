@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
 import 'package:parallel/pages/access_log/access_log_page.dart';
-import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class HomePageReceptionist extends StatefulWidget {

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:parallel/pages/access_log/access_log_page.dart';
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/account/edit_account_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
-import 'package:parallel/pages/events/event_details_page.dart';
-import 'package:parallel/pages/events/new_event_page.dart';
-import 'package:parallel/pages/headquarters/headquarter_details_page.dart';
+import 'package:parallel/pages/events/view/events_page.dart';
+import 'package:parallel/pages/events/view/new_event_page.dart';
+import 'package:parallel/pages/headquarters/view/headquarter_details_page.dart';
+import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
+import 'package:parallel/pages/headquarters/view/favorite_headquarters_page.dart';
 import 'package:parallel/pages/home/home_page_manager.dart';
 import 'package:parallel/pages/home/home_page_user.dart';
-import 'package:parallel/pages/events/events_page.dart';
 import 'package:parallel/pages/forum/forum_page.dart';
-import 'package:parallel/pages/headquarters/favorite_headquarters/favorites_headquarters_page.dart';
-import 'package:parallel/pages/headquarters/headquarters_page.dart';
 import 'package:parallel/pages/login/view/login_page.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:parallel/pages/home/home_page_receptionist.dart';
@@ -32,11 +30,9 @@ class AppRouter {
       case headquarterDetailsPageRoute:
         return MaterialPageRoute(
             builder: (context) => HeadquarterDetailsPage());
-      case eventDetailsPageRoute:
-        return MaterialPageRoute(builder: (context) => EventDetailsPage());
       case favHeadquartersPageRoute:
         return MaterialPageRoute(
-            builder: (context) => FavoritesHeadquartersPage());
+            builder: (context) => FavoriteHeadquartersPage());
       case forumPageRoute:
         return MaterialPageRoute(builder: (context) => ForumPage());
       case eventsPageRoute:

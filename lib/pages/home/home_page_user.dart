@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/pages/events/events_page.dart';
-import 'package:parallel/pages/headquarters/headquarters_page.dart';
+import 'package:parallel/pages/events/view/events_page.dart';
+import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 

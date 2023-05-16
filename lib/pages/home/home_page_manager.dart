@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
-import 'package:parallel/pages/events/events_page.dart';
+import 'package:parallel/pages/events/view/events_page.dart';
+import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class HomePageManager extends StatefulWidget {
@@ -20,15 +20,11 @@ class _HomePageManager extends State<HomePageManager> {
     _pages = [
       {
         'page': EventsPage(),
-        'title': 'Ingressi',
+        'title': 'Eventi',
       },
       {
-        'page': EventsPage(),
-        'title': 'Prenotazioni',
-      },
-      {
-        'page': EventsPage(),
-        'title': 'Prenotazioni',
+        'page': HeadquartersPage(),
+        'title': 'Sedi',
       },
     ];
     super.initState();
@@ -57,15 +53,11 @@ class _HomePageManager extends State<HomePageManager> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.login_outlined),
-            label: "Ingressi",
+            label: "Eventi",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book_outlined),
-            label: "Prenotazioni",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book_outlined),
-            label: "Random",
+            label: "Sedi",
           ),
         ],
         onTap: _selectPage,

@@ -5,13 +5,13 @@ import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_card.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
-class FavoritesHeadquartersPage extends StatefulWidget {
+class FavoriteHeadquartersPage extends StatefulWidget {
   @override
-  State<FavoritesHeadquartersPage> createState() =>
+  State<FavoriteHeadquartersPage> createState() =>
       _FavoritesHeadquartersPageState();
 }
 
-class _FavoritesHeadquartersPageState extends State<FavoritesHeadquartersPage> {
+class _FavoritesHeadquartersPageState extends State<FavoriteHeadquartersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

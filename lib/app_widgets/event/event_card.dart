@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:parallel/app_widgets/card_label.dart';
-import 'package:parallel/core/models/headquarter.dart';
-import 'package:parallel/routing/router_constants.dart';
+import 'package:parallel/core/models/event.dart';
 
 class EventCard extends StatefulWidget {
-  final String image;
-  final String name;
-  final int tickets;
-  final String headquarter_city;
-  final String headquarter_name;
-  final String date;
+  Event event;
 
-  const EventCard({
-    required this.name,
-    required this.headquarter_city,
-    required this.headquarter_name,
-    required this.tickets,
-    required this.image,
-    required this.date,
-  });
+  EventCard({required this.event, required BuildContext context});
 
   @override
   State<EventCard> createState() => _EventCard();
@@ -49,7 +36,7 @@ class _EventCard extends State<EventCard> {
                   topRight: Radius.circular(16),
                 ),
                 child: Image.network(
-                  widget.image,
+                  widget.event.imageUrl,
                   width: double.infinity,
                   height: 280,
                   fit: BoxFit.cover,
@@ -144,7 +131,7 @@ class _EventCard extends State<EventCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  widget.name,
+                  widget.event.name,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -156,17 +143,17 @@ class _EventCard extends State<EventCard> {
                   children: [
                     CardLabel(
                       icon: Icon(Icons.share_location_sharp),
-                      title: widget.headquarter_name +
+                      title: widget.event.headquarter.name +
                           ', ' +
-                          widget.headquarter_city,
+                          widget.event.headquarter.city,
                     ),
                     CardLabel(
                       icon: Icon(Icons.people_outline),
-                      title: widget.tickets.toString(),
+                      title: widget.event.tickets.toString(),
                     ),
                     CardLabel(
                       icon: Icon(Icons.date_range_sharp),
-                      title: widget.date.toString(),
+                      title: widget.event.date,
                     ),
                   ],
                 ),

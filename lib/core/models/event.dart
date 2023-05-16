@@ -1,43 +1,43 @@
 import 'dart:convert';
 
+import 'package:parallel/core/models/headquarter.dart';
+
 Event eventFromJson(String str) => Event.fromJson(json.decode(str));
 
 String eventToJson(Event data) => json.encode(data.toJson());
 
 class Event {
-  String date;
-  String headquarterCity;
-  String headquarterName;
-  String imageLink;
-  String name;
-  int tickets;
+    final int id;
+    final String imageUrl;
+    final String name;
+    final int tickets;
+    final Headquarter headquarter;
+    final String date;
 
-  Event({
-    required this.date,
-    required this.headquarterCity,
-    required this.headquarterName,
-    required this.imageLink,
-    required this.name,
-    required this.tickets,
-  });
+    Event({
+        required this.id,
+        required this.imageUrl,
+        required this.name,
+        required this.tickets,
+        required this.headquarter,
+        required this.date,
+    });
 
-  factory Event.fromJson(Map<String, dynamic> json) {
-    return new Event(
-      date: json["date"] as String,
-      headquarterCity: json["headquarter_city"] as String,
-      headquarterName: json["headquarter_name"] as String,
-      imageLink: json["image_link"] as String,
-      name: json["name"] as String,
-      tickets: json["tickets"] as int,
+    factory Event.fromJson(Map<String, dynamic> json) => Event(
+        id: json["id"] as int,
+        imageUrl: json["imageUrl"],
+        name: json["name"],
+        tickets: json["tickets"] as int,
+        headquarter: Headquarter.fromJson(json["headquarter"]),
+        date: json["date"],
     );
-  }
 
-  Map<String, dynamic> toJson() => {
-        "date": date,
-        "headquarter_city": headquarterCity,
-        "headquarter_name": headquarterName,
-        "image_link": imageLink,
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "imageUrl": imageUrl,
         "name": name,
         "tickets": tickets,
-      };
+        "headquarter": headquarter.toJson(),
+        "date": date,
+    };
 }
