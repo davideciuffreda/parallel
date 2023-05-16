@@ -18,11 +18,9 @@ class HeadquartersPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
 
-          final headquarter = (state as HeadquarterLoaded).headquarters;
-
           return SingleChildScrollView(
             child: Column(
-              children: headquarter
+              children: state.headquarters
                   .map((hq) => HeadquarterCard(
                         context: context,
                         hq: hq,
