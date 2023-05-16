@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-
 import 'package:flutter/material.dart';
 import 'package:parallel/app.dart';
 
