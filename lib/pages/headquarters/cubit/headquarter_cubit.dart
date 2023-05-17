@@ -18,4 +18,10 @@ class HeadquarterCubit extends Cubit<HeadquarterState> {
       emit(HeadquarterLoaded(headquarters: headquarters));
     });
   }
+
+  void getHeadquarterById(int id) {
+    mainRepository.getHeadquarterById(id).then((hq) {
+      emit(HeadquarterDetailLoaded(hq: hq));
+    });
+  }
 }

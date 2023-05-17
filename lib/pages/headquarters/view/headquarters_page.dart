@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_card.dart';
-import 'package:parallel/core/models/headquarter.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
-import 'package:parallel/routing/router_constants.dart';
 
 class HeadquartersPage extends StatelessWidget {
   @override

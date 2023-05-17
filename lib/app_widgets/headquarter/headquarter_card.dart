@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/core/models/headquarter.dart';
+import 'package:parallel/pages/headquarters/view/headquarter_details_page.dart';
 import 'package:parallel/routing/router_constants.dart';
 
 class HeadquarterCard extends StatefulWidget {
@@ -20,7 +21,11 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(headquarterDetailsPageRoute);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => HeadquarterDetailsPage(id: widget.hq.id),
+          ),
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

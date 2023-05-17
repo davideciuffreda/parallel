@@ -1,9 +1,3 @@
-// To parse this JSON data, do
-//
-//     final headquarter = headquarterFromJson(jsonString);
-
-// ignore_for_file: unnecessary_null_comparison
-
 import 'dart:convert';
 
 Headquarter headquarterFromJson(String str) {
@@ -17,9 +11,13 @@ class Headquarter {
   final String imageUrl;
   final String name;
   final String city;
+  final String address;
+  final String description;
   final int workstations;
 
   Headquarter({
+    required this.address,
+    required this.description,
     required this.id,
     required this.imageUrl,
     required this.name,
@@ -34,6 +32,8 @@ class Headquarter {
       name: json["name"],
       city: json["city"],
       workstations: json["workstations"] as int,
+      address: json["address"],
+      description: json["description"],
     );
   }
 
@@ -43,5 +43,7 @@ class Headquarter {
         "name": name,
         "city": city,
         "workstations": workstations,
+        "address": address,
+        "description": description,
       };
 }

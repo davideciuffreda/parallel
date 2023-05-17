@@ -14,8 +14,8 @@ import 'package:parallel/routing/router_constants.dart';
 import 'package:parallel/pages/home/home_page_receptionist.dart';
 
 class AppRouter {
-  Route onGenerateRoute(RouteSettings routeSettings) {
-    switch (routeSettings.name) {
+  Route onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case loginPageRoute:
         return MaterialPageRoute(builder: (context) => LoginPage());
       case homePageUserRoute:
@@ -27,8 +27,10 @@ class AppRouter {
       case headquartersPageRoute:
         return MaterialPageRoute(builder: (context) => HeadquartersPage());
       case headquarterDetailsPageRoute:
+        var parameters = settings.arguments as Map<String, dynamic>;
+        var headquarterId = parameters['headquarterId'];
         return MaterialPageRoute(
-            builder: (context) => HeadquarterDetailsPage());
+            builder: (context) => HeadquarterDetailsPage(id: headquarterId,));
       case favHeadquartersPageRoute:
         return MaterialPageRoute(
             builder: (context) => FavoriteHeadquartersPage());

@@ -53,8 +53,9 @@ class MainRepository {
       accessRespons = await Dio().get("$baseUrl/accesses");
 
       if (accessRespons.statusCode == 200) {
-        var parsedResponse =
-            accessRespons.data.map((access) => Access.fromJson(access)).toList();
+        var parsedResponse = accessRespons.data
+            .map((access) => Access.fromJson(access))
+            .toList();
         accessLog = List<Access>.from(parsedResponse);
         return accessLog;
       }
@@ -63,5 +64,32 @@ class MainRepository {
       return accessLog;
     }
     return accessLog;
+  }
+
+  Future<Headquarter> getHeadquarterById(int id) async {
+    Headquarter headquarter = Headquarter(
+      id: -1,
+      imageUrl: "",
+      name: "",
+      city: "",
+      workstations: -1,
+      address: "",
+      description: "",
+    );
+    String idHq = id.toString();
+    var hqRespons;
+
+    try {
+      hqRespons = await Dio().get("$baseUrl/hq?id=$idHq");
+
+      if (hqRespons.statusCode == 200) {
+        headquarter = Headquarter.fromJson(hqRespons.data[0]);
+        return headquarter;
+      }
+    } catch (e) {
+      print(e.toString());
+      return headquarter;
+    }
+    return headquarter;
   }
 }

@@ -15,4 +15,10 @@ class HeadquarterLoaded extends HeadquarterState {
   HeadquarterLoaded({required this.headquarters});
 }
 
+class HeadquarterDetailLoaded extends HeadquarterState {
+  final Headquarter hq;
+
+  HeadquarterDetailLoaded({required this.hq});
+}
+
 class HeadquarterLoading extends HeadquarterState {}
