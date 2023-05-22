@@ -4,7 +4,6 @@ class HeadquarterDetailCard extends StatelessWidget {
   final String description;
   final Icon icon;
 
-
   const HeadquarterDetailCard({
     required this.description,
     required this.icon,
@@ -20,6 +19,7 @@ class HeadquarterDetailCard extends StatelessWidget {
           child: Text(
             description,
             softWrap: true,
+            style: TextStyle(fontSize: 16),
           ),
         ),
       ],

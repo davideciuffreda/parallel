@@ -37,6 +37,7 @@ class HeadquarterDetailsPage extends StatelessWidget {
           if (state is HeadquarterDetailLoaded) {
             return Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     child: Card(
@@ -87,7 +88,8 @@ class HeadquarterDetailsPage extends StatelessWidget {
                                       icon: Icon(Icons.abc),
                                     ),
                                     HeadquarterDetailCard(
-                                      description: state.hq.workstations.toString(),
+                                      description:
+                                          state.hq.workstations.toString(),
                                       icon: Icon(Icons.abc),
                                     ),
                                     HeadquarterDetailCard(
@@ -103,7 +105,18 @@ class HeadquarterDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  ElevatedButton(onPressed: () {}, child: Text("Prenota ora!")),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: ElevatedButton(
+                      style: ButtonStyle(elevation: MaterialStateProperty.all(5)),
+                        onPressed: () {},
+                        child: Text(
+                          "Prenota ora!",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        )),
+                  ),
                 ],
               ),
             );

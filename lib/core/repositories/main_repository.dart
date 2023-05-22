@@ -6,7 +6,7 @@ import 'package:parallel/core/models/headquarter.dart';
 class MainRepository {
   MainRepository();
 
-  final String baseUrl = "http://172.16.217.236:3000";
+  final String baseUrl = "http://172.16.216.236:3000";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
