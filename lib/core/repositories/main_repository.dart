@@ -6,13 +6,13 @@ import 'package:parallel/core/models/headquarter.dart';
 class MainRepository {
   MainRepository();
 
-  final String baseUrl = "http://172.16.216.236:3000";
+  final String baseUrl = "http://172.16.217.84:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
     var hqResponse;
     try {
-      hqResponse = await Dio().get("$baseUrl/hq");
+      hqResponse = await Dio().get("$baseUrl/headquarters");
 
       if (hqResponse.statusCode == 200) {
         var parsedResponse =

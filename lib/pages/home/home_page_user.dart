@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:parallel/core/repositories/auth_repository.dart';
 
 import 'package:parallel/pages/events/view/events_page.dart';
 import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
@@ -40,7 +41,7 @@ class _HomePageUser extends State<HomePageUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: BlocProvider(
-        create: (context) => LoginBloc(),
+        create: (context) => LoginBloc(AuthRepository()),
         child: DrawerEmployee(),
       ),
       appBar: AppBar(

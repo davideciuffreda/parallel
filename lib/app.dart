@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:parallel/core/repositories/auth_repository.dart';
 
 import 'package:parallel/core/repositories/main_repository.dart';
 import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
@@ -16,6 +17,7 @@ final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 class AppInitializer extends StatelessWidget {
   //Defining the Repositories
   late MainRepository mainRepository;
+  late AuthRepository authRepository;
   //Defining the Blocs/Cubits
   late LoginBloc loginBloc;
   late HeadquarterCubit headquarterCubit;
@@ -25,8 +27,9 @@ class AppInitializer extends StatelessWidget {
   AppInitializer() {
     //Repositories init
     mainRepository = MainRepository();
+    authRepository = AuthRepository();
     //Bloc or Cubit init
-    loginBloc = LoginBloc();
+    loginBloc = LoginBloc(authRepository);
     headquarterCubit = HeadquarterCubit(mainRepository);
     eventCubit = EventCubit(mainRepository);
     accessLogCubit = AccessLogCubit(mainRepository);
@@ -72,7 +75,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(),
+      create: (context) => LoginBloc(AuthRepository()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Parallel",

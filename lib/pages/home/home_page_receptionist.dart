@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
+import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:parallel/pages/access_log/view/access_log_page.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
@@ -39,7 +40,7 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: BlocProvider(
-        create: (context) => LoginBloc(),
+        create: (context) => LoginBloc(AuthRepository()),
         child: DrawerReceptionist(),
       ),
       appBar: AppBar(

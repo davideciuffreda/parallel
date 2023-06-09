@@ -13,6 +13,7 @@ dependencies:
   bloc: ^8.1.1
   flutter_screenutil: 5.0.0+2
   shared_preferences: ^2.0.20
+  flutter_secure_storage: ^8.0.0
   http: ^0.13.5
   flutter_dotenv: ^5.0.2
   fluttertoast: ^8.2.1
@@ -25,6 +26,7 @@ dependencies:
   email_validator: ^2.1.17
   intl: ^0.18.0
   dio: any
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:

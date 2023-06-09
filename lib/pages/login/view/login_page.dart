@@ -9,7 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -59,19 +59,19 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextField(
-                      controller: usernameController,
+                      controller: emailController,
                       onChanged: (value) {
                         BlocProvider.of<LoginBloc>(context).add(
                           LoginTextChangedEvent(
-                            usernameController.text,
+                            emailController.text,
                             passwordController.text,
                           ),
                         );
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Username',
-                        hintText: 'Enter valid username',
+                        labelText: 'Email',
+                        hintText: 'Inserisci la tua email',
                       ),
                     ),
                     SizedBox(height: 10),
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                       onChanged: (value) {
                         BlocProvider.of<LoginBloc>(context).add(
                           LoginTextChangedEvent(
-                            usernameController.text,
+                            emailController.text,
                             passwordController.text,
                           ),
                         );
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Password',
-                        hintText: 'Enter your password',
+                        hintText: 'Inserisci la tua password',
                       ),
                     ),
                   ],
@@ -124,13 +124,13 @@ class _LoginPageState extends State<LoginPage> {
                                 .requestFocus(new FocusNode());
                             BlocProvider.of<LoginBloc>(context).add(
                               LoginSubmittedEvent(
-                                usernameController.text,
+                                emailController.text,
                                 passwordController.text,
                               ),
                             );
                           },
                           child: Text(
-                            'Login',
+                            'Accedi',
                             style: TextStyle(
                               fontSize: 22,
                             ),
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                       return ElevatedButton(
                         onPressed: null,
                         child: Text(
-                          'Login',
+                          'Accedi',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 22,

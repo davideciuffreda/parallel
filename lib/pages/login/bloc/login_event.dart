@@ -3,21 +3,21 @@ part of 'login_bloc.dart';
 abstract class LoginEvent {}
 
 class LoginTextChangedEvent extends LoginEvent {
-  final String usernameValue;
+  final String emailValue;
   final String passwordValue;
 
   LoginTextChangedEvent(
-    this.usernameValue,
+    this.emailValue,
     this.passwordValue,
   );
 }
 
 class LoginSubmittedEvent extends LoginEvent {
-  final String username;
+  final String email;
   final String password;
 
   LoginSubmittedEvent(
-    this.username,
+    this.email,
     this.password,
   );
 }
