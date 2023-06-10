@@ -3,8 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerManager extends StatelessWidget {
+  Future<Map<String, String>> getUserInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String firstName = prefs.getString('firstName') ?? '';
+    String lastName = prefs.getString('lastName') ?? '';
+
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,11 +42,33 @@ class DrawerManager extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          "Nome Cognome",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                        FutureBuilder<Map<String, String>>(
+                          future: getUserInfo(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<Map<String, String>> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              // Visualizza un caricamento mentre si attendono le informazioni
+                              return CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              // Gestisci eventuali errori
+                              return Text('Errore: ${snapshot.error}');
+                            } else {
+                              // Se tutto è andato bene, visualizza le informazioni recuperate
+                              String firstName =
+                                  snapshot.data?['firstName'] ?? '';
+                              String lastName =
+                                  snapshot.data?['lastName'] ?? '';
+
+                              return Text(
+                                '$firstName $lastName',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ],
                     ),

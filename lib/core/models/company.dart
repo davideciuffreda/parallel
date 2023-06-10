@@ -1,48 +1,49 @@
 // To parse this JSON data, do
 //
-//     final headquarter = headquarterFromJson(jsonString);
+//     final company = companyFromJson(jsonString);
 
 import 'dart:convert';
 
-import 'package:parallel/core/models/company.dart';
+Company companyFromJson(String str) => Company.fromJson(json.decode(str));
 
-Headquarter headquarterFromJson(String str) =>
-    Headquarter.fromJson(json.decode(str));
+String companyToJson(Company data) => json.encode(data.toJson());
 
-String headquarterToJson(Headquarter data) => json.encode(data.toJson());
-
-class Headquarter {
+class Company {
   int id;
-  Company company;
+  String name;
   String city;
   String address;
   String phoneNumber;
   String feDescription;
+  String websiteUrl;
 
-  Headquarter({
+  Company({
     required this.id,
-    required this.company,
+    required this.name,
     required this.city,
     required this.address,
     required this.phoneNumber,
     required this.feDescription,
+    required this.websiteUrl,
   });
 
-  factory Headquarter.fromJson(Map<String, dynamic> json) => Headquarter(
+  factory Company.fromJson(Map<String, dynamic> json) => Company(
         id: json["id"],
-        company: Company.fromJson(json["company"]),
+        name: json["name"],
         city: json["city"],
         address: json["address"],
         phoneNumber: json["phoneNumber"],
         feDescription: json["feDescription"],
+        websiteUrl: json["websiteUrl"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "company": company.toJson(),
+        "name": name,
         "city": city,
         "address": address,
         "phoneNumber": phoneNumber,
         "feDescription": feDescription,
+        "websiteUrl": websiteUrl,
       };
 }

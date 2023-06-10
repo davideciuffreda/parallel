@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
-import 'package:parallel/app_widgets/headquarter/headquarter_card.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_detail_card.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
@@ -37,7 +35,7 @@ class HeadquarterDetailsPage extends StatelessWidget {
           if (state is HeadquarterDetailLoaded) {
             return Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     child: Card(
@@ -57,8 +55,8 @@ class HeadquarterDetailsPage extends StatelessWidget {
                               topLeft: Radius.circular(16),
                               topRight: Radius.circular(16),
                             ),
-                            child: Image.network(
-                              state.hq.imageUrl,
+                            child: Image.asset(
+                              "assets/images/city.jpg",
                               width: double.infinity,
                               height: 280,
                               fit: BoxFit.cover,
@@ -70,7 +68,7 @@ class HeadquarterDetailsPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  state.hq.name,
+                                  state.hq.company.name,
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -80,21 +78,23 @@ class HeadquarterDetailsPage extends StatelessWidget {
                                 Column(
                                   children: [
                                     HeadquarterDetailCard(
-                                      description: state.hq.address,
-                                      icon: Icon(Icons.abc),
-                                    ),
-                                    HeadquarterDetailCard(
-                                      description: state.hq.description,
-                                      icon: Icon(Icons.abc),
-                                    ),
-                                    HeadquarterDetailCard(
-                                      description:
-                                          state.hq.workstations.toString(),
-                                      icon: Icon(Icons.abc),
-                                    ),
-                                    HeadquarterDetailCard(
                                       description: state.hq.city,
-                                      icon: Icon(Icons.abc),
+                                      icon: Icon(Icons.near_me_outlined),
+                                    ),
+                                    SizedBox(height: 8),
+                                    HeadquarterDetailCard(
+                                      description: state.hq.address,
+                                      icon: Icon(Icons.place_outlined),
+                                    ),
+                                    SizedBox(height: 8),
+                                    HeadquarterDetailCard(
+                                      description: state.hq.feDescription,
+                                      icon: Icon(Icons.description_outlined),
+                                    ),
+                                    SizedBox(height: 8),
+                                    HeadquarterDetailCard(
+                                      description: state.hq.phoneNumber,
+                                      icon: Icon(Icons.phone_rounded),
                                     ),
                                   ],
                                 ),
@@ -105,17 +105,9 @@ class HeadquarterDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8),
-                    child: ElevatedButton(
-                      style: ButtonStyle(elevation: MaterialStateProperty.all(5)),
-                        onPressed: () {},
-                        child: Text(
-                          "Prenota ora!",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        )),
+                  FloatingActionButton(
+                    onPressed: () {},
+                    child: Icon(Icons.work_history_outlined),
                   ),
                 ],
               ),

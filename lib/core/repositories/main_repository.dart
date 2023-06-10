@@ -1,18 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:parallel/core/models/access.dart';
+import 'package:parallel/core/models/company.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/headquarter.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class MainRepository {
   MainRepository();
 
+  final storage = FlutterSecureStorage();
   final String baseUrl = "http://172.16.217.84:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
     var hqResponse;
+
+    String? token = await storage.read(key: 'userToken');
+
     try {
-      hqResponse = await Dio().get("$baseUrl/headquarters");
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      hqResponse = await dio.get("$baseUrl/headquarters");
 
       if (hqResponse.statusCode == 200) {
         var parsedResponse =
@@ -29,13 +37,14 @@ class MainRepository {
 
   Future<List<Event>> getEvents() async {
     List<Event> events = [];
-    var eRespons;
-    try {
-      eRespons = await Dio().get("$baseUrl/events");
+    var eResponse;
 
-      if (eRespons.statusCode == 200) {
+    try {
+      eResponse = await Dio().get("$baseUrl/events");
+
+      if (eResponse.statusCode == 200) {
         var parsedResponse =
-            eRespons.data.map((ev) => Event.fromJson(ev)).toList();
+            eResponse.data.map((ev) => Event.fromJson(ev)).toList();
         events = List<Event>.from(parsedResponse);
         return events;
       }
@@ -67,23 +76,34 @@ class MainRepository {
   }
 
   Future<Headquarter> getHeadquarterById(int id) async {
+    String? token = await storage.read(key: 'userToken');
+
     Headquarter headquarter = Headquarter(
-      id: -1,
-      imageUrl: "",
-      name: "",
-      city: "",
-      workstations: -1,
-      address: "",
-      description: "",
+      id: id,
+      city: '',
+      address: '',
+      feDescription: '',
+      phoneNumber: '',
+      company: Company(
+        id: -1,
+        name: '',
+        city: '',
+        address: '',
+        phoneNumber: '',
+        feDescription: '',
+        websiteUrl: '',
+      ),
     );
     String idHq = id.toString();
-    var hqRespons;
+    var hqResponse;
 
     try {
-      hqRespons = await Dio().get("$baseUrl/hq?id=$idHq");
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      hqResponse = await dio.get("$baseUrl/headquarters/$idHq");
 
-      if (hqRespons.statusCode == 200) {
-        headquarter = Headquarter.fromJson(hqRespons.data[0]);
+      if (hqResponse.statusCode == 200) {
+        headquarter = Headquarter.fromJson(hqResponse.data);
         return headquarter;
       }
     } catch (e) {

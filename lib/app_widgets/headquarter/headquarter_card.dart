@@ -46,8 +46,8 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
                   ),
-                  child: Image.network(
-                    widget.hq.imageUrl,
+                  child: Image.asset(
+                    "assets/images/city.jpg",
                     width: double.infinity,
                     height: 280,
                     fit: BoxFit.cover,
@@ -82,7 +82,7 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget.hq.name,
+                    widget.hq.company.name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                       ),
                       CardLabel(
                         icon: Icon(Icons.computer_sharp),
-                        title: widget.hq.workstations.toString(),
+                        title: "30",
                       ),
                     ],
                   ),

@@ -6,8 +6,22 @@ import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatelessWidget {
+  Future<Map<String, String>> getUserInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String firstName = prefs.getString('firstName') ?? '';
+    String lastName = prefs.getString('lastName') ?? '';
+    String email = prefs.getString('email') ?? '';
+
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,26 +82,43 @@ class AccountPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                Text(
-                  "Nome Cognome",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  "nomecognome@mail.com",
-                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-                ),
-                Text(
-                  "+39 3369773608",
-                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-                ),
-                Text(
-                  "01/01/2000",
-                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-                ),
-                Text(
-                  "Via Sandro Sandri 81, 00159, Roma",
-                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                FutureBuilder<Map<String, String>>(
+                  future: getUserInfo(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<Map<String, String>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // Visualizza uno spinner o un indicatore di caricamento mentre si attendono le informazioni
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      // Gestisci eventuali errori
+                      return Text('Errore: ${snapshot.error}');
+                    } else {
+                      // Se tutto è andato bene, visualizza le informazioni recuperate
+                      String firstName = snapshot.data?['firstName'] ?? '';
+                      String lastName = snapshot.data?['lastName'] ?? '';
+                      String email = snapshot.data?['email'] ?? '';
+
+                      return Column(
+                        children: [
+                          Text(
+                            '$firstName $lastName',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            '$email',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
                 ),
                 SizedBox(height: 15),
                 SizedBox(
@@ -96,7 +127,7 @@ class AccountPage extends StatelessWidget {
                     child: Text("Modifica"),
                     onPressed: () {
                       Navigator.of(context)
-                            .pushReplacementNamed(editAccountPageRoute);
+                          .pushReplacementNamed(editAccountPageRoute);
                     },
                   ),
                 ),

@@ -143,7 +143,7 @@ class _EventCard extends State<EventCard> {
                   children: [
                     CardLabel(
                       icon: Icon(Icons.share_location_sharp),
-                      title: widget.event.headquarter.name +
+                      title: widget.event.headquarter.company.name +
                           ', ' +
                           widget.event.headquarter.city,
                     ),
