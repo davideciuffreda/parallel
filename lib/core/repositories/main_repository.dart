@@ -82,7 +82,7 @@ class MainRepository {
       id: id,
       city: '',
       address: '',
-      feDescription: '',
+      description: '',
       phoneNumber: '',
       company: Company(
         id: -1,
@@ -90,10 +90,11 @@ class MainRepository {
         city: '',
         address: '',
         phoneNumber: '',
-        feDescription: '',
+        description: '',
         websiteUrl: '',
       ),
     );
+
     String idHq = id.toString();
     var hqResponse;
 

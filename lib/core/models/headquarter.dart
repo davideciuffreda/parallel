@@ -17,7 +17,7 @@ class Headquarter {
   String city;
   String address;
   String phoneNumber;
-  String feDescription;
+  String description;
 
   Headquarter({
     required this.id,
@@ -25,7 +25,7 @@ class Headquarter {
     required this.city,
     required this.address,
     required this.phoneNumber,
-    required this.feDescription,
+    required this.description,
   });
 
   factory Headquarter.fromJson(Map<String, dynamic> json) => Headquarter(
@@ -34,7 +34,7 @@ class Headquarter {
         city: json["city"],
         address: json["address"],
         phoneNumber: json["phoneNumber"],
-        feDescription: json["feDescription"],
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +43,6 @@ class Headquarter {
         "city": city,
         "address": address,
         "phoneNumber": phoneNumber,
-        "feDescription": feDescription,
+        "description": description,
       };
 }

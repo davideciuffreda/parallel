@@ -78,23 +78,25 @@ class HeadquarterDetailsPage extends StatelessWidget {
                                 Column(
                                   children: [
                                     HeadquarterDetailCard(
-                                      description: state.hq.city,
-                                      icon: Icon(Icons.near_me_outlined),
+                                      description: state.hq.address +
+                                          ', ' +
+                                          state.hq.city,
+                                      icon: Icon(Icons.share_location_outlined),
                                     ),
-                                    SizedBox(height: 8),
+                                    SizedBox(height: 6),
                                     HeadquarterDetailCard(
-                                      description: state.hq.address,
-                                      icon: Icon(Icons.place_outlined),
-                                    ),
-                                    SizedBox(height: 8),
-                                    HeadquarterDetailCard(
-                                      description: state.hq.feDescription,
+                                      description: state.hq.description,
                                       icon: Icon(Icons.description_outlined),
                                     ),
-                                    SizedBox(height: 8),
+                                    SizedBox(height: 6),
                                     HeadquarterDetailCard(
                                       description: state.hq.phoneNumber,
                                       icon: Icon(Icons.phone_rounded),
+                                    ),
+                                    SizedBox(height: 6),
+                                    HeadquarterDetailCard(
+                                      description: state.hq.company.websiteUrl,
+                                      icon: Icon(Icons.link_outlined),
                                     ),
                                   ],
                                 ),
@@ -105,9 +107,12 @@ class HeadquarterDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  FloatingActionButton(
-                    onPressed: () {},
-                    child: Icon(Icons.work_history_outlined),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: FloatingActionButton(
+                      onPressed: () {},
+                      child: Icon(Icons.work_history_outlined),
+                    ),
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:parallel/core/models/user.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         //print("[TokenBLoC]: " + token);
 
         if (decodedToken['role'] == "ROLE_ADMIN") {
-          emit(LoginUserState());
+          emit(LoginAdminState());
         } else if (decodedToken['role'] == "ROLE_COMPANY_MANAGER") {
           emit(LoginManagerState());
         } else if (decodedToken['role'] == "ROLE_HEADQUARTERS_RECEPTIONIST") {
@@ -44,13 +45,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else if (decodedToken['role'] == "ROLE_EMPLOYEE") {
           emit(LoginUserState());
         } else {
-          emit(LoginErrorState("Username o passowrd errati!"));
+          emit(LoginErrorState("Username o password errati!"));
         }
       });
     });
 
-    ///Logout the user
-    on<LogoutEvent>((event, emit) {
+    //Logout the user
+    on<LogoutEvent>((event, emit) async {
+      final prefs = await SharedPreferences.getInstance();
+
+      await authRepository
+          .tryLogOut(await storage.read(key: 'userToken') as String);
+
+      await removeSavedInfo(prefs);
+
       emit(LogoutState());
     });
   }
@@ -66,5 +74,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     await prefs.setString('email', decodedToken['email']);
     await prefs.setString('firstName', decodedToken['firstName']);
     await prefs.setString('lastName', decodedToken['lastName']);
+  }
+
+  Future<void> removeSavedInfo(SharedPreferences prefs) async {
+    await storage.delete(key: 'token');
+    await prefs.remove('firstName');
+    await prefs.remove('lastName');
+    await prefs.remove('email');
   }
 }

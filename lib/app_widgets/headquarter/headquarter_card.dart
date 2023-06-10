@@ -88,17 +88,13 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  SizedBox(height: 6),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CardLabel(
-                        icon: Icon(Icons.share_location_sharp),
-                        title: widget.hq.city,
-                      ),
-                      CardLabel(
-                        icon: Icon(Icons.computer_sharp),
-                        title: "30",
+                        icon: Icon(Icons.near_me_outlined),
+                        title: widget.hq.city.toUpperCase() + ' | ' + widget.hq.address,
                       ),
                     ],
                   ),

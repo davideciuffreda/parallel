@@ -14,7 +14,7 @@ class Company {
   String city;
   String address;
   String phoneNumber;
-  String feDescription;
+  String description;
   String websiteUrl;
 
   Company({
@@ -23,7 +23,7 @@ class Company {
     required this.city,
     required this.address,
     required this.phoneNumber,
-    required this.feDescription,
+    required this.description,
     required this.websiteUrl,
   });
 
@@ -33,7 +33,7 @@ class Company {
         city: json["city"],
         address: json["address"],
         phoneNumber: json["phoneNumber"],
-        feDescription: json["feDescription"],
+        description: json["description"],
         websiteUrl: json["websiteUrl"],
       );
 
@@ -43,7 +43,7 @@ class Company {
         "city": city,
         "address": address,
         "phoneNumber": phoneNumber,
-        "feDescription": feDescription,
+        "description": description,
         "websiteUrl": websiteUrl,
       };
 }

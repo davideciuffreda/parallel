@@ -24,4 +24,15 @@ class AuthRepository {
     }
     return token;
   }
+
+  Future<void> tryLogOut(String token) async {
+    var response;
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.get("$baseUrl/auth/logout");
+    } catch (e) {
+      print("Exception -> " + e.toString());
+    }
+  }
 }
