@@ -83,7 +83,7 @@ class DrawerReceptionist extends StatelessWidget {
                         if (state is LoginUserState) {
                           Navigator.of(context)
                               .pushReplacementNamed(homePageUserRoute);
-                        } else if (state is LoginAdminState) {
+                        } else if (state is LoginReceptionistState) {
                           Navigator.of(context)
                               .pushReplacementNamed(homePageReceptionistRoute);
                         }

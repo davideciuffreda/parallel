@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else if (decodedToken['role'] == "ROLE_COMPANY_MANAGER") {
           emit(LoginManagerState());
         } else if (decodedToken['role'] == "ROLE_HEADQUARTERS_RECEPTIONIST") {
-          emit(LoginAdminState());
+          emit(LoginReceptionistState());
         } else if (decodedToken['role'] == "ROLE_EMPLOYEE") {
           emit(LoginUserState());
         } else {

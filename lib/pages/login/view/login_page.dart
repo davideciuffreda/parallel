@@ -16,7 +16,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //Remove the keyboard when the user press anywhere on the screen
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
@@ -105,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (state is LoginLoadingState) {
                       return BlocListener<LoginBloc, LoginState>(
                         listener: (context, state) {
-                          if (state is LoginAdminState) {
+                          if (state is LoginReceptionistState) {
                             Navigator.of(context).pushReplacementNamed(
                                 homePageReceptionistRoute);
                           } else if (state is LoginUserState) {

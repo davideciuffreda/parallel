@@ -111,7 +111,7 @@ class HeadquarterDetailsPage extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 12),
                     child: FloatingActionButton(
                       onPressed: () {},
-                      child: Icon(Icons.work_history_outlined),
+                      child: Icon(Icons.edit_calendar_outlined),
                     ),
                   ),
                 ],
