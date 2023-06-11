@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/routing/router_constants.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class NewEventPage extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class NewEventPage extends StatefulWidget {
 class _NewEventPage extends State<NewEventPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController headquarterController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
   TextEditingController ticketsController = TextEditingController();
   TextEditingController imageUrlController = TextEditingController();
 
@@ -30,34 +31,40 @@ class _NewEventPage extends State<NewEventPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 8,
+                  horizontal: 28,
+                  vertical: 12,
                 ),
                 child: Column(
                   children: [
                     TextField(
                       controller: nameController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
                         labelText: 'Nome',
                         hintText: 'Inserisci il nome dell\'evento',
                       ),
                     ),
                     SizedBox(height: 10),
                     TextField(
-                      controller: cityController,
+                      controller: dateController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Città',
-                        hintText:
-                            'Inserisci la città in cui si terrà l\'evento',
+                        labelText: 'Data',
+                        hintText: 'Seleziona la data in cui si terrà l\'evento',
                       ),
+                      onTap: () {
+                        DatePicker.showDatePicker(
+                          context,
+                          showTitleActions: true,
+                          onConfirm: (date) {
+                            dateController.text = date.toString();
+                          },
+                          currentTime: DateTime.now(),
+                        );
+                      },
                     ),
                     SizedBox(height: 10),
                     TextField(
                       controller: headquarterController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
                         labelText: 'Sede',
                         hintText: 'Inserisci la sede in cui si terrà l\'evento',
                       ),
@@ -67,7 +74,6 @@ class _NewEventPage extends State<NewEventPage> {
                       controller: ticketsController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
                         labelText: 'Numero di posti',
                         hintText:
                             'Inserisci il numero massimo di posti per l\'evento',
@@ -78,23 +84,38 @@ class _NewEventPage extends State<NewEventPage> {
                       controller: imageUrlController,
                       keyboardType: TextInputType.url,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
                         labelText: 'Locandina',
-                        hintText: 'Inserisci l\'url della locandina dell\'evento',
+                        hintText:
+                            'Inserisci l\'url della locandina dell\'evento',
                       ),
                     ),
                     SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed(homePageManagerRoute);
-                      },
-                      child: Text(
-                        "Crea!",
-                        style: TextStyle(
-                          fontSize: 20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.lightBlue.shade50, // Colore di sfondo
+                            foregroundColor: Colors.blue, // Colore del testo
+                            side: BorderSide(
+                                color:
+                                    Colors.lightBlue.shade50), // Colore del bordo e spessore
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed(homePageManagerRoute);
+                          },
+                          child: Text(
+                            "Crea",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),

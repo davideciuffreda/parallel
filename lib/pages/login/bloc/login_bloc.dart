@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:parallel/core/models/user.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,9 +14,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this.authRepository) : super(LoginInitial()) {
     on<LoginTextChangedEvent>((event, emit) {
       if (event.emailValue == '') {
-        emit(LoginErrorState("Please, enter a valid email address!"));
-      } else if (event.passwordValue.length < 3) {
-        emit(LoginErrorState("Please, enter a valid password!"));
+        emit(LoginErrorState("Inserire un indirizzo email valido..."));
+      } else if (event.passwordValue.length < 4) {
+        emit(LoginErrorState("Inserire una password valida..."));
       } else {
         emit(LoginLoadingState());
       }
@@ -77,6 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> removeSavedInfo(SharedPreferences prefs) async {
+    //rimozione delle userInfo salvate nel FSS e nelle SP
     await storage.delete(key: 'token');
     await prefs.remove('firstName');
     await prefs.remove('lastName');

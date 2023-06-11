@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 height: 170,
                 width: 170,
-                padding: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(200),
                 ),
@@ -52,9 +52,9 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 8,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 28,
+                  vertical: 12,
                 ),
                 child: Column(
                   children: [
@@ -69,12 +69,11 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
                         labelText: 'Email',
                         hintText: 'Inserisci la tua email',
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 12),
                     TextField(
                       controller: passwordController,
                       obscureText: true,
@@ -87,7 +86,6 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
                         labelText: 'Password',
                         hintText: 'Inserisci la tua password',
                       ),
