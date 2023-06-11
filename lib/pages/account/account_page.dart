@@ -32,7 +32,7 @@ class AccountPage extends StatelessWidget {
         builder: (context, state) {
           if (state is LoginUserState) {
             return DrawerEmployee();
-          } else if (state is LoginAdminState) {
+          } else if (state is LoginReceptionistState) {
             return DrawerReceptionist();
           } else if (state is LoginManagerState) {
             return DrawerManager();
