@@ -15,10 +15,14 @@ class CardLabel extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         icon,
-        SizedBox(width: 3.5),
+        SizedBox(width: 4),
         Text(
           title,
-          style: TextStyle(fontSize: 16),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 16
+          ),
         ),
       ],
     );

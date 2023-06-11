@@ -19,6 +19,8 @@ class HeadquarterDetailCard extends StatelessWidget {
         Expanded(
           child: Text(
             description,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             softWrap: true,
             style: TextStyle(fontSize: 16),
           ),

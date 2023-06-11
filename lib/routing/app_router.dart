@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/account/edit_account_page.dart';
+import 'package:parallel/pages/bookings/add_booking_page.dart';
 import 'package:parallel/pages/bookings/bookings_page.dart';
 import 'package:parallel/pages/events/view/events_page.dart';
 import 'package:parallel/pages/events/view/new_event_page.dart';
@@ -38,6 +39,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => EventsPage());
       case bookingsPageRoute:
         return MaterialPageRoute(builder: (context) => BookingsPage());
+      case addBookingPageRoute:
+        return MaterialPageRoute(builder: (context) => AddBookingPage());
       case accountPageRoute:
         return MaterialPageRoute(builder: (context) => AccountPage());
       case editAccountPageRoute:

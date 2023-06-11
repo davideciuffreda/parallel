@@ -83,6 +83,7 @@ class MainRepository {
       city: '',
       address: '',
       description: '',
+      totalWorkplaces: 0,
       phoneNumber: '',
       company: Company(
         id: -1,

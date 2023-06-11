@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -14,6 +15,8 @@ class _NewEventPage extends State<NewEventPage> {
   TextEditingController dateController = TextEditingController();
   TextEditingController ticketsController = TextEditingController();
   TextEditingController imageUrlController = TextEditingController();
+
+  FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +49,7 @@ class _NewEventPage extends State<NewEventPage> {
                     SizedBox(height: 10),
                     TextField(
                       controller: dateController,
+                      focusNode: _focusNode,
                       decoration: InputDecoration(
                         labelText: 'Data',
                         hintText: 'Seleziona la data in cui si terrà l\'evento',
@@ -55,10 +59,12 @@ class _NewEventPage extends State<NewEventPage> {
                           context,
                           showTitleActions: true,
                           onConfirm: (date) {
-                            dateController.text = date.toString();
+                            DateFormat dateFormatter = DateFormat('yyyy/MM/dd');
+                            dateController.text = dateFormatter.format(date).toString();
                           },
-                          currentTime: DateTime.now(),
+                          currentTime: DateTime.now().add(Duration(days: 1)),
                         );
+                        _focusNode.unfocus();
                       },
                     ),
                     SizedBox(height: 10),
@@ -95,11 +101,12 @@ class _NewEventPage extends State<NewEventPage> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.lightBlue.shade50, // Colore di sfondo
+                            backgroundColor:
+                                Colors.lightBlue.shade50, // Colore di sfondo
                             foregroundColor: Colors.blue, // Colore del testo
                             side: BorderSide(
-                                color:
-                                    Colors.lightBlue.shade50), // Colore del bordo e spessore
+                                color: Colors.lightBlue
+                                    .shade50), // Colore del bordo e spessore
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
