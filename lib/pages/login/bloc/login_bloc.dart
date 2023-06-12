@@ -14,9 +14,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this.authRepository) : super(LoginInitial()) {
     on<LoginTextChangedEvent>((event, emit) {
       if (event.emailValue == '') {
-        emit(LoginErrorState("Inserire un indirizzo email valido..."));
-      } else if (event.passwordValue.length < 4) {
-        emit(LoginErrorState("Inserire una password valida..."));
+        emit(LoginErrorState("Inserire un indirizzo mail..."));
+      } else if (event.passwordValue.length < 2) {
+        emit(LoginErrorState("Inserire una password..."));
       } else {
         emit(LoginLoadingState());
       }
@@ -28,23 +28,34 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await authRepository
           .tryLogIn(event.email, event.password)
           .then((token) async {
-        Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-
-        await saveToken(token, decodedToken, prefs);
-
-        //print("[DecodedToken] " + decodedToken.toString());
+        
         //print("[TokenBLoC]: " + token);
 
-        if (decodedToken['role'] == "ROLE_ADMIN") {
-          emit(LoginAdminState());
-        } else if (decodedToken['role'] == "ROLE_COMPANY_MANAGER") {
-          emit(LoginManagerState());
-        } else if (decodedToken['role'] == "ROLE_HEADQUARTERS_RECEPTIONIST") {
-          emit(LoginReceptionistState());
-        } else if (decodedToken['role'] == "ROLE_EMPLOYEE") {
-          emit(LoginUserState());
-        } else {
+        if (token == "") {
           emit(LoginErrorState("Username o password errati!"));
+        } else {
+          Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+
+          await saveToken(token, decodedToken, prefs);
+
+          //print("[DecodedToken] " + decodedToken.toString());
+
+          switch (decodedToken['role']) {
+            case "ROLE_ADMIN":
+              emit(LoginAdminState());
+              break;
+            case "ROLE_COMPANY_MANAGER":
+              emit(LoginManagerState());
+              break;
+            case "ROLE_HEADQUARTERS_RECEPTIONIST":
+              emit(LoginReceptionistState());
+              break;
+            case "ROLE_EMPLOYEE":
+              emit(LoginUserState());
+              break;
+            default:
+              emit(LoginErrorState("Username o password errati!"));
+          }
         }
       });
     });

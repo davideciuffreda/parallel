@@ -5,6 +5,7 @@ import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_description_card.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_detail_card.dart';
+import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
@@ -19,8 +20,14 @@ class HeadquarterDetailsPage extends StatefulWidget {
 }
 
 class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
-  TextEditingController dateController = TextEditingController();
+  TextEditingController dateController = TextEditingController(text: '');
   FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    dateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +129,28 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                         ),
                       ),
                     ),
+                    BlocBuilder<AddBookingBloc, AddBookingState>(
+                      builder: (context, state) {
+                        if (dateController.text.isEmpty) {
+                          BlocProvider.of<AddBookingBloc>(context)
+                              .add(CleaningBookingDate());
+                        }
+                        if (state is AddBookingError) {
+                          return Center(
+                            child: Text(
+                              state.errorMessage,
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Text('');
+                        }
+                      },
+                    ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -143,22 +170,45 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                       DateTime.now().add(Duration(days: 1)),
                                   minTime:
                                       DateTime.now().add(Duration(days: 1)),
+                                  maxTime:
+                                      DateTime.now().add(Duration(days: 1095)),
                                   onConfirm: (date) {
                                     dateController.text =
                                         date.toString().substring(0, 10);
+                                    BlocProvider.of<AddBookingBloc>(context)
+                                        .add(
+                                      BookingDateAdded(
+                                        dateController.text,
+                                      ),
+                                    );
                                   },
                                 );
+                                dateController.clear();
                                 _focusNode.unfocus();
                               },
                             ),
                           ),
-                          FloatingActionButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushReplacementNamed(addBookingPageRoute);
+                          BlocBuilder<AddBookingBloc, AddBookingState>(
+                            builder: (context, state) {
+                              if (state is BookingDateSelected) {
+                                return FloatingActionButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacementNamed(
+                                        addBookingPageRoute);
+                                  },
+                                  child: Icon(Icons.arrow_forward_ios_outlined),
+                                );
+                              } else {
+                                return FloatingActionButton(
+                                  backgroundColor: Colors.grey.shade400,
+                                  onPressed: null,
+                                  child: Icon(
+                                    Icons.arrow_back_ios_new_outlined,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }
                             },
-                            //child: Icon(Icons.edit_calendar_outlined),
-                            child: Icon(Icons.arrow_forward_ios_outlined),
                           ),
                         ],
                       ),

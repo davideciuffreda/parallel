@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Image.asset("assets/images/logo.png"),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 8),
               BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
                   if (state is LoginErrorState) {
@@ -42,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                         state.errorMessage,
                         style: TextStyle(
                           color: Colors.red,
+                          fontSize: 16,
                         ),
                       ),
                     );
@@ -113,6 +114,15 @@ class _LoginPageState extends State<LoginPage> {
                           } else if (state is LoginManagerState) {
                             Navigator.of(context)
                                 .pushReplacementNamed(homePageManagerRoute);
+                          } else if (state is LoginErrorState) {
+                            Center(
+                              child: Text(
+                                state.errorMessage,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            );
                           }
                         },
                         child: ElevatedButton(

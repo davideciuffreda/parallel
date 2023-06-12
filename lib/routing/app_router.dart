@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:parallel/pages/account/account_page.dart';
 import 'package:parallel/pages/account/edit_account_page.dart';
-import 'package:parallel/pages/bookings/add_booking_page.dart';
-import 'package:parallel/pages/bookings/bookings_page.dart';
+import 'package:parallel/pages/bookings/view/add_booking_page.dart';
+import 'package:parallel/pages/bookings/view/bookings_page.dart';
 import 'package:parallel/pages/events/view/events_page.dart';
 import 'package:parallel/pages/events/view/new_event_page.dart';
 import 'package:parallel/pages/headquarters/view/headquarter_details_page.dart';

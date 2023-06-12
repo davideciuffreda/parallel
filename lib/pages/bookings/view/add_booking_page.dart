@@ -10,6 +10,14 @@ class AddBookingPage extends StatefulWidget {
 }
 
 class _AddBookingPage extends State<AddBookingPage> {
+  String selectedOption = 'Opzione 1';
+
+  @override
+  void initState() {
+    super.initState();
+    selectedOption = 'Opzione 1';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +34,26 @@ class _AddBookingPage extends State<AddBookingPage> {
             return Text("Non dovresti essere arrivato a questo punto!");
           }
         },
+      ),
+      body: Center(
+        child: DropdownButton<String>(
+          value: selectedOption,
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedOption = newValue!;
+            });
+          },
+          items: <String>[
+            'Opzione 1',
+            'Opzione 2',
+            'Opzione 3',
+          ].map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
