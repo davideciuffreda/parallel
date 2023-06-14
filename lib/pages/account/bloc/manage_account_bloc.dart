@@ -37,7 +37,7 @@ class ManageAccountBloc extends Bloc<ManageAccountEvent, ManageAccountState> {
         
         //print("[Value]: " + value.toString());
 
-        if (value.toString() == 'done') {
+        if (value.toString() == 'pwd_changed') {
           emit(PasswordChanged());
         } else {
           emit(ManageAccountError(
