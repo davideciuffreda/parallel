@@ -5,6 +5,7 @@ import 'package:parallel/core/repositories/auth_repository.dart';
 
 import 'package:parallel/core/repositories/main_repository.dart';
 import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
+import 'package:parallel/pages/account/bloc/manage_account_bloc.dart';
 import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
@@ -22,6 +23,7 @@ class AppInitializer extends StatelessWidget {
   //Defining the Blocs/Cubits
   late LoginBloc loginBloc;
   late HeadquarterCubit headquarterCubit;
+  late ManageAccountBloc manageAccountBloc;
   late EventCubit eventCubit;
   late AccessLogCubit accessLogCubit;
   late AddBookingBloc addBookingBloc;
@@ -32,6 +34,7 @@ class AppInitializer extends StatelessWidget {
     authRepository = AuthRepository();
     //Bloc or Cubit init
     loginBloc = LoginBloc(authRepository);
+    manageAccountBloc = ManageAccountBloc(mainRepository);
     headquarterCubit = HeadquarterCubit(mainRepository);
     eventCubit = EventCubit(mainRepository);
     accessLogCubit = AccessLogCubit(mainRepository);
@@ -47,6 +50,9 @@ class AppInitializer extends StatelessWidget {
       providers: [
         BlocProvider<LoginBloc>(
           create: (context) => loginBloc,
+        ),
+        BlocProvider<ManageAccountBloc>(
+          create: (context) => manageAccountBloc,
         ),
         BlocProvider<AddBookingBloc>(
           create: (context) => addBookingBloc,

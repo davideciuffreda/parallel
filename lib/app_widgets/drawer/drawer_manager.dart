@@ -83,9 +83,6 @@ class DrawerManager extends StatelessWidget {
                         if (state is LoginUserState) {
                           Navigator.of(context)
                               .pushReplacementNamed(homePageUserRoute);
-                        } else if (state is LoginAdminState) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(homePageReceptionistRoute);
                         } else if (state is LoginManagerState) {
                           Navigator.of(context)
                               .pushReplacementNamed(homePageManagerRoute);

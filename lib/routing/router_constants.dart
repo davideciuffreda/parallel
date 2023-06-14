@@ -5,6 +5,7 @@ const String homePageManagerRoute = '/home_page_manager';
 const String homePageReceptionistRoute = '/home_page_receptionist';
 const String accountPageRoute = '/profile_page';
 const String editAccountPageRoute = '/edit_profile_page';
+const String editPasswordPageRoute = '/edit_password_page';
 const String headquartersPageRoute = '/headquarters_page';
 const String favHeadquartersPageRoute = '/fav_headquarters_page';
 const String eventsPageRoute = '/events_page';

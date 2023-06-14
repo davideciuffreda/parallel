@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           }
                         },
-                        child: ElevatedButton(
+                        child: TextButton(
                           onPressed: () {
                             FocusScope.of(context)
                                 .requestFocus(new FocusNode());
@@ -145,12 +145,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       );
                     } else {
-                      return ElevatedButton(
+                      return TextButton(
                         onPressed: null,
                         child: Text(
                           'Accedi',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.grey,
                             fontSize: 22,
                           ),
                         ),

@@ -8,8 +8,6 @@ class LoginValidState extends LoginState {}
 
 class LoginUserState extends LoginState {}
 
-class LoginAdminState extends LoginState {}
-
 class LoginReceptionistState extends LoginState {}
 
 class LoginManagerState extends LoginState {}

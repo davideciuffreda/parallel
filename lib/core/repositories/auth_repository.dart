@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class AuthRepository {
   AuthRepository();
 
-  final String baseUrl = "http://172.16.217.84:8080/api/v1";
+  final String baseUrl = "http://172.16.216.130:8080/api/v1";
 
   Future<String> tryLogIn(String email, String password) async {
     String token = "";

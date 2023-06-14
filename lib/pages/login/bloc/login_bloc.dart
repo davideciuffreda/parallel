@@ -28,10 +28,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await authRepository
           .tryLogIn(event.email, event.password)
           .then((token) async {
-        
         //print("[TokenBLoC]: " + token);
 
-        if (token == "") {
+        if (token.isEmpty) {
           emit(LoginErrorState("Username o password errati!"));
         } else {
           Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
@@ -42,7 +41,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
           switch (decodedToken['role']) {
             case "ROLE_ADMIN":
-              emit(LoginAdminState());
+              emit(LoginReceptionistState());
               break;
             case "ROLE_COMPANY_MANAGER":
               emit(LoginManagerState());
@@ -73,17 +72,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
 
-  Future<void> saveToken(String token, Map<String, dynamic> decodedToken,
-      SharedPreferences prefs) async {
+  Future<void> saveToken(String token,
+      Map<String, dynamic> decodedToken, SharedPreferences prefs) async {
     //memorizzazione del token codificato nel Flutter Secure Storage
-    String key = 'userToken';
-    String value = token;
-    await storage.write(key: key, value: value);
+    String tokenKey = 'userToken';
+    String tokenValue = token;
+    await storage.write(key: tokenKey, value: tokenValue);
 
     //memorizzazione di email, nome e cognome dell'utente nelle SharedPreferences
     await prefs.setString('email', decodedToken['email']);
     await prefs.setString('firstName', decodedToken['firstName']);
     await prefs.setString('lastName', decodedToken['lastName']);
+    await prefs.setString('userRole', decodedToken['role']);
   }
 
   Future<void> removeSavedInfo(SharedPreferences prefs) async {
@@ -92,5 +92,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     await prefs.remove('firstName');
     await prefs.remove('lastName');
     await prefs.remove('email');
+    await prefs.remove('userRole');
   }
 }

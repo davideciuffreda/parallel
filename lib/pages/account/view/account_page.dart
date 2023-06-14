@@ -27,6 +27,19 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profilo"),
+        actions: [
+          BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                  Navigator.of(context).pushReplacementNamed(loginPageRoute);
+                },
+                icon: Icon(Icons.logout_outlined),
+              );
+            },
+          ),
+        ],
       ),
       drawer: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
@@ -87,7 +100,6 @@ class AccountPage extends StatelessWidget {
                   builder: (BuildContext context,
                       AsyncSnapshot<Map<String, String>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      // Visualizza uno spinner o un indicatore di caricamento mentre si attendono le informazioni
                       return CircularProgressIndicator();
                     } else if (snapshot.hasError) {
                       // Gestisci eventuali errori
@@ -120,31 +132,51 @@ class AccountPage extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(height: 15),
-                SizedBox(
-                  width: 150,
-                  child: ElevatedButton(
-                    child: Text("Modifica"),
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(editAccountPageRoute);
-                    },
-                  ),
-                ),
-                BlocBuilder<LoginBloc, LoginState>(
-                  builder: (context, state) {
-                    return TextButton(
-                      onPressed: () {
-                        BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
-                        Navigator.of(context)
-                            .pushReplacementNamed(loginPageRoute);
-                      },
-                      child: Text(
-                        "Logout",
-                        style: TextStyle(color: Colors.red),
+                SizedBox(height: 28),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 55,
+                      width: 110,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.blue,
+                          ),
+                        ),
+                        child: Text(
+                          "Modifica dati",
+                          style: TextStyle(fontSize: 17),
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(editAccountPageRoute);
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(
+                      height: 55,
+                      width: 110,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.blue,
+                          ),
+                        ),
+                        child: Text(
+                          "Modifica password",
+                          style: TextStyle(fontSize: 17),
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(editPasswordPageRoute);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

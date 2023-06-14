@@ -31,7 +31,7 @@ class _AccessLogCard extends State<AccessLogCard> {
                 topLeft: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
               ),
-              child: Image.network(widget.access.user.profileImg),
+              child: Image.asset("assests/images/profile.png"),
             ),
             SizedBox(width: 30),
             Column(

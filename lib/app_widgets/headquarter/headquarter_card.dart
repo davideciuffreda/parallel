@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/core/models/headquarter.dart';
 import 'package:parallel/pages/headquarters/view/headquarter_details_page.dart';
-import 'package:parallel/routing/router_constants.dart';
 
 class HeadquarterCard extends StatefulWidget {
   Headquarter hq;

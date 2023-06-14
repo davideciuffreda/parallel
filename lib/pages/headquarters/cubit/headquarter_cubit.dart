@@ -9,9 +9,7 @@ part 'headquarter_state.dart';
 class HeadquarterCubit extends Cubit<HeadquarterState> {
   final MainRepository mainRepository;
 
-  HeadquarterCubit(
-    this.mainRepository,
-  ) : super(HeadquarterInitial());
+  HeadquarterCubit(this.mainRepository) : super(HeadquarterInitial());
 
   void getHeadquarters() {
     mainRepository.getHeadquarters().then((headquarters) {
