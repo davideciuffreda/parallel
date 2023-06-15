@@ -9,7 +9,7 @@ class MainRepository {
   MainRepository();
 
   final storage = FlutterSecureStorage();
-  final String baseUrl = "http://172.16.217.133:8080/api/v1";
+  final String baseUrl = "http://192.168.99.225:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
@@ -33,6 +33,23 @@ class MainRepository {
       return headquarters;
     }
     return headquarters;
+  }
+
+  Future<int> setFavoriteHeadquarter(int hqId) async {
+    var response;
+    String? token = await storage.read(key: 'userToken');
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.patch("$baseUrl/headquarters/favs/$hqId");
+
+      //print("[StatusCode] " + response.statusCode.toString());
+
+      return response.statusCode;
+    } catch (e) {
+      print(e.toString());
+    }
+    return 0;
   }
 
   Future<List<Event>> getEvents() async {
@@ -94,6 +111,7 @@ class MainRepository {
         description: '',
         websiteUrl: '',
       ),
+      favorite: false,
     );
 
     String idHq = id.toString();

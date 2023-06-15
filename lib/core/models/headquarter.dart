@@ -6,30 +6,33 @@ import 'dart:convert';
 
 import 'package:parallel/core/models/company.dart';
 
-Headquarter headquarterFromJson(String str) => Headquarter.fromJson(json.decode(str));
+Headquarter headquarterFromJson(String str) =>
+    Headquarter.fromJson(json.decode(str));
 
 String headquarterToJson(Headquarter data) => json.encode(data.toJson());
 
 class Headquarter {
-    int id;
-    Company company;
-    String city;
-    String address;
-    String phoneNumber;
-    String description;
-    int totalWorkplaces;
+  int id;
+  Company company;
+  String city;
+  String address;
+  String phoneNumber;
+  String description;
+  int totalWorkplaces;
+  bool favorite;
 
-    Headquarter({
-        required this.id,
-        required this.company,
-        required this.city,
-        required this.address,
-        required this.phoneNumber,
-        required this.description,
-        required this.totalWorkplaces,
-    });
+  Headquarter({
+    required this.id,
+    required this.company,
+    required this.city,
+    required this.address,
+    required this.phoneNumber,
+    required this.description,
+    required this.totalWorkplaces,
+    required this.favorite,
+  });
 
-    factory Headquarter.fromJson(Map<String, dynamic> json) => Headquarter(
+  factory Headquarter.fromJson(Map<String, dynamic> json) => Headquarter(
         id: json["id"],
         company: Company.fromJson(json["company"]),
         city: json["city"],
@@ -37,9 +40,10 @@ class Headquarter {
         phoneNumber: json["phoneNumber"],
         description: json["description"],
         totalWorkplaces: json["totalWorkplaces"],
-    );
+        favorite: json["favorite"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "company": company.toJson(),
         "city": city,
@@ -47,5 +51,6 @@ class Headquarter {
         "phoneNumber": phoneNumber,
         "description": description,
         "totalWorkplaces": totalWorkplaces,
-    };
+        "favorite": favorite,
+      };
 }

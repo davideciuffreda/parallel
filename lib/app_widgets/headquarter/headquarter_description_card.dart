@@ -18,7 +18,7 @@ class HeadquarterDescriptionCard extends StatelessWidget {
         SizedBox(width: 4),
         Expanded(
           child: Container(
-            height: 100,
+            height: 80,
             child: ListView(
               physics: ClampingScrollPhysics(),
               children: [

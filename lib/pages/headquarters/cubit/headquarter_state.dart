@@ -9,6 +9,8 @@ abstract class HeadquarterState extends Equatable {
 
 class HeadquarterInitial extends HeadquarterState {}
 
+class HeadquarterFavorite extends HeadquarterState {}
+
 class HeadquarterLoaded extends HeadquarterState {
   final List<Headquarter> headquarters;
 
@@ -19,6 +21,12 @@ class HeadquarterDetailLoaded extends HeadquarterState {
   final Headquarter hq;
 
   HeadquarterDetailLoaded({required this.hq});
+}
+
+class HeadquarterError extends HeadquarterState {
+  final String error;
+
+  HeadquarterError(this.error);
 }
 
 class HeadquarterLoading extends HeadquarterState {}

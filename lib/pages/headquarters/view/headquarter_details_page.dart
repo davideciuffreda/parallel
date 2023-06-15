@@ -5,10 +5,12 @@ import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_description_card.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_detail_card.dart';
+import 'package:parallel/core/models/headquarter.dart';
 import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HeadquarterDetailsPage extends StatefulWidget {
   final int id;
@@ -22,11 +24,26 @@ class HeadquarterDetailsPage extends StatefulWidget {
 class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
   TextEditingController dateController = TextEditingController(text: '');
   FocusNode _focusNode = FocusNode();
+  late SharedPreferences sharedPreferences;
+
+  String? userRole;
 
   @override
-  void dispose() {
-    dateController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    initSharedPreferences();
+  }
+
+  void initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    getUserRole();
+  }
+
+  void getUserRole() {
+    String? storedUserRole = sharedPreferences.getString('userRole');
+    setState(() {
+      userRole = storedUserRole;
+    });
   }
 
   @override
@@ -52,6 +69,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
         child: BlocBuilder<HeadquarterCubit, HeadquarterState>(
           builder: (context, state) {
             if (state is HeadquarterDetailLoaded) {
+              Headquarter headquarter = state.hq;
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,17 +87,85 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16),
-                              ),
-                              child: Image.asset(
-                                "assets/images/city.jpg",
-                                width: double.infinity,
-                                height: 280,
-                                fit: BoxFit.cover,
-                              ),
+                            Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  ),
+                                  child: Image.asset(
+                                    "assets/images/city.jpg",
+                                    width: double.infinity,
+                                    height: 280,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                BlocListener<HeadquarterCubit,
+                                    HeadquarterState>(
+                                  listener: (context, state) {
+                                    if (state is HeadquarterFavorite) {
+                                      if (userRole.toString() ==
+                                          'ROLE_EMPLOYEE') {
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(
+                                                homePageUserRoute);
+                                      } else if (userRole.toString() ==
+                                          'ROLE_COMPANY_MANAGER') {
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(
+                                                homePageManagerRoute);
+                                      } else if (userRole.toString() ==
+                                          'ROLE_HEADQUARTERS_RECEPTIONIST') {
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(
+                                                homePageReceptionistRoute);
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text('Errore'),
+                                              content: Text(
+                                                  'Si è verificato un errore durante l\'operazione.'),
+                                              actions: [
+                                                TextButton(
+                                                  child: Text('Chiudi'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+                                    }
+                                  },
+                                  child: Positioned(
+                                    right: 8,
+                                    top: 8,
+                                    child: FloatingActionButton.small(
+                                      backgroundColor: Colors.white70,
+                                      onPressed: () {
+                                        BlocProvider.of<HeadquarterCubit>(
+                                                context)
+                                            .setFavoriteHeadquarter(
+                                                headquarter.id);
+                                      },
+                                      child: headquarter.favorite == true
+                                          ? Icon(
+                                              Icons.star_outlined,
+                                              color: Colors.orange.shade400,
+                                            )
+                                          : Icon(
+                                              Icons.star_border_outlined,
+                                              color: Colors.orange.shade400,
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             Padding(
                               padding: EdgeInsets.all(16),
@@ -87,7 +173,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    state.hq.company.name,
+                                    headquarter.company.name,
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -97,25 +183,25 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                   Column(
                                     children: [
                                       HeadquarterDetailCard(
-                                        description: state.hq.address +
+                                        description: headquarter.address +
                                             ', ' +
-                                            state.hq.city,
+                                            headquarter.city,
                                         icon:
                                             Icon(Icons.share_location_outlined),
                                       ),
                                       SizedBox(height: 6),
                                       HeadquarterDescriptionCard(
-                                        description: state.hq.description,
+                                        description: headquarter.description,
                                         icon: Icon(Icons.description_outlined),
                                       ),
                                       SizedBox(height: 6),
                                       HeadquarterDetailCard(
-                                        description: state.hq.phoneNumber,
+                                        description: headquarter.phoneNumber,
                                         icon: Icon(Icons.phone_rounded),
                                       ),
                                       SizedBox(height: 6),
                                       HeadquarterDetailCard(
-                                        description: state.hq.totalWorkplaces
+                                        description: headquarter.totalWorkplaces
                                                 .toString() +
                                             ' postazioni',
                                         icon: Icon(Icons.group_outlined),

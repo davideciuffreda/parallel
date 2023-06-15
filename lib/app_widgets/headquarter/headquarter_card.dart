@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/core/models/headquarter.dart';
+import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/headquarters/view/headquarter_details_page.dart';
 
 class HeadquarterCard extends StatefulWidget {
@@ -14,8 +16,6 @@ class HeadquarterCard extends StatefulWidget {
 }
 
 class _HeadquarterCardState extends State<HeadquarterCard> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,42 +38,17 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
-                  child: Image.asset(
-                    "assets/images/city.jpg",
-                    width: double.infinity,
-                    height: 280,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  top: 4,
-                  right: 4,
-                  child: FloatingActionButton.small(
-                    backgroundColor: Colors.white.withOpacity(0.7),
-                    onPressed: () {
-                      setState(() {
-                        isFavorite = !isFavorite;
-                      });
-                    },
-                    child: isFavorite
-                        ? Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        : Icon(
-                            Icons.favorite_border_outlined,
-                            color: Colors.red.shade300,
-                          ),
-                  ),
-                ),
-              ],
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+              child: Image.asset(
+                "assets/images/city.jpg",
+                width: double.infinity,
+                height: 280,
+                fit: BoxFit.cover,
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(16),
@@ -93,7 +68,9 @@ class _HeadquarterCardState extends State<HeadquarterCard> {
                     children: [
                       CardLabel(
                         icon: Icon(Icons.near_me_outlined),
-                        title: widget.hq.city.toUpperCase() + ' | ' + widget.hq.address,
+                        title: widget.hq.city.toUpperCase() +
+                            ' | ' +
+                            widget.hq.address,
                       ),
                     ],
                   ),
