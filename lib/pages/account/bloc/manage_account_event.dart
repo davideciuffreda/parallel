@@ -27,3 +27,29 @@ class ChangePasswordSubmittedEvent extends ManageAccountEvent {
     this.token,
   );
 }
+
+class ChangingUserInfoEvent extends ManageAccountEvent {
+  final String city;
+  final String address;
+  final String phoneNumber;
+
+  ChangingUserInfoEvent(
+    this.city,
+    this.address,
+    this.phoneNumber,
+  );
+}
+
+class ChangeUserInfoSubmittedEvent extends ManageAccountEvent {
+  final String city;
+  final String address;
+  final String phoneNumber;
+  final String token;
+
+  ChangeUserInfoSubmittedEvent(
+    this.city,
+    this.address,
+    this.phoneNumber,
+    this.token,
+  );
+}

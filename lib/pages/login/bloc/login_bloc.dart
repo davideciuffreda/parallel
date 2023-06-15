@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:parallel/core/models/user.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,7 +36,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else {
           Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
 
-          await saveToken(token, decodedToken, prefs);
+          await authRepository.getUserInfo(token).then((user) {
+            saveToken(token, prefs, user);
+          });
 
           //print("[DecodedToken] " + decodedToken.toString());
 
@@ -73,25 +76,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> saveToken(String token,
-      Map<String, dynamic> decodedToken, SharedPreferences prefs) async {
+      SharedPreferences prefs, User user) async {
     //memorizzazione del token codificato nel Flutter Secure Storage
     String tokenKey = 'userToken';
     String tokenValue = token;
     await storage.write(key: tokenKey, value: tokenValue);
 
-    //memorizzazione di email, nome e cognome dell'utente nelle SharedPreferences
-    await prefs.setString('email', decodedToken['email']);
-    await prefs.setString('firstName', decodedToken['firstName']);
-    await prefs.setString('lastName', decodedToken['lastName']);
-    await prefs.setString('userRole', decodedToken['role']);
+    //memorizzazione dei dati dell'utente nelle SharedPreferences
+    await prefs.setString('email', user.email);
+    await prefs.setString('firstName', user.firstName);
+    await prefs.setString('lastName', user.lastName);
+    await prefs.setString('userRole', user.role);
+    await prefs.setString('jobPosition', user.jobPosition);
+    await prefs.setString('birthDate', user.birthDate.toString());
+    await prefs.setString('phoneNumber', user.phoneNumber.toString());
+    await prefs.setString('address', user.address);
+    await prefs.setString('city', user.city);
   }
 
   Future<void> removeSavedInfo(SharedPreferences prefs) async {
     //rimozione delle userInfo salvate nel FSS e nelle SP
     await storage.delete(key: 'token');
-    await prefs.remove('firstName');
-    await prefs.remove('lastName');
-    await prefs.remove('email');
-    await prefs.remove('userRole');
+    await prefs.clear();
   }
 }

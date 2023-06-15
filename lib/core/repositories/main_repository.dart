@@ -9,7 +9,7 @@ class MainRepository {
   MainRepository();
 
   final storage = FlutterSecureStorage();
-  final String baseUrl = "http://172.16.216.130:8080/api/v1";
+  final String baseUrl = "http://172.16.217.133:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
@@ -120,7 +120,8 @@ class MainRepository {
     String newPwd,
     String confirmPwd,
     String token,
-  ) async {;
+  ) async {
+    ;
     var response;
     try {
       Dio dio = Dio();
@@ -145,5 +146,38 @@ class MainRepository {
       print(e.toString());
     }
     return "pwd_not_changed";
+  }
+
+  Future<String> changeUserInfo(
+    String city,
+    String address,
+    String phoneNumber,
+    String token,
+  ) async {
+    ;
+    var response;
+    try {
+      Dio dio = Dio();
+
+      dio.options.headers['Authorization'] = 'Bearer $token';
+
+      response = await dio.put(
+        "$baseUrl/users",
+        data: {
+          "phoneNumber": phoneNumber,
+          "city": city,
+          "address": address,
+        },
+      );
+
+      if (response.statusCode == 204) {
+        return "info_changed";
+      } else {
+        return "info_not_changed";
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return "info_not_changed";
   }
 }

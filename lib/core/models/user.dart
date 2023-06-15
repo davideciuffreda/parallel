@@ -13,26 +13,26 @@ class User {
     String email;
     String firstName;
     String lastName;
-    String role;
-    int scopeId;
-    String jobPosition;
-    String address;
     DateTime birthDate;
     String phoneNumber;
     String city;
+    String address;
+    String role;
+    int scopeId;
+    String jobPosition;
 
     User({
         required this.id,
         required this.email,
         required this.firstName,
         required this.lastName,
-        required this.role,
-        required this.scopeId,
-        required this.jobPosition,
-        required this.address,
         required this.birthDate,
         required this.phoneNumber,
         required this.city,
+        required this.address,
+        required this.role,
+        required this.scopeId,
+        required this.jobPosition,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
@@ -40,13 +40,13 @@ class User {
         email: json["email"],
         firstName: json["firstName"],
         lastName: json["lastName"],
-        role: json["role"],
-        scopeId: json["scopeId"],
-        jobPosition: json["jobPosition"],
-        address: json["address"],
         birthDate: DateTime.parse(json["birthDate"]),
         phoneNumber: json["phoneNumber"],
         city: json["city"],
+        address: json["address"],
+        role: json["role"],
+        scopeId: json["scopeId"],
+        jobPosition: json["jobPosition"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -54,12 +54,12 @@ class User {
         "email": email,
         "firstName": firstName,
         "lastName": lastName,
-        "role": role,
-        "scopeId": scopeId,
-        "jobPosition": jobPosition,
-        "address": address,
         "birthDate": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
         "phoneNumber": phoneNumber,
         "city": city,
+        "address": address,
+        "role": role,
+        "scopeId": scopeId,
+        "jobPosition": jobPosition,
     };
 }

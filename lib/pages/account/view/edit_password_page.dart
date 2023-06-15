@@ -50,7 +50,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
     });
   }
 
-  void cleanController() {
+  void clearController() {
     currentPwdController.clear();
     newPwdController.clear();
     confirmNewPwdController.clear();
@@ -148,9 +148,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                     children: [
                       BlocBuilder<LoginBloc, LoginState>(
                         builder: (context, state) {
-                          currentPwdController.clear();
-                          confirmNewPwdController.clear();
-                          newPwdController.clear();
+                          clearController();
                           return TextButton(
                             onPressed: () {
                               if (state is LoginReceptionistState) {
@@ -218,7 +216,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                                           .pushReplacementNamed(
                                               homePageReceptionistRoute);
                                     } else {
-                                      cleanController();
+                                      clearController();
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -239,7 +237,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                                       );
                                     }
                                   } else if (state is ManageAccountError) {
-                                    cleanController();
+                                    clearController();
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {

@@ -6,6 +6,8 @@ class ManageAccountInitial extends ManageAccountState {}
 
 class PasswordChanged extends ManageAccountState {}
 
+class UserInfoChanged extends ManageAccountState {}
+
 class ManageAccountError extends ManageAccountState {
   final String errorMessage;
 
@@ -13,3 +15,5 @@ class ManageAccountError extends ManageAccountState {
 }
 
 class ChangingPasswordState extends ManageAccountState {}
+
+class ChangingUserInfoState extends ManageAccountState {}

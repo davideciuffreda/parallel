@@ -8,17 +8,32 @@ import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
+  @override
+  State<AccountPage> createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
   Future<Map<String, String>> getUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String firstName = prefs.getString('firstName') ?? '';
     String lastName = prefs.getString('lastName') ?? '';
     String email = prefs.getString('email') ?? '';
+    String city = prefs.getString('city') ?? '';
+    String address = prefs.getString('address') ?? '';
+    String phoneNumber = prefs.getString('phoneNumber') ?? '';
+    String birthDate = prefs.getString('birthDate') ?? '';
+    String jobPosition = prefs.getString('jobPosition') ?? '';
 
     return {
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
+      'city': city,
+      'address': address,
+      'phoneNumber': phoneNumber,
+      'birthDate': birthDate,
+      'jobPosition': jobPosition,
     };
   }
 
@@ -60,39 +75,15 @@ class AccountPage extends StatelessWidget {
             padding: EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      height: 130,
-                      width: 130,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: CircleAvatar(
-                          backgroundImage:
-                              AssetImage("assets/images/profile.png"),
-                        ),
-                      ),
+                SizedBox(
+                  height: 130,
+                  width: 130,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/profile.png"),
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.blue,
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
                 SizedBox(height: 10),
                 FutureBuilder<Map<String, String>>(
@@ -102,13 +93,19 @@ class AccountPage extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      // Gestisci eventuali errori
+                      // Gestione di eventuali errori
                       return Text('Errore: ${snapshot.error}');
                     } else {
                       // Se tutto è andato bene, visualizza le informazioni recuperate
                       String firstName = snapshot.data?['firstName'] ?? '';
                       String lastName = snapshot.data?['lastName'] ?? '';
                       String email = snapshot.data?['email'] ?? '';
+                      String city = snapshot.data?['city'] ?? '';
+                      String phoneNumber = snapshot.data?['phoneNumber'] ?? '';
+                      String address = snapshot.data?['address'] ?? '';
+                      String jobPosition = snapshot.data?['jobPosition'] ?? '';
+                      String birthDate =
+                          snapshot.data?['birthDate']!.substring(0, 10) ?? '';
 
                       return Column(
                         children: [
@@ -125,6 +122,41 @@ class AccountPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 24,
                               fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            '$jobPosition',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            '$phoneNumber',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            '$city',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            '$address',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            '$birthDate',
+                            style: TextStyle(
+                              fontSize: 20,
                             ),
                           ),
                         ],

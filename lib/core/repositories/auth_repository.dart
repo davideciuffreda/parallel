@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:parallel/core/models/user.dart';
 
 class AuthRepository {
   AuthRepository();
 
-  final String baseUrl = "http://172.16.216.130:8080/api/v1";
+  final String baseUrl = "http://172.16.217.133:8080/api/v1";
 
   Future<String> tryLogIn(String email, String password) async {
     String token = "";
@@ -25,6 +26,36 @@ class AuthRepository {
       return "";
     }
     return token;
+  }
+
+  Future<User> getUserInfo(String token) async {
+    User currentUser = User(
+      id: -1,
+      firstName: "",
+      lastName: "",
+      email: "",
+      birthDate: DateTime(0),
+      phoneNumber: "",
+      city: "",
+      address: "",
+      role: "",
+      scopeId: 0,
+      jobPosition: "",
+    );
+    var response;
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.get("$baseUrl/users/who-am-i");
+
+      if (response.statusCode == 200) {
+        currentUser = User.fromJson(response.data);
+        return currentUser;
+      }
+    } catch (e) {
+      print("Exception -> " + e.toString());
+    }
+    return currentUser;
   }
 
   Future<void> tryLogOut(String token) async {
