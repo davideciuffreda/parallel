@@ -64,13 +64,13 @@ class MainRepository {
     var response;
     String? token = await storage.read(key: 'userToken');
 
-    print("[Token] " + token.toString());
+    /* print("[Token] " + token.toString());
     print("[ID] " + id.toString());
     print("[Name] " + name);
     print("[EventDate] " + eventDate);
     print("[startTime] " + startTime);
     print("[endTime] " + endTime);
-    print("[maxPlaces] " + maxPlaces.toString());
+    print("[maxPlaces] " + maxPlaces.toString()); */
 
     try {
       Dio dio = Dio();
@@ -92,6 +92,8 @@ class MainRepository {
         print("[Response]: " + response);
         newEvent = response.data.map((event) => Event.fromJson(event));
         return newEvent;
+      } else if (response.statusCode == 403) {
+        response.data;
       }
     } catch (e) {
       print(e.toString());

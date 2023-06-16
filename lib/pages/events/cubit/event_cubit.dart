@@ -26,7 +26,7 @@ class EventCubit extends Cubit<EventState> {
   ) {
     mainRepository
         .createNewEvent(id, name, eventDate, startTime, endTime, maxPlaces)
-        .then((events) {
+        .then((event) {
       emit(EventCreated());
     });
   }

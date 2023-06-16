@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -46,6 +47,14 @@ class _NewEventPage extends State<NewEventPage> {
 
   void setHeadquarterId(int id) async {
     await sharedPreferences.setInt('headquarterId', id);
+  }
+
+  void clearController() {
+    dateController.clear();
+    nameController.clear();
+    startTimeController.clear();
+    endTimeController.clear();
+    ticketsController.clear();
   }
 
   @override
@@ -192,26 +201,30 @@ class _NewEventPage extends State<NewEventPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextButton(
-                              onPressed: () {
-                                //print(sharedPreferences.getInt('headquarterId').toString());
-
-                                BlocProvider.of<EventCubit>(context)
-                                    .createNewEvent(
-                                  hqSelected.id,
-                                  nameController.text,
-                                  dateController.text,
-                                  startTimeController.text,
-                                  endTimeController.text,
-                                  int.parse(ticketsController.text),
-                                );
-                                Navigator.of(context)
-                                    .pushReplacementNamed(homePageManagerRoute);
+                            BlocListener<EventCubit, EventState>(
+                              listener: (context, state) {
+                                if (state is EventCreated) {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      homePageManagerRoute);
+                                }
                               },
-                              child: Text(
-                                "Crea",
-                                style: TextStyle(
-                                  fontSize: 20,
+                              child: TextButton(
+                                onPressed: () {
+                                  BlocProvider.of<EventCubit>(context)
+                                      .createNewEvent(
+                                    hqSelected.id,
+                                    nameController.text,
+                                    dateController.text,
+                                    startTimeController.text,
+                                    endTimeController.text,
+                                    int.parse(ticketsController.text),
+                                  );
+                                },
+                                child: Text(
+                                  "Crea",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             ),
