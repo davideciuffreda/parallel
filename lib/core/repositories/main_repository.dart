@@ -9,7 +9,7 @@ class MainRepository {
   MainRepository();
 
   final storage = FlutterSecureStorage();
-  final String baseUrl = "http://192.168.99.225:8080/api/v1";
+  final String baseUrl = "http://172.16.218.232:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];

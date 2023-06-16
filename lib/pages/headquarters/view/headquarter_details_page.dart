@@ -6,6 +6,7 @@ import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_description_card.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_detail_card.dart';
 import 'package:parallel/core/models/headquarter.dart';
+import 'package:parallel/core/repositories/main_repository.dart';
 import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
@@ -25,8 +26,11 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
   TextEditingController dateController = TextEditingController(text: '');
   FocusNode _focusNode = FocusNode();
   late SharedPreferences sharedPreferences;
+  MainRepository mainRepository = MainRepository();
 
   String? userRole;
+
+  _HeadquarterDetailsPageState();
 
   @override
   void initState() {
@@ -44,6 +48,13 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
     setState(() {
       userRole = storedUserRole;
     });
+  }
+
+  Future<int> setFavorite(int id) async {
+    int statusCode = 0;
+    statusCode = await mainRepository.setFavoriteHeadquarter(id);
+
+    return statusCode;
   }
 
   @override
@@ -70,6 +81,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
           builder: (context, state) {
             if (state is HeadquarterDetailLoaded) {
               Headquarter headquarter = state.hq;
+              bool isFavorite = headquarter.favorite;
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -101,67 +113,45 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                BlocListener<HeadquarterCubit,
-                                    HeadquarterState>(
-                                  listener: (context, state) {
-                                    if (state is HeadquarterFavorite) {
-                                      if (userRole.toString() ==
-                                          'ROLE_EMPLOYEE') {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                homePageUserRoute);
-                                      } else if (userRole.toString() ==
-                                          'ROLE_COMPANY_MANAGER') {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                homePageManagerRoute);
-                                      } else if (userRole.toString() ==
-                                          'ROLE_HEADQUARTERS_RECEPTIONIST') {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                homePageReceptionistRoute);
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text('Errore'),
-                                              content: Text(
-                                                  'Si è verificato un errore durante l\'operazione.'),
-                                              actions: [
-                                                TextButton(
-                                                  child: Text('Chiudi'),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-                                    }
-                                  },
-                                  child: Positioned(
-                                    right: 8,
-                                    top: 8,
-                                    child: FloatingActionButton.small(
-                                      backgroundColor: Colors.white70,
-                                      onPressed: () {
-                                        BlocProvider.of<HeadquarterCubit>(
-                                                context)
-                                            .setFavoriteHeadquarter(
-                                                headquarter.id);
-                                      },
-                                      child: headquarter.favorite == true
-                                          ? Icon(
-                                              Icons.star_outlined,
-                                              color: Colors.orange.shade400,
-                                            )
-                                          : Icon(
-                                              Icons.star_border_outlined,
-                                              color: Colors.orange.shade400,
-                                            ),
+                                Positioned(
+                                  right: 8,
+                                  top: 8,
+                                  child: FloatingActionButton.small(
+                                    backgroundColor: Colors.white70,
+                                    onPressed: () {
+                                      setFavorite(headquarter.id);
+                                      setState(() {
+                                        isFavorite = !isFavorite;
+                                      });
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          String textFavorite;
+                                          if (isFavorite) {
+                                            textFavorite =
+                                                'La sede è stata aggiunta alle preferite!';
+                                          } else {
+                                            textFavorite =
+                                                'La sede è stata rimossa dalle preferite!';
+                                          }
+                                          return AlertDialog(
+                                            title: Text('Successo'),
+                                            content: Text(textFavorite),
+                                            actions: [
+                                              TextButton(
+                                                child: Text('Okay'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.star_outlined,
+                                      color: Colors.orange.shade400,
                                     ),
                                   ),
                                 ),
