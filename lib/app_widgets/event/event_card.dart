@@ -35,8 +35,8 @@ class _EventCard extends State<EventCard> {
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
-                child: Image.network(
-                  widget.event.imageUrl,
+                child: Image.asset(
+                  "assets/images/event.jpg",
                   width: double.infinity,
                   height: 280,
                   fit: BoxFit.cover,
@@ -100,8 +100,10 @@ class _EventCard extends State<EventCard> {
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: const Text('Informazioni'),
-                            content:
-                                Text('Ora di inizio: 9:00\nOra di fine: 12:00'),
+                            content: Text(
+                              'Ora di inizio: ${widget.event.startTime.substring(0, 5)}\n' +
+                                  'Ora di fine: ${widget.event.endTime.substring(0, 5)}\n',
+                            ),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -143,17 +145,19 @@ class _EventCard extends State<EventCard> {
                   children: [
                     CardLabel(
                       icon: Icon(Icons.share_location_sharp),
-                      title: widget.event.headquarter.company.name +
+                      title: widget.event.company.name +
                           ', ' +
-                          widget.event.headquarter.city,
+                          widget.event.headquarters.city,
                     ),
                     CardLabel(
                       icon: Icon(Icons.people_outline),
-                      title: widget.event.tickets.toString(),
+                      title: widget.event.availablePlaces.toString() +
+                          '/' +
+                          widget.event.totalPlaces.toString(),
                     ),
                     CardLabel(
                       icon: Icon(Icons.date_range_sharp),
-                      title: widget.event.date,
+                      title: widget.event.eventDate.toString().substring(0, 10),
                     ),
                   ],
                 ),

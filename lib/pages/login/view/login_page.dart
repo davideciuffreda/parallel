@@ -23,14 +23,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               Container(
-                height: 170,
-                width: 170,
-                padding: EdgeInsets.only(top: 24),
+                height: 200,
+                width: 200,
+                padding: EdgeInsets.only(top: 52),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(200),
                 ),
                 child: Center(
-                  child: Image.asset("assets/images/logo.png"),
+                  child: Image.asset("assets/images/sigla.png"),
                 ),
               ),
               SizedBox(height: 8),

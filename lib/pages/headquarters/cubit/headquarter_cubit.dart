@@ -22,14 +22,4 @@ class HeadquarterCubit extends Cubit<HeadquarterState> {
       emit(HeadquarterDetailLoaded(hq: hq));
     });
   }
-
-  void setFavoriteHeadquarter(int id) {
-    mainRepository.setFavoriteHeadquarter(id).then((statusCode) {
-      if (statusCode == 204) {
-        emit(HeadquarterFavorite());
-      } else {
-        emit(HeadquarterError("Ops, qualcosa è andato storto!"));
-      }
-    });
-  }
 }

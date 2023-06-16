@@ -9,10 +9,12 @@ abstract class EventState extends Equatable {
 
 class EventInitial extends EventState {}
 
+class EventCreated extends EventState {}
+
 class EventsLoaded extends EventState {
   final List<Event> events;
 
   EventsLoaded({required this.events});
 }
 
-class EvebtsLoading extends EventState {}
+class EventsLoading extends EventState {}

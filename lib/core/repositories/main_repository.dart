@@ -52,12 +52,64 @@ class MainRepository {
     return 0;
   }
 
+  Future<Event?> createNewEvent(
+    int id,
+    String name,
+    String eventDate,
+    String startTime,
+    String endTime,
+    int maxPlaces,
+  ) async {
+    Event? newEvent;
+    var response;
+    String? token = await storage.read(key: 'userToken');
+
+    print("[Token] " + token.toString());
+    print("[ID] " + id.toString());
+    print("[Name] " + name);
+    print("[EventDate] " + eventDate);
+    print("[startTime] " + startTime);
+    print("[endTime] " + endTime);
+    print("[maxPlaces] " + maxPlaces.toString());
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.post(
+        "$baseUrl/headquarters/$id/events",
+        data: {
+          "name": name,
+          "eventDate": eventDate,
+          "startTime": startTime,
+          "endTime": endTime,
+          "maxPlaces": maxPlaces,
+        },
+      );
+
+      print("Response " + response.statusCode);
+
+      if (response.statusCode == 201) {
+        print("[Response]: " + response);
+        newEvent = response.data.map((event) => Event.fromJson(event));
+        return newEvent;
+      }
+    } catch (e) {
+      print(e.toString());
+      return newEvent;
+    }
+    return newEvent;
+  }
+
   Future<List<Event>> getEvents() async {
     List<Event> events = [];
     var eResponse;
 
+    String? token = await storage.read(key: 'userToken');
+
     try {
-      eResponse = await Dio().get("$baseUrl/events");
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      eResponse = await dio.get("$baseUrl/events");
 
       if (eResponse.statusCode == 200) {
         var parsedResponse =
@@ -66,7 +118,7 @@ class MainRepository {
         return events;
       }
     } catch (e) {
-      print(e.toString());
+      print("Exception: " + e.toString());
       return events;
     }
     return events;
