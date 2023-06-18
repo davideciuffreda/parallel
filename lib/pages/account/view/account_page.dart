@@ -133,28 +133,21 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                           SizedBox(height: 4),
                           Text(
-                            '$phoneNumber',
+                            'Cell: $phoneNumber',
                             style: TextStyle(
                               fontSize: 20,
                             ),
                           ),
                           SizedBox(height: 4),
                           Text(
-                            '$city',
+                            '$address, ' + '$city',
                             style: TextStyle(
                               fontSize: 20,
                             ),
                           ),
                           SizedBox(height: 4),
                           Text(
-                            '$address',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            '$birthDate',
+                            'Data di nascita: $birthDate',
                             style: TextStyle(
                               fontSize: 20,
                             ),

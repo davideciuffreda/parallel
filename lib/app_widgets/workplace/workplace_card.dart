@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:parallel/core/models/access.dart';
+import 'package:parallel/core/models/workplace.dart';
 
-class AccessLogCard extends StatefulWidget {
-  Access access;
+class WorkplaceCard extends StatefulWidget {
+  Workplace workplace;
 
-  AccessLogCard({required this.access, required BuildContext context});
+  WorkplaceCard({required this.workplace, required BuildContext context});
 
   @override
-  State<AccessLogCard> createState() => _AccessLogCard();
+  State<WorkplaceCard> createState() => _WorkplaceCard();
 }
 
-class _AccessLogCard extends State<AccessLogCard> {
+class _WorkplaceCard extends State<WorkplaceCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 130,
+      height: 100,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -31,33 +31,25 @@ class _AccessLogCard extends State<AccessLogCard> {
                 topLeft: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
               ),
-              child: Image.asset("assets/images/profile.png"),
+              child: Image.asset("assets/images/workplace.jpg"),
             ),
             SizedBox(width: 30),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  widget.access.user.firstName +
-                      "" +
-                      widget.access.user.lastName,
+                  widget.workplace.name,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 8),
                 Text(
-                  widget.access.user.email,
+                  widget.workplace.type,
                   style: TextStyle(
-                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(height: 5),
-                Text("Check in: " + widget.access.accessHour),
-                Text(
-                  widget.access.leavingHour != ""
-                      ? "Check out: " + widget.access.leavingHour
-                      : "Check out: --:--",
                 ),
               ],
             ),

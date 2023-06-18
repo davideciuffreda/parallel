@@ -254,6 +254,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                     BlocProvider.of<AddBookingBloc>(context)
                                         .add(
                                       BookingDateAdded(
+                                        headquarter.id,
                                         dateController.text,
                                       ),
                                     );

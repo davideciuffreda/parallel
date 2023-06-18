@@ -18,10 +18,12 @@ class AccessLogPage extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: state.accessLog
-                  .map((access) => AccessLogCard(
-                        context: context,
-                        access: access,
-                      ))
+                  .map(
+                    (access) => AccessLogCard(
+                      context: context,
+                      access: access,
+                    ),
+                  )
                   .toList(),
             ),
           );

@@ -4,6 +4,8 @@ import 'package:parallel/core/models/company.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/headquarter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:parallel/core/models/workplace.dart';
+import 'package:parallel/core/models/workspace.dart';
 
 class MainRepository {
   MainRepository();
@@ -33,6 +35,60 @@ class MainRepository {
       return headquarters;
     }
     return headquarters;
+  }
+
+  Future<List<Workspace>> getWorkspacesByDate(
+      int hqId, String bookingDate) async {
+    List<Workspace> workspaces = [];
+    var wResponse;
+
+    String? token = await storage.read(key: 'userToken');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      wResponse = await dio.get(
+          "$baseUrl/headquarters/$hqId/workspaces?bookingDate=$bookingDate");
+
+      if (wResponse.statusCode == 200) {
+        var parsedResponse = wResponse.data
+            .map((workspace) => Workspace.fromJson(workspace))
+            .toList();
+        workspaces = List<Workspace>.from(parsedResponse);
+        return workspaces;
+      }
+    } catch (e) {
+      print(e.toString());
+      return workspaces;
+    }
+    return workspaces;
+  }
+
+  Future<List<Workplace>> getWorkplacesByWorkspace(
+      int hqId, int wsId) async {
+    List<Workplace> workplaces = [];
+    var wResponse;
+
+    String? token = await storage.read(key: 'userToken');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      wResponse = await dio.get(
+          "$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces");
+
+      if (wResponse.statusCode == 200) {
+        var parsedResponse = wResponse.data
+            .map((workplace) => Workplace.fromJson(workplace))
+            .toList();
+        workplaces = List<Workplace>.from(parsedResponse);
+        return workplaces;
+      }
+    } catch (e) {
+      print(e.toString());
+      return workplaces;
+    }
+    return workplaces;
   }
 
   Future<int> setFavoriteHeadquarter(int hqId) async {
