@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             saveToken(token, prefs, user);
           });
 
-          //print("[DecodedToken] " + decodedToken.toString());
+          print("[DecodedToken] " + decodedToken.toString());
 
           switch (decodedToken['role']) {
             case "ROLE_ADMIN":
@@ -75,8 +75,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
 
-  Future<void> saveToken(String token,
-      SharedPreferences prefs, User user) async {
+  Future<void> saveToken(
+    String token,
+    SharedPreferences prefs,
+    User user,
+  ) async {
     //memorizzazione del token codificato nel Flutter Secure Storage
     String tokenKey = 'userToken';
     String tokenValue = token;
@@ -84,6 +87,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     //memorizzazione dei dati dell'utente nelle SharedPreferences
     await prefs.setString('email', user.email);
+    await prefs.setString('role', user.role);
     await prefs.setString('firstName', user.firstName);
     await prefs.setString('lastName', user.lastName);
     await prefs.setString('userRole', user.role);

@@ -46,7 +46,7 @@ class User {
         address: json["address"],
         role: json["role"],
         scopeId: json["scopeId"],
-        jobPosition: json["jobPosition"],
+        jobPosition: json["jobPosition"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
