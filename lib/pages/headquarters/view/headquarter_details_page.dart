@@ -126,17 +126,20 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          String textFavorite;
+                                          String title;
+                                          String body;
                                           if (isFavorite) {
-                                            textFavorite =
+                                            title = "Aggiunta";
+                                            body =
                                                 'La sede è stata aggiunta alle preferite!';
                                           } else {
-                                            textFavorite =
+                                            title = "Rimossa";
+                                            body =
                                                 'La sede è stata rimossa dalle preferite!';
                                           }
                                           return AlertDialog(
-                                            title: Text('Successo'),
-                                            content: Text(textFavorite),
+                                            title: Text(title),
+                                            content: Text(body),
                                             actions: [
                                               TextButton(
                                                 child: Text('Okay'),

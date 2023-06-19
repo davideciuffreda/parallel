@@ -43,6 +43,7 @@ class _AddBookingPage extends State<AddBookingPage> {
               children: state.workspaces
                   .map(
                     (workspace) => WorkspaceCard(
+                      bookingDate: state.bookingDate,
                       context: context,
                       workspace: workspace,
                       headquarterId: state.hqId,

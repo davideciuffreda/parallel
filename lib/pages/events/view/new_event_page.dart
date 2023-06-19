@@ -170,6 +170,8 @@ class _NewEventPage extends State<NewEventPage> {
                                 onTap: () {
                                   DatePicker.showDatePicker(
                                     context,
+                                    minTime:
+                                        DateTime.now().add(Duration(days: 1)),
                                     showTitleActions: true,
                                     onConfirm: (date) {
                                       DateFormat dateFormatter =
@@ -210,15 +212,42 @@ class _NewEventPage extends State<NewEventPage> {
                               },
                               child: TextButton(
                                 onPressed: () {
-                                  BlocProvider.of<EventCubit>(context)
-                                      .createNewEvent(
-                                    hqSelected.id,
-                                    nameController.text,
-                                    dateController.text,
-                                    startTimeController.text,
-                                    endTimeController.text,
-                                    int.parse(ticketsController.text),
-                                  );
+                                  if (hqSelected.id != 0 &&
+                                      dateController.text.isNotEmpty &&
+                                      nameController.text.isNotEmpty &&
+                                      startTimeController.text.isNotEmpty &&
+                                      endTimeController.text.isNotEmpty &&
+                                      ticketsController.text.isNotEmpty) {
+                                    BlocProvider.of<EventCubit>(context)
+                                        .createNewEvent(
+                                      hqSelected.id,
+                                      nameController.text,
+                                      dateController.text,
+                                      startTimeController.text,
+                                      endTimeController.text,
+                                      int.parse(ticketsController.text),
+                                    );
+                                  } else {
+                                    clearController();
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Errore'),
+                                          content: Text(
+                                              'Devi compilare tutti i campi, riprova!'),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Chiudi'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 },
                                 child: Text(
                                   "Crea",

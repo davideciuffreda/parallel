@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
@@ -11,8 +9,10 @@ import 'package:parallel/pages/login/bloc/login_bloc.dart';
 class WorkplacesListPage extends StatefulWidget {
   int headquarterId;
   int workspaceId;
+  String bookingDate;
 
   WorkplacesListPage({
+    required this.bookingDate,
     required this.headquarterId,
     required this.workspaceId,
   });
@@ -51,6 +51,8 @@ class _WorkplacesListPageState extends State<WorkplacesListPage> {
                   .map(
                     (workplace) => WorkplaceCard(
                       workplace: workplace,
+                      bookingDate: widget.bookingDate,
+                      workspaceId: widget.workspaceId,
                       context: context,
                     ),
                   )

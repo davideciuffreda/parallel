@@ -150,7 +150,7 @@ class _EventCard extends State<EventCard> {
                           widget.event.headquarters.city,
                     ),
                     CardLabel(
-                      icon: Icon(Icons.people_outline),
+                      icon: Icon(Icons.people_alt_outlined),
                       title: widget.event.availablePlaces.toString() +
                           '/' +
                           widget.event.totalPlaces.toString(),

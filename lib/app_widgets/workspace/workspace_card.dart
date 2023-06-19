@@ -7,13 +7,16 @@ import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
 import 'package:parallel/pages/workspace/workplaces_list.dart';
 
 class WorkspaceCard extends StatefulWidget {
+  String bookingDate;
   Workspace workspace;
   int headquarterId;
 
-  WorkspaceCard(
-      {required this.headquarterId,
-      required this.workspace,
-      required BuildContext context});
+  WorkspaceCard({
+    required this.bookingDate,
+    required this.headquarterId,
+    required this.workspace,
+    required BuildContext context,
+  });
 
   @override
   State<WorkspaceCard> createState() => _WorkspaceCard();
@@ -25,6 +28,7 @@ class _WorkspaceCard extends State<WorkspaceCard> {
     return GestureDetector(
       onTap: () {
         BlocProvider.of<AddBookingBloc>(context).add(WorkspaceAdded(
+          widget.bookingDate,
           widget.headquarterId,
           widget.workspace.id,
         ));
@@ -33,6 +37,7 @@ class _WorkspaceCard extends State<WorkspaceCard> {
             builder: (context) => WorkplacesListPage(
               headquarterId: widget.headquarterId,
               workspaceId: widget.workspace.id,
+              bookingDate: widget.bookingDate,
             ),
           ),
         );
@@ -67,7 +72,9 @@ class _WorkspaceCard extends State<WorkspaceCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget.workspace.name,
+                    widget.workspace.name +
+                        ' ' +
+                        widget.workspace.id.toString(),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -78,15 +85,15 @@ class _WorkspaceCard extends State<WorkspaceCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CardLabel(
-                        icon: Icon(Icons.near_me_outlined),
-                        title: widget.workspace.type,
+                        icon: Icon(Icons.room_preferences_outlined),
+                        title: widget.workspace.type.replaceAll('_', ' '),
                       ),
                       CardLabel(
-                        icon: Icon(Icons.near_me_outlined),
+                        icon: Icon(Icons.format_list_numbered_outlined),
                         title: widget.workspace.floor,
                       ),
                       CardLabel(
-                        icon: Icon(Icons.near_me_outlined),
+                        icon: Icon(Icons.people_alt_outlined),
                         title: widget.workspace.availableWorkplaces.toString() +
                             '/' +
                             widget.workspace.totalWorkplaces.toString(),

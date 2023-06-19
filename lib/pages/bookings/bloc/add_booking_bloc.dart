@@ -18,6 +18,7 @@ class AddBookingBloc extends Bloc<AddBookingEvent, AddBookingState> {
             .getWorkspacesByDate(event.hqId, event.bookingDate)
             .then((workspaces) {
           emit(BookingDateSelected(
+            bookingDate: event.bookingDate,
             workspaces: workspaces,
             hqId: event.hqId,
           ));
@@ -34,6 +35,19 @@ class AddBookingBloc extends Bloc<AddBookingEvent, AddBookingState> {
           hqId: event.hqId,
           workplaces: workplaces,
         ));
+      });
+    });
+
+    on<CreateBooking>((event, emit) async {
+      await mainRepository
+          .createBooking(event.wsId, event.wpId, event.bookingDate)
+          .then((booking) {
+        if (booking.id != -1) {
+          emit(BookingCreated());
+        } else {
+          emit(AddBookingError(
+              "Probabilmente esiste già una prenotazione a tuo carico per la data selezionata!"));
+        }
       });
     });
 

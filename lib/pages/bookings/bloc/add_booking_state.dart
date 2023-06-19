@@ -8,9 +8,11 @@ class BookingAdded extends AddBookingState {}
 
 class BookingDateSelected extends AddBookingState {
   final List<Workspace> workspaces;
+  final String bookingDate;
   final int hqId;
 
   BookingDateSelected({
+    required this.bookingDate,
     required this.hqId,
     required this.workspaces,
   });
@@ -27,6 +29,8 @@ class WorkspaceSelected extends AddBookingState {
     required this.workplaces,
   });
 }
+
+class BookingCreated extends AddBookingState {}
 
 class AddBookingError extends AddBookingState {
   final String errorMessage;

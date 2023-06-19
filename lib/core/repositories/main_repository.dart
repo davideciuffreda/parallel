@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:parallel/core/models/access.dart';
+import 'package:parallel/core/models/booking.dart';
 import 'package:parallel/core/models/company.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/headquarter.dart';
@@ -64,8 +65,7 @@ class MainRepository {
     return workspaces;
   }
 
-  Future<List<Workplace>> getWorkplacesByWorkspace(
-      int hqId, int wsId) async {
+  Future<List<Workplace>> getWorkplacesByWorkspace(int hqId, int wsId) async {
     List<Workplace> workplaces = [];
     var wResponse;
 
@@ -74,8 +74,8 @@ class MainRepository {
     try {
       Dio dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer $token';
-      wResponse = await dio.get(
-          "$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces");
+      wResponse = await dio
+          .get("$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces");
 
       if (wResponse.statusCode == 200) {
         var parsedResponse = wResponse.data
@@ -142,10 +142,7 @@ class MainRepository {
         },
       );
 
-      print("Response " + response.statusCode);
-
       if (response.statusCode == 201) {
-        print("[Response]: " + response);
         newEvent = response.data.map((event) => Event.fromJson(event));
         return newEvent;
       } else if (response.statusCode == 403) {
@@ -156,6 +153,46 @@ class MainRepository {
       return newEvent;
     }
     return newEvent;
+  }
+
+  Future<Booking> createBooking(
+    int wsId,
+    int wpId,
+    String bookingDate,
+  ) async {
+    Booking booking = Booking(
+      id: -1,
+      workplaceId: 0,
+      bookingDate: DateTime(0),
+      bookedOn: DateTime(0),
+      present: false,
+    );
+    var response;
+    String? token = await storage.read(key: 'userToken');
+
+    /* print("[bkDt] " + bookingDate);
+    print("[wsIdRepo] " + wsId.toString());
+    print("[wpIdRepo] " + wpId.toString()); */
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.post(
+        "$baseUrl/workspaces/$wsId/workplaces/$wpId/bookings",
+        data: {
+          "bookingDate": bookingDate,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        booking = Booking.fromJson(response.data);
+        return booking;
+      }
+    } catch (e) {
+      print(e.toString());
+      return booking;
+    }
+    return booking;
   }
 
   Future<List<Event>> getEvents() async {

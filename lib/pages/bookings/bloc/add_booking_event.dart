@@ -14,11 +14,25 @@ class BookingDateAdded extends AddBookingEvent {
 
 class WorkspaceAdded extends AddBookingEvent {
   final int hqId;
+  final String bookingDate;
   final int wsId;
 
   WorkspaceAdded(
+    this.bookingDate,
     this.hqId,
     this.wsId,
+  );
+}
+
+class CreateBooking extends AddBookingEvent {
+  final int wsId;
+  final int wpId;
+  final String bookingDate;
+
+  CreateBooking(
+    this.wsId,
+    this.wpId,
+    this.bookingDate,
   );
 }
 
