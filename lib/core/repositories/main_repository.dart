@@ -173,8 +173,6 @@ class MainRepository {
       if (response.statusCode == 201) {
         newEvent = Event.fromJson(response.data);
         return newEvent;
-      } else if (response.statusCode == 403) {
-        response.data;
       }
     } catch (e) {
       print(e.toString());
@@ -272,21 +270,25 @@ class MainRepository {
     return events;
   }
 
-  Future<List<Access>> getAccessLog() async {
+  Future<List<Access>> getAccessLog(int hqId) async {
     List<Access> accessLog = [];
-    var accessRespons;
+    String? token = await storage.read(key: 'userToken');
+    var aResponse;
     try {
-      accessRespons = await Dio().get("$baseUrl/accesses");
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      aResponse = await dio.get(
+        "$baseUrl/headquarters/$hqId/workplaces/bookings/current-day",
+      );
 
-      if (accessRespons.statusCode == 200) {
-        var parsedResponse = accessRespons.data
-            .map((access) => Access.fromJson(access))
-            .toList();
+      if (aResponse.statusCode == 200) {
+        var parsedResponse =
+            aResponse.data.map((access) => Access.fromJson(access)).toList();
         accessLog = List<Access>.from(parsedResponse);
         return accessLog;
       }
     } catch (e) {
-      print(e.toString());
+      print("Exception -> " + e.toString());
       return accessLog;
     }
     return accessLog;

@@ -10,8 +10,8 @@ class AccessLogCubit extends Cubit<AccessLogState> {
 
   AccessLogCubit(this.mainRepository) : super(AccessLogInitial());
 
-  void getAccessLog() {
-    mainRepository.getAccessLog().then((accessLog) {
+  void getAccessLog(int hqId) {
+    mainRepository.getAccessLog(hqId).then((accessLog) {
       emit(AccessLogLoaded(accessLog: accessLog));
     });
   }

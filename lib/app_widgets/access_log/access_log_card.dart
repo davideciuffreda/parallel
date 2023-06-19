@@ -15,6 +15,7 @@ class _AccessLogCard extends State<AccessLogCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12),
       width: double.infinity,
       height: 130,
       child: Card(
@@ -23,7 +24,7 @@ class _AccessLogCard extends State<AccessLogCard> {
         ),
         elevation: 3,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
@@ -33,34 +34,44 @@ class _AccessLogCard extends State<AccessLogCard> {
               ),
               child: Image.asset("assets/images/profile.png"),
             ),
-            SizedBox(width: 30),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.access.user.firstName +
-                      "" +
-                      widget.access.user.lastName,
+                  widget.access.worker.firstName +
+                      ' ' +
+                      widget.access.worker.lastName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
                 ),
+                SizedBox(height: 4),
                 Text(
-                  widget.access.user.email,
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                  ),
+                  widget.access.worker.companyName +
+                      ' | ' +
+                      widget.access.worker.email,
                 ),
-                SizedBox(height: 5),
-                Text("Check in: " + widget.access.accessHour),
+                SizedBox(height: 4),
                 Text(
-                  widget.access.leavingHour != ""
-                      ? "Check out: " + widget.access.leavingHour
-                      : "Check out: --:--",
+                  widget.access.workspace.name +
+                      ' | ' +
+                      widget.access.workplace.name,
                 ),
               ],
             ),
+            SizedBox(width: 12),
+            !widget.access.present
+                ? IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.check_circle_outline_outlined,
+                      color: Colors.green,
+                      size: 30,
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),

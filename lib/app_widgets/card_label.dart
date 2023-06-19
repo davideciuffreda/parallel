@@ -18,7 +18,7 @@ class CardLabel extends StatelessWidget {
         SizedBox(width: 4),
         Text(
           title,
-          maxLines: 2,
+          maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 16

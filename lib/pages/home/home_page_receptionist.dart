@@ -6,6 +6,7 @@ import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePageReceptionist extends StatefulWidget {
   @override
@@ -13,9 +14,30 @@ class HomePageReceptionist extends StatefulWidget {
 }
 
 class _HomePageReceptionist extends State<HomePageReceptionist> {
+  late SharedPreferences sharedPreferences;
+  int hqID = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedPreferences();
+  }
+
+  void initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    getScopeId();
+  }
+
+  void getScopeId() {
+    int storedScopeId = int.parse(sharedPreferences.getString('scopeId')!);
+    setState(() {
+      hqID = storedScopeId;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AccessLogCubit>(context).getAccessLog();
+    BlocProvider.of<AccessLogCubit>(context).getAccessLog(hqID);
 
     return Scaffold(
       drawer: BlocProvider(
@@ -27,6 +49,7 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
       ),
       body: BlocBuilder<AccessLogCubit, AccessLogState>(
         builder: (context, state) {
+          Duration(seconds: 3);
           if (!(state is AccessLogLoaded)) {
             return Center(child: CircularProgressIndicator());
           }

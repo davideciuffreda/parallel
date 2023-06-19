@@ -1,11 +1,6 @@
 part of 'access_log_cubit.dart';
 
-abstract class AccessLogState extends Equatable {
-  const AccessLogState();
-
-  @override
-  List<Object> get props => [];
-}
+abstract class AccessLogState {}
 
 class AccessLogInitial extends AccessLogState {}
 

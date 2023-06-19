@@ -134,21 +134,25 @@ class _EventCard extends State<EventCard> {
               children: [
                 Text(
                   widget.event.name,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Container(
+                  child: CardLabel(
+                    icon: Icon(Icons.share_location_sharp),
+                    title: widget.event.company.name +
+                        ', ' +
+                        widget.event.headquarters.city,
                   ),
                 ),
                 SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CardLabel(
-                      icon: Icon(Icons.share_location_sharp),
-                      title: widget.event.company.name +
-                          ', ' +
-                          widget.event.headquarters.city,
-                    ),
                     CardLabel(
                       icon: Icon(Icons.people_alt_outlined),
                       title: widget.event.availablePlaces.toString() +
