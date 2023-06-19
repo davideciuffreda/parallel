@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:parallel/core/models/access.dart';
 import 'package:parallel/core/models/booking.dart';
-import 'package:parallel/core/models/company.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/headquarter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:parallel/core/models/workplace.dart';
 import 'package:parallel/core/models/workspace.dart';
+import 'package:parallel/core/models/wpBooking.dart';
+import 'package:parallel/core/models/company.dart';
 
 class MainRepository {
   MainRepository();
@@ -49,7 +50,8 @@ class MainRepository {
       Dio dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer $token';
       wResponse = await dio.get(
-          "$baseUrl/headquarters/$hqId/workspaces?bookingDate=$bookingDate");
+        "$baseUrl/headquarters/$hqId/workspaces?bookingDate=$bookingDate",
+      );
 
       if (wResponse.statusCode == 200) {
         var parsedResponse = wResponse.data
@@ -74,8 +76,9 @@ class MainRepository {
     try {
       Dio dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer $token';
-      wResponse = await dio
-          .get("$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces");
+      wResponse = await dio.get(
+        "$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces",
+      );
 
       if (wResponse.statusCode == 200) {
         var parsedResponse = wResponse.data
@@ -89,6 +92,31 @@ class MainRepository {
       return workplaces;
     }
     return workplaces;
+  }
+
+  Future<List<WpBooking>> getBookingsByToken() async {
+    List<WpBooking> myBookings = [];
+    var bResponse;
+
+    String? token = await storage.read(key: 'userToken');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      bResponse = await dio.get("$baseUrl/workplaces/bookings");
+
+      if (bResponse.statusCode == 200) {
+        var parsedResponse = bResponse.data
+            .map((booking) => WpBooking.fromJson(booking))
+            .toList();
+        myBookings = List<WpBooking>.from(parsedResponse);
+        return myBookings;
+      }
+    } catch (e) {
+      print(e.toString());
+      return myBookings;
+    }
+    return myBookings;
   }
 
   Future<int> setFavoriteHeadquarter(int hqId) async {
@@ -120,13 +148,13 @@ class MainRepository {
     var response;
     String? token = await storage.read(key: 'userToken');
 
-    /* print("[Token] " + token.toString());
+    /*print("[Token] " + token.toString());
     print("[ID] " + id.toString());
     print("[Name] " + name);
     print("[EventDate] " + eventDate);
     print("[startTime] " + startTime);
     print("[endTime] " + endTime);
-    print("[maxPlaces] " + maxPlaces.toString()); */
+    print("[maxPlaces] " + maxPlaces.toString());*/
 
     try {
       Dio dio = Dio();
@@ -143,7 +171,7 @@ class MainRepository {
       );
 
       if (response.statusCode == 201) {
-        newEvent = response.data.map((event) => Event.fromJson(event));
+        newEvent = Event.fromJson(response.data);
         return newEvent;
       } else if (response.statusCode == 403) {
         response.data;
@@ -193,6 +221,31 @@ class MainRepository {
       return booking;
     }
     return booking;
+  }
+
+  Future<String> deleteBooking(int wsId, int wpId, int bkId) async {
+    var response;
+    String? token = await storage.read(key: 'userToken');
+
+    /*print("[bkIdRepo] " + bkId.toString());
+    print("[wsIdRepo] " + wsId.toString());
+    print("[wpIdRepo] " + wpId.toString());*/
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.delete(
+        "$baseUrl/workspaces/$wsId/workplaces/$wpId/bookings/$bkId",
+      );
+
+      if (response.statusCode == 204) {
+        return "booking_deleted";
+      }
+    } catch (e) {
+      print(e.toString());
+      return "booking_not_deleted";
+    }
+    return "booking_not_deleted";
   }
 
   Future<List<Event>> getEvents() async {

@@ -1,18 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:parallel/core/models/workplace.dart';
 import 'package:parallel/core/models/workspace.dart';
+import 'package:parallel/core/models/wpBooking.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 
-part 'add_booking_event.dart';
-part 'add_booking_state.dart';
+part 'booking_event.dart';
+part 'booking_state.dart';
 
-class AddBookingBloc extends Bloc<AddBookingEvent, AddBookingState> {
+class BookingBloc extends Bloc<BookingEvent, BookingState> {
   final MainRepository mainRepository;
 
-  AddBookingBloc(this.mainRepository) : super(AddBookingInitial()) {
+  BookingBloc(this.mainRepository) : super(BookingInitial()) {
     on<BookingDateAdded>((event, emit) async {
-      if (event.bookingDate == '2023-06-13' || event.bookingDate == '') {
-        emit(AddBookingError("La data selezionata non è valida!"));
+      if (event.bookingDate == '') {
+        emit(BookingError("La data selezionata non è valida!"));
       } else {
         await mainRepository
             .getWorkspacesByDate(event.hqId, event.bookingDate)
@@ -45,14 +46,35 @@ class AddBookingBloc extends Bloc<AddBookingEvent, AddBookingState> {
         if (booking.id != -1) {
           emit(BookingCreated());
         } else {
-          emit(AddBookingError(
-              "Probabilmente esiste già una prenotazione a tuo carico per la data selezionata!"));
+          emit(BookingError(
+              'Probabilmente esiste già una prenotazione a tuo carico per la' +
+                  ' data selezionata oppure la postazione non è disponibile!'));
+        }
+      });
+    });
+
+    on<GetAllMyWpBookings>((event, emit) async {
+      await mainRepository.getBookingsByToken().then((myBookings) {
+        emit(BookingsLoaded(myBookings: myBookings));
+      });
+    });
+
+    on<DeleteBooking>((event, emit) async {
+      await mainRepository
+          .deleteBooking(event.wsId, event.wpId, event.bkId)
+          .then((response) {
+        if (response == 'booking_deleted') {
+          emit(BookingDeleted());
+        } else {
+          emit(
+            BookingError("Non è stato possibile cancellare la prenotazione"),
+          );
         }
       });
     });
 
     on<CleaningBookingDate>((event, emit) {
-      emit(AddBookingInitial());
+      emit(BookingInitial());
     });
   }
 }

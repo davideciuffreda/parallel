@@ -1,3 +1,13 @@
+// To parse this JSON data, do
+//
+//     final company = companyFromJson(jsonString);
+
+import 'dart:convert';
+
+Company companyFromJson(String str) => Company.fromJson(json.decode(str));
+
+String companyToJson(Company data) => json.encode(data.toJson());
+
 class Company {
   int id;
   String name;

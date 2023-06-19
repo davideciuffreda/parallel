@@ -46,6 +46,7 @@ flutter:
     - assets/images/splash.png
     - assets/images/workspace.jpg
     - assets/images/workplace.png
+    - assets/images/booking.png
 
   fonts:
     - family: Lato

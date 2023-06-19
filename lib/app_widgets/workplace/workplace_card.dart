@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/core/models/workplace.dart';
-import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
+import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -91,9 +91,9 @@ class _WorkplaceCard extends State<WorkplaceCard> {
               ],
             ),
             SizedBox(width: 12),
-            BlocBuilder<AddBookingBloc, AddBookingState>(
+            BlocBuilder<BookingBloc, BookingState>(
               builder: (context, state) {
-                return BlocListener<AddBookingBloc, AddBookingState>(
+                return BlocListener<BookingBloc, BookingState>(
                   listener: (context, state) {
                     if (state is BookingCreated) {
                       if (userRole.toString() == 'ROLE_EMPLOYEE') {
@@ -104,7 +104,7 @@ class _WorkplaceCard extends State<WorkplaceCard> {
                         Navigator.of(context)
                             .pushReplacementNamed(homePageManagerRoute);
                       }
-                    } else if (state is AddBookingError) {
+                    } else if (state is BookingError) {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -133,7 +133,7 @@ class _WorkplaceCard extends State<WorkplaceCard> {
                   },
                   child: TextButton(
                     onPressed: () {
-                      BlocProvider.of<AddBookingBloc>(context)
+                      BlocProvider.of<BookingBloc>(context)
                           .add(CreateBooking(
                         widget.workspaceId,
                         widget.workplace.id,

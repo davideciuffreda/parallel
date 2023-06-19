@@ -7,7 +7,7 @@ import 'package:parallel/app_widgets/headquarter/headquarter_description_card.da
 import 'package:parallel/app_widgets/headquarter/headquarter_detail_card.dart';
 import 'package:parallel/core/models/headquarter.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
-import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
+import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
@@ -152,8 +152,13 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                         },
                                       );
                                     },
-                                    child: Icon(
+                                    child: isFavorite ?
+                                    Icon(
                                       Icons.star_outlined,
+                                      color: Colors.orange.shade400,
+                                    ) :
+                                    Icon(
+                                      Icons.star_border_outlined,
                                       color: Colors.orange.shade400,
                                     ),
                                   ),
@@ -208,13 +213,13 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                         ),
                       ),
                     ),
-                    BlocBuilder<AddBookingBloc, AddBookingState>(
+                    BlocBuilder<BookingBloc, BookingState>(
                       builder: (context, state) {
                         if (dateController.text.isEmpty) {
-                          BlocProvider.of<AddBookingBloc>(context)
+                          BlocProvider.of<BookingBloc>(context)
                               .add(CleaningBookingDate());
                         }
-                        if (state is AddBookingError) {
+                        if (state is BookingError) {
                           return Center(
                             child: Text(
                               state.errorMessage,
@@ -254,7 +259,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                   onConfirm: (date) {
                                     dateController.text =
                                         date.toString().substring(0, 10);
-                                    BlocProvider.of<AddBookingBloc>(context)
+                                    BlocProvider.of<BookingBloc>(context)
                                         .add(
                                       BookingDateAdded(
                                         headquarter.id,
@@ -268,7 +273,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                               },
                             ),
                           ),
-                          BlocBuilder<AddBookingBloc, AddBookingState>(
+                          BlocBuilder<BookingBloc, BookingState>(
                             builder: (context, state) {
                               if (state is BookingDateSelected) {
                                 return FloatingActionButton(

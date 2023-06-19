@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/workplace/workplace_card.dart';
-import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
+import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class WorkplacesListPage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _WorkplacesListPageState extends State<WorkplacesListPage> {
           }
         },
       ),
-      body: BlocBuilder<AddBookingBloc, AddBookingState>(
+      body: BlocBuilder<BookingBloc, BookingState>(
         builder: (context, state) {
           if (!(state is WorkspaceSelected)) {
             return Center(child: CircularProgressIndicator());

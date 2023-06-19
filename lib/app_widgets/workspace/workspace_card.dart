@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/card_label.dart';
 
 import 'package:parallel/core/models/workspace.dart';
-import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
+import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/workspace/workplaces_list.dart';
 
 class WorkspaceCard extends StatefulWidget {
@@ -27,7 +27,7 @@ class _WorkspaceCard extends State<WorkspaceCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<AddBookingBloc>(context).add(WorkspaceAdded(
+        BlocProvider.of<BookingBloc>(context).add(WorkspaceAdded(
           widget.bookingDate,
           widget.headquarterId,
           widget.workspace.id,

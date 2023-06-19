@@ -4,7 +4,7 @@ import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/workspace/workspace_card.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
-import 'package:parallel/pages/bookings/bloc/add_booking_bloc.dart';
+import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class AddBookingPage extends StatefulWidget {
@@ -32,7 +32,7 @@ class _AddBookingPage extends State<AddBookingPage> {
           }
         },
       ),
-      body: BlocBuilder<AddBookingBloc, AddBookingState>(
+      body: BlocBuilder<BookingBloc, BookingState>(
         builder: (context, state) {
           if (!(state is BookingDateSelected)) {
             return Center(child: CircularProgressIndicator());
