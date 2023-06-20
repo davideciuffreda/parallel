@@ -13,3 +13,4 @@ const String bookingsPageRoute = '/bookings_page';
 const String addBookingPageRoute = '/add_booking_page';
 const String headquarterDetailsPageRoute = '/headquarter_details_page';
 const String newEventPageRoute = '/new_event_page';
+const String myEventsPageRoute = '/my_events_page';

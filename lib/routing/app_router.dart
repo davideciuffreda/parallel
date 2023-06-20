@@ -5,6 +5,7 @@ import 'package:parallel/pages/account/view/edit_password_page.dart';
 import 'package:parallel/pages/bookings/view/add_booking_page.dart';
 import 'package:parallel/pages/bookings/view/bookings_page.dart';
 import 'package:parallel/pages/events/view/events_page.dart';
+import 'package:parallel/pages/events/view/my_events_page.dart';
 import 'package:parallel/pages/events/view/new_event_page.dart';
 import 'package:parallel/pages/headquarters/view/headquarter_details_page.dart';
 import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
@@ -50,6 +51,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => EditPasswordPage());
       case newEventPageRoute:
         return MaterialPageRoute(builder: (context) => NewEventPage());
+      case myEventsPageRoute:
+        return MaterialPageRoute(builder: (context) => MyEventsPage());
       default:
         return MaterialPageRoute(builder: (context) => LoginPage());
     }

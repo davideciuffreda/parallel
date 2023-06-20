@@ -16,6 +16,14 @@ class EventCubit extends Cubit<EventState> {
     });
   }
 
+  void setEventPresence(int hqId, int evId) {
+    mainRepository.setEventPresence(hqId, evId).then((value) {
+      if (value == 201) {
+        emit(EventPresenceSetted());
+      }
+    });
+  }
+
   void createNewEvent(
     int id,
     String name,

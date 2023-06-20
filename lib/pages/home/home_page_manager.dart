@@ -14,10 +14,11 @@ class HomePageManager extends StatefulWidget {
 
 class _HomePageManager extends State<HomePageManager> {
   late List<Map<String, Object>> _pages;
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   @override
   void initState() {
+    _selectedIndex = 1;
     _pages = [
       {
         'page': EventsPage(),

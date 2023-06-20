@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/core/models/event.dart';
+import 'package:parallel/pages/events/cubit/event_cubit.dart';
 
 class EventCard extends StatefulWidget {
   Event event;
@@ -47,51 +49,56 @@ class _EventCard extends State<EventCard> {
                 right: 4,
                 child: Column(
                   children: [
-                    FloatingActionButton.small(
-                      backgroundColor: Colors.white.withOpacity(0.7),
-                      onPressed: () {
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Conferma iscrizione'),
-                            content: Text('Vuoi iscriverti a questo evento?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, 'Annulla iscrizione');
-                                  setState(() {
-                                    isJoined = false;
-                                  });
-                                },
-                                child: Text(
-                                  'Annulla iscrizione',
-                                  style: TextStyle(
-                                    color: Colors.red,
+                    BlocBuilder<EventCubit, EventState>(
+                      builder: (context, state) {
+                        return FloatingActionButton.small(
+                          backgroundColor: Colors.white.withOpacity(0.7),
+                          onPressed: () {
+                            if (!widget.event.alreadyBooked) {
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: Text('Iscrizione'),
+                                  content: Text(
+                                    'Confermi di volerti iscrivere a questo evento?',
                                   ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Annulla',
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        BlocProvider.of<EventCubit>(context)
+                                            .setEventPresence(
+                                          widget.event.headquarters.id,
+                                          widget.event.id,
+                                        );
+                                        Navigator.of(context).pop;
+                                      },
+                                      child: Text('Confermo'),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, 'Certo!');
-                                  setState(() {
-                                    isJoined = true;
-                                  });
-                                },
-                                child: Text('Certo!'),
-                              ),
-                            ],
-                          ),
+                              );
+                            }
+                          },
+                          child: widget.event.alreadyBooked
+                              ? Icon(
+                                  Icons.bookmark_added_sharp,
+                                  color: Colors.green.shade700,
+                                )
+                              : Icon(
+                                  Icons.bookmark_add_sharp,
+                                  color: Colors.black,
+                                ),
                         );
                       },
-                      child: isJoined
-                          ? Icon(
-                              Icons.bookmark_added_sharp,
-                              color: Colors.green.shade700,
-                            )
-                          : Icon(
-                              Icons.bookmark_add_sharp,
-                              color: Colors.black,
-                            ),
                     ),
                     FloatingActionButton.small(
                       backgroundColor: Colors.white.withOpacity(0.7),

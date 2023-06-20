@@ -105,11 +105,19 @@ class DrawerEmployee extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.assignment_outlined),
+                  leading: Icon(Icons.desktop_mac_outlined),
                   title: Text("Prenotazioni"),
                   onTap: () {
                     Navigator.of(context)
                         .pushReplacementNamed(bookingsPageRoute);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.calendar_month_outlined),
+                  title: Text("I miei eventi"),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(myEventsPageRoute);
                   },
                 ),
               ],

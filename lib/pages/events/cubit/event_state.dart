@@ -11,6 +11,8 @@ class EventInitial extends EventState {}
 
 class EventCreated extends EventState {}
 
+class EventPresenceSetted extends EventState {}
+
 class EventsLoaded extends EventState {
   final List<Event> events;
 

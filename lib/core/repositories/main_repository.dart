@@ -159,6 +159,26 @@ class MainRepository {
     return 0;
   }
 
+  Future<int> setEventPresence(int hqId, int evId) async {
+    var response;
+    String? token = await storage.read(key: 'userToken');
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.post(
+        "$baseUrl/headquarters/$hqId/events/$evId/bookings",
+        data: {},
+      );
+
+      //print('HTTP ' + "$baseUrl/headquarters/$hqId/events/$evId/bookings");
+
+      return response.statusCode;
+    } catch (e) {
+      print(e.toString());
+    }
+    return 0;
+  }
+
   Future<Event?> createNewEvent(
     int id,
     String name,
