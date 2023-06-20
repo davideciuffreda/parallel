@@ -89,7 +89,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     await prefs.setString('email', user.email);
     await prefs.setString('role', user.role);
     await prefs.setString('firstName', user.firstName);
-    await prefs.setString('scopeId', user.scopeId.toString());
+    await prefs.setInt('scopeId', user.scopeId);
     await prefs.setString('lastName', user.lastName);
     await prefs.setString('userRole', user.role);
     await prefs.setString('jobPosition', user.jobPosition);

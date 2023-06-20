@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:parallel/core/models/access.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 
@@ -13,6 +12,16 @@ class AccessLogCubit extends Cubit<AccessLogState> {
   void getAccessLog(int hqId) {
     mainRepository.getAccessLog(hqId).then((accessLog) {
       emit(AccessLogLoaded(accessLog: accessLog));
+    });
+  }
+
+  void checkInUser(int wsId, int wpId, int bkId) {
+    mainRepository.checkInUser(wsId, wpId, bkId).then((value) {
+      if (value == 200) {
+        emit(UserCheckIn());
+      } else {
+        emit(AccessLogError(error: "Operazione non eseguita, riprovare!"));
+      }
     });
   }
 }

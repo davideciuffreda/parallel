@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:parallel/core/models/access.dart';
+import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
+import 'package:parallel/routing/router_constants.dart';
 
 class AccessLogCard extends StatefulWidget {
   Access access;
@@ -63,13 +66,69 @@ class _AccessLogCard extends State<AccessLogCard> {
             ),
             SizedBox(width: 12),
             !widget.access.present
-                ? IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.check_circle_outline_outlined,
-                      color: Colors.green,
-                      size: 30,
-                    ),
+                ? BlocBuilder<AccessLogCubit, AccessLogState>(
+                    builder: (context, state) {
+                      return BlocListener<AccessLogCubit, AccessLogState>(
+                        listener: (context, state) {
+                          if (state is UserCheckIn) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Check in'),
+                                  content: Text('Presenza registrata'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Chiudi'),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(
+                                                homePageReceptionistRoute);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else if (state is AccessLogError) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Errore'),
+                                  content: Text(state.error),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Chiudi'),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(
+                                                homePageReceptionistRoute);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                        child: IconButton(
+                          onPressed: () {
+                            BlocProvider.of<AccessLogCubit>(context)
+                                .checkInUser(
+                              widget.access.workspace.id,
+                              widget.access.workplace.id,
+                              widget.access.id,
+                            );
+                          },
+                          icon: Icon(
+                            Icons.check_circle_outline_outlined,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                        ),
+                      );
+                    },
                   )
                 : Container(),
           ],

@@ -13,7 +13,7 @@ class MainRepository {
   MainRepository();
 
   final storage = FlutterSecureStorage();
-  final String baseUrl = "http://172.16.218.232:8080/api/v1";
+  final String baseUrl = "http://172.16.218.248:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
@@ -126,6 +126,25 @@ class MainRepository {
       Dio dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer $token';
       response = await dio.patch("$baseUrl/headquarters/favs/$hqId");
+
+      //print("[StatusCode] " + response.statusCode.toString());
+
+      return response.statusCode;
+    } catch (e) {
+      print(e.toString());
+    }
+    return 0;
+  }
+
+  Future<int> checkInUser(int wsId, int wpId, int bkId) async {
+    var response;
+    String? token = await storage.read(key: 'userToken');
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.patch(
+        "$baseUrl/workspaces/$wsId/workplaces/$wpId/bookings/$bkId",
+      );
 
       //print("[StatusCode] " + response.statusCode.toString());
 

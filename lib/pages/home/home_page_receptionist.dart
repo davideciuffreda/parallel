@@ -29,9 +29,9 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
   }
 
   void getScopeId() {
-    int storedScopeId = int.parse(sharedPreferences.getString('scopeId')!);
     setState(() {
-      hqID = storedScopeId;
+      hqID = sharedPreferences.getInt('scopeId') ?? 0;
+      print(hqID);
     });
   }
 
