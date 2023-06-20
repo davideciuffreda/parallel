@@ -155,11 +155,35 @@ class _BookingCard extends State<BookingCard> {
                     },
                     child: IconButton(
                       onPressed: () {
-                        BlocProvider.of<BookingBloc>(context).add(DeleteBooking(
-                          widget.wpBooking.workspace.id,
-                          widget.wpBooking.workplace.id,
-                          widget.wpBooking.id,
-                        ));
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Cancellazione'),
+                              content: Text(
+                                  'Confermi di voler cancellare la prenotazione?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text('Annulla'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text('Confermo'),
+                                  onPressed: () {
+                                    BlocProvider.of<BookingBloc>(context)
+                                        .add(DeleteBooking(
+                                      widget.wpBooking.workspace.id,
+                                      widget.wpBooking.workplace.id,
+                                      widget.wpBooking.id,
+                                    ));
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       icon: Icon(
                         Icons.delete_outline_outlined,
