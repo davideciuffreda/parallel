@@ -67,7 +67,11 @@ class MainRepository {
     return workspaces;
   }
 
-  Future<List<Workplace>> getWorkplacesByWorkspace(int hqId, int wsId) async {
+  Future<List<Workplace>> getWorkplacesByWorkspace(
+    int hqId,
+    int wsId,
+    String bookingDate,
+  ) async {
     List<Workplace> workplaces = [];
     var wResponse;
 
@@ -77,7 +81,7 @@ class MainRepository {
       Dio dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer $token';
       wResponse = await dio.get(
-        "$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces",
+        "$baseUrl/headquarters/$hqId/workspaces/$wsId/workplaces/available?on=$bookingDate",
       );
 
       if (wResponse.statusCode == 200) {

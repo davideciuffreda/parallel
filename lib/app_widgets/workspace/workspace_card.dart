@@ -72,9 +72,7 @@ class _WorkspaceCard extends State<WorkspaceCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget.workspace.name +
-                        ' ' +
-                        widget.workspace.id.toString(),
+                    widget.workspace.name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

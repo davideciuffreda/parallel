@@ -29,7 +29,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
 
     on<WorkspaceAdded>((event, emit) async {
       await mainRepository
-          .getWorkplacesByWorkspace(event.hqId, event.wsId)
+          .getWorkplacesByWorkspace(event.hqId, event.wsId, event.bookingDate)
           .then((workplaces) {
         emit(WorkspaceSelected(
           wsId: event.wsId,

@@ -47,6 +47,7 @@ class _WorkplaceCard extends State<WorkplaceCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12),
       width: double.infinity,
       height: 88,
       child: Card(
@@ -133,8 +134,7 @@ class _WorkplaceCard extends State<WorkplaceCard> {
                   },
                   child: TextButton(
                     onPressed: () {
-                      BlocProvider.of<BookingBloc>(context)
-                          .add(CreateBooking(
+                      BlocProvider.of<BookingBloc>(context).add(CreateBooking(
                         widget.workspaceId,
                         widget.workplace.id,
                         widget.bookingDate,
