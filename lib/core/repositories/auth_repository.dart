@@ -18,8 +18,6 @@ class AuthRepository {
       if (response.statusCode == 200) {
         token = response.data['token'];
         return token;
-      } else if (response.statusCode == 401) {
-        return token = "401";
       }
     } catch (e) {
       print(e.toString());

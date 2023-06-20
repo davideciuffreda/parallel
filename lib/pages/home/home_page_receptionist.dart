@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:parallel/app_widgets/access_log/access_log_card.dart';
 
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
@@ -15,11 +16,14 @@ class HomePageReceptionist extends StatefulWidget {
 
 class _HomePageReceptionist extends State<HomePageReceptionist> {
   late SharedPreferences sharedPreferences;
+  final storage = FlutterSecureStorage();
   int hqID = 0;
+  String? userToken;
 
   @override
   void initState() {
     super.initState();
+    getToken();
     initSharedPreferences();
   }
 
@@ -31,13 +35,19 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
   void getScopeId() {
     setState(() {
       hqID = sharedPreferences.getInt('scopeId') ?? 0;
-      print(hqID);
+    });
+  }
+
+  void getToken() async {
+    String? storedToken = await storage.read(key: 'userToken');
+    setState(() {
+      userToken = storedToken;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AccessLogCubit>(context).getAccessLog(hqID);
+    BlocProvider.of<AccessLogCubit>(context).getAccessLog(hqID, userToken!);
 
     return Scaffold(
       drawer: BlocProvider(

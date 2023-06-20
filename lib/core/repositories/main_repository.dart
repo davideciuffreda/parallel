@@ -293,9 +293,9 @@ class MainRepository {
     return events;
   }
 
-  Future<List<Access>> getAccessLog(int hqId) async {
+  Future<List<Access>> getAccessLog(int hqId, String token) async {
     List<Access> accessLog = [];
-    String? token = await storage.read(key: 'userToken');
+
     var aResponse;
     try {
       Dio dio = Dio();
