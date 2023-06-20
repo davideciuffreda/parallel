@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/app_widgets/booking/booking_card.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
-import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
+import 'package:parallel/app_widgets/event/my_event_card.dart';
+import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 
 class MyEventsPage extends StatefulWidget {
@@ -14,7 +14,7 @@ class MyEventsPage extends StatefulWidget {
 class _MyEventsPage extends State<MyEventsPage> {
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<BookingBloc>(context).add(GetAllMyWpBookings());
+    BlocProvider.of<EventCubit>(context).getMyEvents();
 
     return Scaffold(
       appBar: AppBar(
@@ -31,18 +31,18 @@ class _MyEventsPage extends State<MyEventsPage> {
           }
         },
       ),
-      body: BlocBuilder<BookingBloc, BookingState>(
+      body: BlocBuilder<EventCubit, EventState>(
         builder: (context, state) {
-          if (!(state is BookingsLoaded)) {
+          if (!(state is MyEventsLoaded)) {
             return Center(child: CircularProgressIndicator());
           }
 
           return SingleChildScrollView(
             child: Column(
-              children: state.myBookings
+              children: state.events
                   .map(
-                    (wpBooking) => BookingCard(
-                      wpBooking: wpBooking,
+                    (event) => MyEventCard(
+                      eventBooking: event,
                       context: context,
                     ),
                   )

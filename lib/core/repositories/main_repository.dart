@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:parallel/core/models/access.dart';
 import 'package:parallel/core/models/booking.dart';
 import 'package:parallel/core/models/event.dart';
+import 'package:parallel/core/models/eventBooking.dart';
 import 'package:parallel/core/models/headquarter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:parallel/core/models/workplace.dart';
@@ -289,6 +290,25 @@ class MainRepository {
     return "booking_not_deleted";
   }
 
+  Future<int> deleteEventBooking(int hqId, int evId, int bkId) async {
+    var response;
+    String? token = await storage.read(key: 'userToken');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+
+      response = await dio.delete(
+        "$baseUrl/headquarters/$hqId/events/$evId/bookings/$bkId",
+      );
+
+      return response.statusCode;
+    } catch (e) {
+      print(e.toString());
+    }
+    return 0;
+  }
+
   Future<List<Event>> getEvents() async {
     List<Event> events = [];
     var eResponse;
@@ -304,6 +324,30 @@ class MainRepository {
         var parsedResponse =
             eResponse.data.map((ev) => Event.fromJson(ev)).toList();
         events = List<Event>.from(parsedResponse);
+        return events;
+      }
+    } catch (e) {
+      print("Exception: " + e.toString());
+      return events;
+    }
+    return events;
+  }
+
+  Future<List<EventBooking>> getMyEvents() async {
+    List<EventBooking> events = [];
+    var eResponse;
+
+    String? token = await storage.read(key: 'userToken');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      eResponse = await dio.get("$baseUrl/events/bookings");
+
+      if (eResponse.statusCode == 200) {
+        var parsedResponse =
+            eResponse.data.map((ev) => EventBooking.fromJson(ev)).toList();
+        events = List<EventBooking>.from(parsedResponse);
         return events;
       }
     } catch (e) {
