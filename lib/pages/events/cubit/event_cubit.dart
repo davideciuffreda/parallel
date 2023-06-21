@@ -54,8 +54,7 @@ class EventCubit extends Cubit<EventState> {
         .createNewEvent(id, name, eventDate, startTime, endTime, maxPlaces)
         .then((event) {
       if (event == [] || event == null) {
-        print("erroreeeee");
-        emit(EventError("Ops, non è stato possibile creare l'evento!"));
+        emit(EventError("Non puoi pianificare un evento per il weekend!"));
       } else {
         emit(EventCreated());
       }
