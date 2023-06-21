@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:parallel/app_widgets/access_log/access_log_card.dart';
 
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
+import 'package:parallel/core/models/access.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
@@ -19,6 +20,7 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
   final storage = FlutterSecureStorage();
   int hqID = 0;
   String? userToken;
+  List<Access> accessLogList = [];
 
   @override
   void initState() {
@@ -59,7 +61,6 @@ class _HomePageReceptionist extends State<HomePageReceptionist> {
       ),
       body: BlocBuilder<AccessLogCubit, AccessLogState>(
         builder: (context, state) {
-          Duration(seconds: 3);
           if (!(state is AccessLogLoaded)) {
             return Center(child: CircularProgressIndicator());
           }

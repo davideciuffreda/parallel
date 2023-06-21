@@ -175,6 +175,19 @@ class _BookingCard extends State<BookingCard> {
                                       widget.wpBooking.workplace.id,
                                       widget.wpBooking.id,
                                     ));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Prenotazione cancellata!',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        duration: Duration(seconds: 3),
+                                        backgroundColor: Colors.green.shade300,
+                                      ),
+                                    );
                                   },
                                 ),
                               ],

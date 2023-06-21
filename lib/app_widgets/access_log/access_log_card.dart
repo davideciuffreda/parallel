@@ -120,6 +120,22 @@ class _AccessLogCard extends State<AccessLogCard> {
                               widget.access.workplace.id,
                               widget.access.id,
                             );
+                            Navigator.of(context).pushReplacementNamed(
+                              homePageReceptionistRoute,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Check-in effettuato!',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Colors.green.shade300,
+                              ),
+                            );
                           },
                           icon: Icon(
                             Icons.check_circle_outline_outlined,

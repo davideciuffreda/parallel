@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/eventBooking.dart';
+import 'package:parallel/core/models/headquarterCompany.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 
 part 'event_state.dart';
@@ -50,7 +53,28 @@ class EventCubit extends Cubit<EventState> {
     mainRepository
         .createNewEvent(id, name, eventDate, startTime, endTime, maxPlaces)
         .then((event) {
-      emit(EventCreated());
+      if (event == [] || event == null) {
+        print("erroreeeee");
+        emit(EventError("Ops, non è stato possibile creare l'evento!"));
+      } else {
+        emit(EventCreated());
+      }
+    });
+  }
+
+  void getHeadquartersByCompany() {
+    mainRepository.getHeadquartersByCompany().then((headquarters) {
+      emit(EventHeadquartersByCompanyLoaded(headquarters));
+    });
+  }
+
+  void deleteEvent(int hqId, int evId) {
+    mainRepository.deleteEvent(hqId, evId).then((value) {
+      if (value == 204) {
+        emit(EventCanceled());
+      } else {
+        emit(EventError("Non è stato possibile eliminare questo evento!"));
+      }
     });
   }
 }

@@ -179,6 +179,19 @@ class _MyEventCard extends State<MyEventCard> {
                                       widget.eventBooking.event.id,
                                       widget.eventBooking.id,
                                     );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Iscrizione cancellata!',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        duration: Duration(seconds: 3),
+                                        backgroundColor: Colors.green.shade300,
+                                      ),
+                                    );
                                   },
                                 ),
                               ],

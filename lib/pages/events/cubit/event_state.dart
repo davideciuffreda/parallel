@@ -15,6 +15,8 @@ class EventPresenceSetted extends EventState {}
 
 class EventDeleted extends EventState {}
 
+class EventCanceled extends EventState {}
+
 class EventsLoaded extends EventState {
   final List<Event> events;
 
@@ -29,10 +31,22 @@ class MyEventsLoaded extends EventState {
 
 class EventsLoading extends EventState {}
 
+class EventHqSelected extends EventState {
+  final int hqId;
+
+  EventHqSelected(this.hqId);
+}
+
 class EventBookingDeleted extends EventState {}
 
 class EventError extends EventState {
   final String error;
 
   EventError(this.error);
+}
+
+class EventHeadquartersByCompanyLoaded extends EventState {
+  final List<HeadquarterCompany> headquarters;
+
+  EventHeadquartersByCompanyLoaded(this.headquarters);
 }

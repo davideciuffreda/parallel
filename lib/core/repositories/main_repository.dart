@@ -5,15 +5,18 @@ import 'package:parallel/core/models/event.dart';
 import 'package:parallel/core/models/eventBooking.dart';
 import 'package:parallel/core/models/headquarter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:parallel/core/models/headquarterCompany.dart';
 import 'package:parallel/core/models/workplace.dart';
 import 'package:parallel/core/models/workspace.dart';
 import 'package:parallel/core/models/wpBooking.dart';
 import 'package:parallel/core/models/company.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainRepository {
   MainRepository();
 
   final storage = FlutterSecureStorage();
+
   final String baseUrl = "http://172.16.216.51:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
@@ -31,6 +34,32 @@ class MainRepository {
         var parsedResponse =
             hqResponse.data.map((hq) => Headquarter.fromJson(hq)).toList();
         headquarters = List<Headquarter>.from(parsedResponse);
+        return headquarters;
+      }
+    } catch (e) {
+      print(e.toString());
+      return headquarters;
+    }
+    return headquarters;
+  }
+
+  Future<List<HeadquarterCompany>> getHeadquartersByCompany() async {
+    List<HeadquarterCompany> headquarters = [];
+    var hqResponse;
+    final prefs = await SharedPreferences.getInstance();
+    String? token = await storage.read(key: 'userToken');
+    int? cmId = await prefs.getInt('scopeId');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      hqResponse = await dio.get("$baseUrl/companies/$cmId/headquarters");
+
+      if (hqResponse.statusCode == 200) {
+        var parsedResponse = hqResponse.data
+            .map((hq) => HeadquarterCompany.fromJson(hq))
+            .toList();
+        headquarters = List<HeadquarterCompany>.from(parsedResponse);
         return headquarters;
       }
     } catch (e) {
@@ -288,6 +317,24 @@ class MainRepository {
       return "booking_not_deleted";
     }
     return "booking_not_deleted";
+  }
+
+  Future<int> deleteEvent(int hqId, int evId) async {
+    var response;
+    String? token = await storage.read(key: 'userToken');
+
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      response = await dio.delete(
+        "$baseUrl/headquarters/$hqId/events/$evId",
+      );
+
+      return response.statusCode;
+    } catch (e) {
+      print(e.toString());
+    }
+    return 0;
   }
 
   Future<int> deleteEventBooking(int hqId, int evId, int bkId) async {

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/card_label.dart';
 import 'package:parallel/core/models/event.dart';
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
+import 'package:parallel/pages/login/bloc/login_bloc.dart';
+import 'package:parallel/routing/router_constants.dart';
 
 class EventCard extends StatefulWidget {
   Event event;
@@ -80,6 +82,21 @@ class _EventCard extends State<EventCard> {
                                           widget.event.id,
                                         );
                                         Navigator.of(context).pop;
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Iscrizione effettuata con successo!',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            behavior: SnackBarBehavior.floating,
+                                            duration: Duration(seconds: 3),
+                                            backgroundColor:
+                                                Colors.green.shade300,
+                                          ),
+                                        );
                                       },
                                       child: Text('Confermo'),
                                     ),
@@ -100,34 +117,68 @@ class _EventCard extends State<EventCard> {
                         );
                       },
                     ),
-                    FloatingActionButton.small(
-                      backgroundColor: Colors.white.withOpacity(0.7),
-                      onPressed: () {
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Informazioni'),
-                            content: Text(
-                              'Ora di inizio: ${widget.event.startTime.substring(0, 5)}\n' +
-                                  'Ora di fine: ${widget.event.endTime.substring(0, 5)}\n',
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, 'Chiudi');
-                                },
-                                child: Text(
-                                  'Chiudi',
+                    BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
+                        if (state is LoginManagerState) {
+                          return FloatingActionButton.small(
+                            backgroundColor: Colors.white.withOpacity(0.7),
+                            onPressed: () {
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Conferma'),
+                                  content: Text(
+                                    'Confermi di voler cancellare questo evento?',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context, 'Annulla');
+                                      },
+                                      child: Text('Annulla'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        BlocProvider.of<EventCubit>(context)
+                                            .deleteEvent(
+                                          widget.event.headquarters.id,
+                                          widget.event.id,
+                                        );
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(
+                                          homePageManagerRoute,
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Evento rimosso correttamente!',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            behavior: SnackBarBehavior.floating,
+                                            duration: Duration(seconds: 3),
+                                            backgroundColor:
+                                                Colors.green.shade300,
+                                          ),
+                                        );
+                                      },
+                                      child: Text('Confermo'),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
+                              );
+                            },
+                            child: Icon(
+                              Icons.delete_outline_outlined,
+                              color: Colors.red,
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
                       },
-                      child: Icon(
-                        Icons.info_outline,
-                        color: Colors.black,
-                      ),
                     ),
                   ],
                 ),
@@ -169,6 +220,12 @@ class _EventCard extends State<EventCard> {
                     CardLabel(
                       icon: Icon(Icons.date_range_sharp),
                       title: widget.event.eventDate.toString().substring(0, 10),
+                    ),
+                    CardLabel(
+                      icon: Icon(Icons.hourglass_bottom_outlined),
+                      title: widget.event.startTime.substring(0, 5) +
+                          '-' +
+                          widget.event.endTime.substring(0, 5),
                     ),
                   ],
                 ),

@@ -139,6 +139,19 @@ class _WorkplaceCard extends State<WorkplaceCard> {
                         widget.workplace.id,
                         widget.bookingDate,
                       ));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Prenotazione effettuata!',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                          duration: Duration(seconds: 3),
+                          backgroundColor: Colors.green.shade300,
+                        ),
+                      );
                     },
                     child: Text("Prenota"),
                   ),
