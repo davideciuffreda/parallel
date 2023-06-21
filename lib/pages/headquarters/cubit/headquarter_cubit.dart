@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:parallel/core/models/headquarter.dart';
+import 'package:parallel/core/models/headquarter/headquarter.dart';
 
 import 'package:parallel/core/repositories/main_repository.dart';
 

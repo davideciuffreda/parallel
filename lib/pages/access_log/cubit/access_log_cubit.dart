@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:parallel/core/models/access.dart';
+import 'package:parallel/core/models/access/access.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 
 part 'access_log_state.dart';

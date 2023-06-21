@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:parallel/core/models/user.dart';
+import 'package:parallel/core/models/user/user.dart';
 
 class AuthRepository {
   AuthRepository();

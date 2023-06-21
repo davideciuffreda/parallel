@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:parallel/core/models/company.dart';
+import 'package:parallel/core/models/company/company.dart';
 
 Headquarter headquarterFromJson(String str) =>
     Headquarter.fromJson(json.decode(str));

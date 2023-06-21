@@ -5,7 +5,7 @@ import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_description_card.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_detail_card.dart';
-import 'package:parallel/core/models/headquarter.dart';
+import 'package:parallel/core/models/headquarter/headquarter.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';

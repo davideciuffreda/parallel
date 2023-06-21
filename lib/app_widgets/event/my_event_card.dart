@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/core/models/eventBooking.dart';
+import 'package:parallel/core/models/event/eventBooking.dart';
 
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/routing/router_constants.dart';

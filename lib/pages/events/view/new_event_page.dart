@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_company_card.dart';
-import 'package:parallel/core/models/headquarterCompany.dart';
+import 'package:parallel/core/models/headquarter/headquarterCompany.dart';
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';

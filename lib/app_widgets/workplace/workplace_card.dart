@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/core/models/workplace.dart';
+import 'package:parallel/core/models/workplace/workplace.dart';
 import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:parallel/core/models/access.dart';
-import 'package:parallel/core/models/booking.dart';
-import 'package:parallel/core/models/event.dart';
-import 'package:parallel/core/models/eventBooking.dart';
-import 'package:parallel/core/models/headquarter.dart';
+import 'package:parallel/core/models/access/access.dart';
+import 'package:parallel/core/models/booking/booking.dart';
+import 'package:parallel/core/models/event/event.dart';
+import 'package:parallel/core/models/event/eventBooking.dart';
+import 'package:parallel/core/models/headquarter/headquarter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:parallel/core/models/headquarterCompany.dart';
-import 'package:parallel/core/models/workplace.dart';
-import 'package:parallel/core/models/workspace.dart';
-import 'package:parallel/core/models/wpBooking.dart';
-import 'package:parallel/core/models/company.dart';
+import 'package:parallel/core/models/headquarter/headquarterCompany.dart';
+import 'package:parallel/core/models/workplace/workplace.dart';
+import 'package:parallel/core/models/workspace/workspace.dart';
+import 'package:parallel/core/models/workplace/wpBooking.dart';
+import 'package:parallel/core/models/company/company.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainRepository {

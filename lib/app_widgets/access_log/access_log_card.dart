@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:parallel/core/models/access.dart';
+import 'package:parallel/core/models/access/access.dart';
 import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
 import 'package:parallel/routing/router_constants.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parallel/app_widgets/card_label.dart';
-import 'package:parallel/core/models/event.dart';
+import 'package:parallel/app_widgets/headquarter/card_label.dart';
+import 'package:parallel/core/models/event/event.dart';
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';

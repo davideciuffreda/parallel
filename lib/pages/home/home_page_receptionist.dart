@@ -4,7 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:parallel/app_widgets/access_log/access_log_card.dart';
 
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
-import 'package:parallel/core/models/access.dart';
+import 'package:parallel/core/models/access/access.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
 import 'package:parallel/pages/access_log/cubit/access_log_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';

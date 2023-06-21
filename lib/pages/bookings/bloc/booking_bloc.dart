@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:parallel/core/models/workplace.dart';
-import 'package:parallel/core/models/workspace.dart';
-import 'package:parallel/core/models/wpBooking.dart';
+import 'package:parallel/core/models/workplace/workplace.dart';
+import 'package:parallel/core/models/workspace/workspace.dart';
+import 'package:parallel/core/models/workplace/wpBooking.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 
 part 'booking_event.dart';

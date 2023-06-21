@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:parallel/core/models/event.dart';
-import 'package:parallel/core/models/eventBooking.dart';
-import 'package:parallel/core/models/headquarterCompany.dart';
+import 'package:parallel/core/models/event/event.dart';
+import 'package:parallel/core/models/event/eventBooking.dart';
+import 'package:parallel/core/models/headquarter/headquarterCompany.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 
 part 'event_state.dart';
