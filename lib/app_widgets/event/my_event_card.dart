@@ -75,6 +75,7 @@ class _MyEventCard extends State<MyEventCard> {
                     widget.eventBooking.event.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 18,
                     ),
                   ),
                   SizedBox(height: 4),

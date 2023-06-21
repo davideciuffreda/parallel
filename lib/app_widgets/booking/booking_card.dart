@@ -89,17 +89,14 @@ class _BookingCard extends State<BookingCard> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Data: ' +
-                        widget.wpBooking.bookingDate
-                            .toString()
-                            .substring(0, 10),
+                    widget.wpBooking.bookingDate.toString().substring(0, 10),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Locale e postazione:\n' +
+                    'Postazione:\n' +
                         widget.wpBooking.workspace.name +
                         ' | ' +
                         widget.wpBooking.workplace.name,

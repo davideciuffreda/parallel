@@ -142,7 +142,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
                                             content: Text(body),
                                             actions: [
                                               TextButton(
-                                                child: Text('Okay'),
+                                                child: Text('Chiudi'),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
