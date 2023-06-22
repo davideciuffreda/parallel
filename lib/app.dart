@@ -13,14 +13,14 @@ import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/pages/login/view/login_page.dart';
 import 'package:parallel/routing/app_router.dart';
 
-/// Global navigator to retrieve the context for the controllers
+//Global navigator to retrieve the context for the controllers
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 class AppInitializer extends StatelessWidget {
-  //Defining the Repositories
+  //Definizione delle repository
   late MainRepository mainRepository;
   late AuthRepository authRepository;
-  //Defining the Blocs/Cubits
+  //Definizione dei BLoC/Cubit
   late LoginBloc loginBloc;
   late HeadquarterCubit headquarterCubit;
   late ManageAccountBloc manageAccountBloc;

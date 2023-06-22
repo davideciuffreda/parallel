@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_description_card.dart';
@@ -11,12 +13,14 @@ import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/headquarters/cubit/headquarter_cubit.dart';
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HeadquarterDetailsPage extends StatefulWidget {
   final int id;
 
-  HeadquarterDetailsPage({super.key, required this.id});
+  HeadquarterDetailsPage({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   State<HeadquarterDetailsPage> createState() => _HeadquarterDetailsPageState();
