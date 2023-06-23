@@ -33,15 +33,6 @@ class _NewEventPage extends State<NewEventPage> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<EventCubit>(context).getHeadquartersByCompany();
-    HeadquarterCompany hqSelected = HeadquarterCompany(
-      id: 0,
-      address: '',
-      city: '',
-      companyId: 0,
-      description: '',
-      phoneNumber: '',
-      totalWorkplaces: 0,
-    );
 
     return Scaffold(
       appBar: AppBar(

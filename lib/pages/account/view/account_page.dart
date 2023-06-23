@@ -19,7 +19,6 @@ class _AccountPageState extends State<AccountPage> {
     String firstName = prefs.getString('firstName') ?? '';
     String lastName = prefs.getString('lastName') ?? '';
     String email = prefs.getString('email') ?? '';
-    String role = prefs.getString('role') ?? '';
     String city = prefs.getString('city') ?? '';
     String address = prefs.getString('address') ?? '';
     String phoneNumber = prefs.getString('phoneNumber') ?? '';
