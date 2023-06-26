@@ -1,7 +1,12 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/core/models/event/eventBooking.dart';
-
 import 'package:parallel/pages/events/cubit/event_cubit.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +21,7 @@ class MyEventCard extends StatefulWidget {
 }
 
 class _MyEventCard extends State<MyEventCard> {
+  ///Definizione delle SharedPreferences per la gestione della memoria locale
   late SharedPreferences sharedPreferences;
   String? userRole;
 
@@ -25,11 +31,13 @@ class _MyEventCard extends State<MyEventCard> {
     initSharedPreferences();
   }
 
+  ///Inizializzazione delle SharedPreferences
   void initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getUserRole();
   }
 
+  ///Ottenimento del role dell'utente
   void getUserRole() {
     String? storedUserRole = sharedPreferences.getString('userRole');
     setState(() {

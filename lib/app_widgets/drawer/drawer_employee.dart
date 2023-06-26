@@ -1,11 +1,19 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:parallel/pages/login/bloc/login_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///Drawer per l'utente EMPLOYEE
 class DrawerEmployee extends StatelessWidget {
+
+  ///getUserInfo ottiene le info dell'utente
   Future<Map<String, String>> getUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String firstName = prefs.getString('firstName') ?? '';

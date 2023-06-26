@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 part of 'event_cubit.dart';
 
 abstract class EventState extends Equatable {

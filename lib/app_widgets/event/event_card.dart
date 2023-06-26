@@ -1,4 +1,8 @@
-// ignore_for_file: must_be_immutable
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

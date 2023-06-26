@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -14,14 +20,17 @@ class NewEventPage extends StatefulWidget {
 }
 
 class _NewEventPage extends State<NewEventPage> {
+  ///Definizione dei controller per i campi del form
   TextEditingController nameController = TextEditingController();
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController ticketsController = TextEditingController();
+
   List<HeadquarterCompany> hqList = [];
   FocusNode _focusNode = FocusNode();
 
+  ///Pulizia dei controller dei campi del form
   void clearController() {
     dateController.clear();
     nameController.clear();

@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final event = eventFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -33,6 +35,9 @@ class Event {
         required this.alreadyBooked,
     });
 
+    ///factory method che restituisce un'istanza di Event.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto Event utilizzando i dati del JSON.
     factory Event.fromJson(Map<String, dynamic> json) => Event(
         id: json["id"],
         company: CompanyEvent.fromJson(json["company"]),
@@ -69,6 +74,9 @@ class CompanyEvent {
         required this.name,
     });
 
+    ///factory method che restituisce un'istanza di CompanyEvent.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto CompanyEvent utilizzando i dati del JSON.
     factory CompanyEvent.fromJson(Map<String, dynamic> json) => CompanyEvent(
         id: json["id"],
         name: json["name"],
@@ -91,6 +99,9 @@ class HeadquartersEvent {
         required this.address,
     });
 
+    ///factory method che restituisce un'istanza di HeadquartersEvent.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto HeadquartersEvent utilizzando i dati del JSON.
     factory HeadquartersEvent.fromJson(Map<String, dynamic> json) => HeadquartersEvent(
         id: json["id"],
         city: json["city"],

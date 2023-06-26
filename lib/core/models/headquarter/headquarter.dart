@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final headquarter = headquarterFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -32,6 +34,9 @@ class Headquarter {
     required this.favorite,
   });
 
+  ///factory method che restituisce un'istanza di Headquarter.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto Headquarter utilizzando i dati del JSON.
   factory Headquarter.fromJson(Map<String, dynamic> json) => Headquarter(
         id: json["id"],
         company: Company.fromJson(json["company"]),

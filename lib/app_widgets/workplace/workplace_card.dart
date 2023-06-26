@@ -1,6 +1,11 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:parallel/core/models/workplace/workplace.dart';
 import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/routing/router_constants.dart';
@@ -32,11 +37,13 @@ class _WorkplaceCard extends State<WorkplaceCard> {
     initSharedPreferences();
   }
 
+  ///Inizializzazione delle SharedPreferences
   void initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getUserRole();
   }
 
+  ///Ottenimento del role dell'utente
   void getUserRole() {
     String? storedUserRole = sharedPreferences.getString('userRole');
     setState(() {

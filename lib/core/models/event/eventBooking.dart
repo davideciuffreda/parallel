@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final eventBooking = eventBookingFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -24,6 +26,9 @@ class EventBooking {
     required this.bookedOn,
   });
 
+  ///factory method che restituisce un'istanza di EventBooking.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto EventBooking utilizzando i dati del JSON.
   factory EventBooking.fromJson(Map<String, dynamic> json) => EventBooking(
         id: json["id"],
         company: CompanyBook.fromJson(json["company"]),
@@ -51,6 +56,9 @@ class CompanyBook {
     required this.name,
   });
 
+  ///factory method che restituisce un'istanza di CompanyBook.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto CompanyBook utilizzando i dati del JSON.
   factory CompanyBook.fromJson(Map<String, dynamic> json) => CompanyBook(
         id: json["id"],
         name: json["name"],
@@ -81,6 +89,9 @@ class EventBooked {
     required this.totalPlaces,
   });
 
+  ///factory method che restituisce un'istanza di EventBooked.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto EventBooked utilizzando i dati del JSON.
   factory EventBooked.fromJson(Map<String, dynamic> json) => EventBooked(
         id: json["id"],
         name: json["name"],
@@ -114,6 +125,9 @@ class HeadquartersBook {
     required this.address,
   });
 
+  ///factory method che restituisce un'istanza di HeadquartersBook.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto HeadquartersBook utilizzando i dati del JSON.
   factory HeadquartersBook.fromJson(Map<String, dynamic> json) =>
       HeadquartersBook(
         id: json["id"],

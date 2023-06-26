@@ -1,12 +1,14 @@
-// ignore_for_file: must_be_immutable
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:parallel/core/models/workplace/wpBooking.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../pages/bookings/bloc/booking_bloc.dart';
 
 class BookingCard extends StatefulWidget {
@@ -28,11 +30,13 @@ class _BookingCard extends State<BookingCard> {
     initSharedPreferences();
   }
 
+  ///Inizializzazione delle SharedPreferences
   void initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getUserRole();
   }
 
+  ///Ottenimento del role dell'utente
   void getUserRole() {
     String? storedUserRole = sharedPreferences.getString('userRole');
     setState(() {

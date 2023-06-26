@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:dio/dio.dart';
 import 'package:parallel/core/models/access/access.dart';
 import 'package:parallel/core/models/booking/booking.dart';
@@ -12,6 +18,8 @@ import 'package:parallel/core/models/workplace/wpBooking.dart';
 import 'package:parallel/core/models/company/company.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///MainRepository gestisce le richieste HTTP di Parallel e in alcuni
+///casi la memoria locale
 class MainRepository {
   MainRepository();
 
@@ -19,6 +27,10 @@ class MainRepository {
 
   final String baseUrl = "http://172.16.219.94:8080/api/v1";
 
+  ///getHeadquarters ottiene la lista di tutte le sedi registrate.
+  ///INPUT: -
+  ///OUTPUT: lista di headquarter
+  ///TIPOLOGIA: GET
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];
     var hqResponse;
@@ -43,6 +55,11 @@ class MainRepository {
     return headquarters;
   }
 
+  ///getHeadquartersByCompany ottiene la lista di tutte le sedi di una
+  ///specifica company
+  ///INPUT: -
+  ///OUTPUT: lista di headquarter
+  //////TIPOLOGIA: GET
   Future<List<HeadquarterCompany>> getHeadquartersByCompany() async {
     List<HeadquarterCompany> headquarters = [];
     var hqResponse;
@@ -69,6 +86,11 @@ class MainRepository {
     return headquarters;
   }
 
+  ///getWorkspacesByDate ottiene la lista di tutti i workspace in una
+  ///determinata data
+  ///INPUT: id headquarter, data di prenotazione
+  ///OUTPUT: lista di workspace
+  //////TIPOLOGIA: GET
   Future<List<Workspace>> getWorkspacesByDate(
       int hqId, String bookingDate) async {
     List<Workspace> workspaces = [];
@@ -97,6 +119,11 @@ class MainRepository {
     return workspaces;
   }
 
+  ///getWorkplacesByWorkspace ottiene la lista di tutte le postazioni
+  ///di un workspace
+  ///INPUT: id headquarter, id workspace, data di prenotazione
+  ///OUTPUT: lista di workplace
+  //////TIPOLOGIA: GET
   Future<List<Workplace>> getWorkplacesByWorkspace(
     int hqId,
     int wsId,
@@ -128,6 +155,11 @@ class MainRepository {
     return workplaces;
   }
 
+  ///getBookingsByToken ottiene la lista di tutte le prenotazioni di un
+  ///determinato utente a partire dal token
+  ///INPUT: -
+  ///OUTPUT: lista di prenotazioni
+  //////TIPOLOGIA: GET
   Future<List<WpBooking>> getBookingsByToken() async {
     List<WpBooking> myBookings = [];
     var bResponse;
@@ -153,6 +185,11 @@ class MainRepository {
     return myBookings;
   }
 
+  ///setFavoriteHeadquarter imposta una sede come preferita o la rimuove dalle
+  ///preferite attraverso l'attributo "favorite"
+  ///INPUT: id headquarter
+  ///OUTPUT: codice di risposta della richiesta HTTP
+  //////TIPOLOGIA: PATCH
   Future<int> setFavoriteHeadquarter(int hqId) async {
     var response;
     String? token = await storage.read(key: 'userToken');
@@ -170,6 +207,11 @@ class MainRepository {
     return 0;
   }
 
+  ///checkInUser effettua il check-in di un utente. Operazione esclusivamente
+  ///a cura del RECEPTIONIST
+  ///INPUT: id workspace, id workplace, id prenotazione
+  ///OUTPUT: codice di risposta della richiesta HTTP
+  //////TIPOLOGIA: PATCH
   Future<int> checkInUser(int wsId, int wpId, int bkId) async {
     var response;
     String? token = await storage.read(key: 'userToken');
@@ -189,6 +231,10 @@ class MainRepository {
     return 0;
   }
 
+  ///setEventPresence effettua l'iscrizione di un utente ad un evento
+  ///INPUT: id headquarter, id evento
+  ///OUTPUT: codice di risposta della richiesta HTTP
+  //////TIPOLOGIA: POST
   Future<int> setEventPresence(int hqId, int evId) async {
     var response;
     String? token = await storage.read(key: 'userToken');
@@ -209,8 +255,13 @@ class MainRepository {
     return 0;
   }
 
+  ///createNewEvent crea un nuovo evento
+  ///INPUT: id headquarter, nome evento, data evento, ora di inizio,
+  ///ora di fine e numero di posti
+  ///OUTPUT: oggetto Event
+  //////TIPOLOGIA: POST
   Future<Event?> createNewEvent(
-    int id,
+    int hqId,
     String name,
     String eventDate,
     String startTime,
@@ -221,19 +272,11 @@ class MainRepository {
     var response;
     String? token = await storage.read(key: 'userToken');
 
-    /*print("[Token] " + token.toString());
-    print("[ID] " + id.toString());
-    print("[Name] " + name);
-    print("[EventDate] " + eventDate);
-    print("[startTime] " + startTime);
-    print("[endTime] " + endTime);
-    print("[maxPlaces] " + maxPlaces.toString());*/
-
     try {
       Dio dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer $token';
       response = await dio.post(
-        "$baseUrl/headquarters/$id/events",
+        "$baseUrl/headquarters/$hqId/events",
         data: {
           "name": name,
           "eventDate": eventDate,
@@ -254,6 +297,10 @@ class MainRepository {
     return newEvent;
   }
 
+  ///createBooking crea una nuova prenotazione
+  ///INPUT: id workspace, id workplace, data di prenotazione
+  ///OUTPUT: oggetto Booking
+  //////TIPOLOGIA: POST
   Future<Booking> createBooking(
     int wsId,
     int wpId,
@@ -267,11 +314,8 @@ class MainRepository {
       present: false,
     );
     var response;
-    String? token = await storage.read(key: 'userToken');
 
-    /* print("[bkDt] " + bookingDate);
-    print("[wsIdRepo] " + wsId.toString());
-    print("[wpIdRepo] " + wpId.toString()); */
+    String? token = await storage.read(key: 'userToken');
 
     try {
       Dio dio = Dio();
@@ -294,13 +338,13 @@ class MainRepository {
     return booking;
   }
 
+  ///deleteBooking cancella una prenotazione
+  ///INPUT: id workspace, id workplace, id prenotazione
+  ///OUTPUT: stringa esito
+  //////TIPOLOGIA: DELETE
   Future<String> deleteBooking(int wsId, int wpId, int bkId) async {
     var response;
     String? token = await storage.read(key: 'userToken');
-
-    /*print("[bkIdRepo] " + bkId.toString());
-    print("[wsIdRepo] " + wsId.toString());
-    print("[wpIdRepo] " + wpId.toString());*/
 
     try {
       Dio dio = Dio();
@@ -319,6 +363,11 @@ class MainRepository {
     return "booking_not_deleted";
   }
 
+  ///deleteEvent rimuove un evento. Operazione esclusivamente a cura di un
+  ///COMPANY_MANAGER
+  ///INPUT: id headquarter, id evento
+  ///OUTPUT: codice di risposta della richiesta HTTP 
+  //////TIPOLOGIA: DELETE
   Future<int> deleteEvent(int hqId, int evId) async {
     var response;
     String? token = await storage.read(key: 'userToken');
@@ -337,6 +386,10 @@ class MainRepository {
     return 0;
   }
 
+  ///deleteEventBooking cancella l'iscrizione ad un evento
+  ///INPUT: id headquarter, id evento, id prenotazione
+  ///OUTPUT: codice di risposta della richiesta HTTP 
+  //////TIPOLOGIA: DELETE
   Future<int> deleteEventBooking(int hqId, int evId, int bkId) async {
     var response;
     String? token = await storage.read(key: 'userToken');
@@ -356,6 +409,10 @@ class MainRepository {
     return 0;
   }
 
+  ///getEvents ottiene la lista di tutti gli eventi
+  ///INPUT: -
+  ///OUTPUT: lista di eventi
+  //////TIPOLOGIA: GET
   Future<List<Event>> getEvents() async {
     List<Event> events = [];
     var eResponse;
@@ -380,6 +437,10 @@ class MainRepository {
     return events;
   }
 
+  ///getMyEvents ottiene la lista di tutti gli eventi a cui un utente è iscritto
+  ///INPUT: -
+  ///OUTPUT: lista di eventi
+  //////TIPOLOGIA: GET
   Future<List<EventBooking>> getMyEvents() async {
     List<EventBooking> events = [];
     var eResponse;
@@ -404,6 +465,12 @@ class MainRepository {
     return events;
   }
 
+  ///getAccessLog ottiene la lista di tutti coloro che nella giornata odierna
+  ///hanno fatto l'accesso ad una sede. Operazione esclusivamente a cura del
+  ///RECEPTIONIST
+  ///INPUT: id headquarter, token
+  ///OUTPUT: lista di accessi
+  //////TIPOLOGIA: GET
   Future<List<Access>> getAccessLog(int hqId, String token) async {
     List<Access> accessLog = [];
 
@@ -428,9 +495,11 @@ class MainRepository {
     return accessLog;
   }
 
+  ///getHeadquarterById ottiene i dati di un headquarter a partire dal suo ID
+  ///INPUT: id headquarter
+  ///OUTPUT: oggetto Headquarter
+  //////TIPOLOGIA: GET
   Future<Headquarter> getHeadquarterById(int id) async {
-    String? token = await storage.read(key: 'userToken');
-
     Headquarter headquarter = Headquarter(
       id: id,
       city: '',
@@ -452,6 +521,7 @@ class MainRepository {
 
     String idHq = id.toString();
     var hqResponse;
+    String? token = await storage.read(key: 'userToken');
 
     try {
       Dio dio = Dio();
@@ -469,6 +539,10 @@ class MainRepository {
     return headquarter;
   }
 
+  ///changePassword permette il cambio password
+  ///INPUT: vecchia password, nuova password, conferma nuova password, token
+  ///OUTPUT: stringa esito
+  //////TIPOLOGIA: PUT
   Future<String> changePassword(
     String oldPwd,
     String newPwd,
@@ -479,9 +553,7 @@ class MainRepository {
     var response;
     try {
       Dio dio = Dio();
-
       dio.options.headers['Authorization'] = 'Bearer $token';
-
       response = await dio.put(
         "$baseUrl/users/pwd",
         data: {
@@ -502,6 +574,10 @@ class MainRepository {
     return "pwd_not_changed";
   }
 
+  ///changeUserInfo permette il cambio dati di un utente
+  ///INPUT: città, indirizzo, numero di cellulare, token
+  ///OUTPUT: stringa esito
+  //////TIPOLOGIA: PUT
   Future<String> changeUserInfo(
     String city,
     String address,
@@ -512,9 +588,7 @@ class MainRepository {
     var response;
     try {
       Dio dio = Dio();
-
       dio.options.headers['Authorization'] = 'Bearer $token';
-
       response = await dio.put(
         "$baseUrl/users",
         data: {

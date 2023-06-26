@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:bloc/bloc.dart';
 import 'package:parallel/core/repositories/main_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,10 +11,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'manage_account_event.dart';
 part 'manage_account_state.dart';
 
+///Utente di destinazione: ANY
 class ManageAccountBloc extends Bloc<ManageAccountEvent, ManageAccountState> {
   final MainRepository mainRepository;
 
   ManageAccountBloc(this.mainRepository) : super(ManageAccountInitial()) {
+    ///BLoC per il cambio password dedicato alla gestione dei possibili stati
     on<ChangingPasswordEvent>((event, emit) {
       if (event.oldPwd.isEmpty ||
           event.newPwd.isEmpty ||
@@ -27,12 +35,8 @@ class ManageAccountBloc extends Bloc<ManageAccountEvent, ManageAccountState> {
       }
     });
 
+    ///BLoC per il cambio password dedicato alla gestione dei possibili stati
     on<ChangePasswordSubmittedEvent>((event, emit) async {
-      //print("[OldPwd]: " + event.oldPwd);
-      //print("[NewPwd]: " + event.newPwd);
-      //print("[ConPwd]: " + event.confirmPwd);
-      //print("[Token]: " + event.token);
-
       await mainRepository
           .changePassword(
               event.oldPwd, event.newPwd, event.confirmPwd, event.token)
@@ -48,6 +52,7 @@ class ManageAccountBloc extends Bloc<ManageAccountEvent, ManageAccountState> {
       });
     });
 
+    ///BLoC per il cambio dati dedicato alla gestione dei possibili stati
     on<ChangingUserInfoEvent>((event, emit) {
       if (event.city.isEmpty ||
           event.address.isEmpty ||
@@ -58,11 +63,8 @@ class ManageAccountBloc extends Bloc<ManageAccountEvent, ManageAccountState> {
       }
     });
 
+    ///BLoC per il cambio dati dedicato alla gestione dei possibili stati
     on<ChangeUserInfoSubmittedEvent>((event, emit) async {
-      //print("[city]: " + event.city);
-      //print("[address]: " + event.address);
-      //print("[phoneNumber]: " + event.phoneNumber);
-      //print("[Token]: " + event.token);
       final prefs = await SharedPreferences.getInstance();
 
       await mainRepository
@@ -73,7 +75,6 @@ class ManageAccountBloc extends Bloc<ManageAccountEvent, ManageAccountState> {
         event.token,
       )
           .then((value) {
-        // print("[Value]: " + value.toString());
 
         if (value.toString() == 'info_changed') {
           prefs.setString('city', event.city);

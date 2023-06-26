@@ -1,7 +1,12 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/core/repositories/auth_repository.dart';
-
 import 'package:parallel/pages/events/view/events_page.dart';
 import 'package:parallel/pages/headquarters/view/headquarters_page.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';

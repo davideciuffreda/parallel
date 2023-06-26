@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final wpBooking = wpBookingFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -27,6 +29,9 @@ class WpBooking {
     required this.bookedOn,
   });
 
+  ///factory method che restituisce un'istanza di WpBooking.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto WpBooking utilizzando i dati del JSON.
   factory WpBooking.fromJson(Map<String, dynamic> json) => WpBooking(
         id: json["id"],
         company: wpCompany.fromJson(json["company"]),
@@ -59,6 +64,9 @@ class wpCompany {
     required this.name,
   });
 
+  ///factory method che restituisce un'istanza di wpCompany.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto wpCompany utilizzando i dati del JSON.
   factory wpCompany.fromJson(Map<String, dynamic> json) => wpCompany(
         id: json["id"],
         name: json["name"],
@@ -81,6 +89,9 @@ class wpHeadquarters {
     required this.address,
   });
 
+  ///factory method che restituisce un'istanza di wpHeadquarters.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto wpHeadquarters utilizzando i dati del JSON.
   factory wpHeadquarters.fromJson(Map<String, dynamic> json) => wpHeadquarters(
         id: json["id"],
         city: json["city"],
@@ -105,6 +116,9 @@ class wpWorkspace {
     required this.floor,
   });
 
+  ///factory method che restituisce un'istanza di wpWorkspace.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto wpWorkspace utilizzando i dati del JSON.
   factory wpWorkspace.fromJson(Map<String, dynamic> json) => wpWorkspace(
         id: json["id"],
         name: json["name"],

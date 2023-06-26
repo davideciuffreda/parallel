@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final booking = bookingFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -23,6 +25,9 @@ class Booking {
     required this.present,
   });
 
+  ///factory method che restituisce un'istanza di Booking.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto Booking utilizzando i dati del JSON.
   factory Booking.fromJson(Map<String, dynamic> json) => Booking(
         id: json["id"],
         workplaceId: json["workplaceId"],

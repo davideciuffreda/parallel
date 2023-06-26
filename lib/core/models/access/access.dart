@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final access = accessFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -27,6 +29,9 @@ class Access {
         required this.present,
     });
 
+    ///factory method che restituisce un'istanza di Access.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto Access utilizzando i dati del JSON.
     factory Access.fromJson(Map<String, dynamic> json) => Access(
         id: json["id"],
         worker: Worker.fromJson(json["worker"]),
@@ -63,6 +68,9 @@ class Worker {
         required this.companyName,
     });
 
+    ///factory method che restituisce un'istanza di Worker.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto Worker utilizzando i dati del JSON.
     factory Worker.fromJson(Map<String, dynamic> json) => Worker(
         id: json["id"],
         firstName: json["firstName"],
@@ -89,6 +97,9 @@ class acWorkplace {
         required this.name,
     });
 
+    ///factory method che restituisce un'istanza di acWorkplace.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto acWorkplace utilizzando i dati del JSON.
     factory acWorkplace.fromJson(Map<String, dynamic> json) => acWorkplace(
         id: json["id"],
         name: json["name"],
@@ -111,6 +122,9 @@ class acWorkspace {
         required this.floor,
     });
 
+    ///factory method che restituisce un'istanza di acWorkspace.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto acWorkspace utilizzando i dati del JSON.
     factory acWorkspace.fromJson(Map<String, dynamic> json) => acWorkspace(
         id: json["id"],
         name: json["name"],

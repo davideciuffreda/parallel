@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/event/event_card.dart';
@@ -15,6 +21,7 @@ class EventsPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
 
+          ///Lista di widget che rappresentano gli eventi
           return SingleChildScrollView(
             child: Column(
               children: state.events

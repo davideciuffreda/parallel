@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:parallel/core/models/event/event.dart';
@@ -7,23 +13,33 @@ import 'package:parallel/core/repositories/main_repository.dart';
 
 part 'event_state.dart';
 
+///Utente di destinazione: EMPLOYEE, COMPANY_MANAGER
 class EventCubit extends Cubit<EventState> {
   final MainRepository mainRepository;
 
   EventCubit(this.mainRepository) : super(EventInitial());
 
+  ///getEvents ottiene la lista degli eventi
+  ///INPUT: -
+  ///OUTPUT: EventsLoaded State
   void getEvents() {
     mainRepository.getEvents().then((events) {
       emit(EventsLoaded(events: events));
     });
   }
 
+  ///getMyEvents ottiene la lista degli eventi di un utente
+  ///INPUT: -
+  ///OUTPUT: MyEventsLoaded State
   void getMyEvents() {
     mainRepository.getMyEvents().then((events) {
       emit(MyEventsLoaded(events: events));
     });
   }
 
+  ///setEventPresence iscrive un utente ad un evento
+  ///INPUT: id headquarter, id evento
+  ///OUTPUT: EventPresenceSetted State
   void setEventPresence(int hqId, int evId) {
     mainRepository.setEventPresence(hqId, evId).then((value) {
       if (value == 201) {
@@ -32,6 +48,9 @@ class EventCubit extends Cubit<EventState> {
     });
   }
 
+  ///deleteEventSubscription cancella l'iscrizione di un utente ad un evento
+  ///INPUT: id headquarter, id evento, id prenotazione
+  ///OUTPUT: EventBookingDeleted State
   void deleteEventSubscription(int hqId, int evId, int bkId) {
     mainRepository.deleteEventBooking(hqId, evId, bkId).then((value) {
       if (value == 204) {
@@ -40,6 +59,9 @@ class EventCubit extends Cubit<EventState> {
     });
   }
 
+  ///createNewEvent crea un nuovo evento
+  ///INPUT: id, nome evento, data, ora di inizio e fine, numero di posti
+  ///OUTPUT: EventCreated State | EventError
   void createNewEvent(
     int id,
     String name,
@@ -59,12 +81,18 @@ class EventCubit extends Cubit<EventState> {
     });
   }
 
+  ///getHeadquartersByCompany restituisce la lista delle sedi di una company
+  ///INPUT: -
+  ///OUTPUT: EventHeadquartersByCompanyLoaded State
   void getHeadquartersByCompany() {
     mainRepository.getHeadquartersByCompany().then((headquarters) {
       emit(EventHeadquartersByCompanyLoaded(headquarters));
     });
   }
 
+  ///deleteEvent cancella un evento
+  ///INPUT: id headquarter, id evento
+  ///OUTPUT: EventCanceled State | EventError
   void deleteEvent(int hqId, int evId) {
     mainRepository.deleteEvent(hqId, evId).then((value) {
       if (value == 204) {

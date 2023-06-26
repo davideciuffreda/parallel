@@ -11,34 +11,38 @@ User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
 
 class User {
-    int id;
-    String email;
-    String firstName;
-    String lastName;
-    DateTime birthDate;
-    String phoneNumber;
-    String city;
-    String address;
-    String role;
-    ///ID utile a seconda del role dell'utente che esegue il login
-    int scopeId;
-    String jobPosition;
+  int id;
+  String email;
+  String firstName;
+  String lastName;
+  DateTime birthDate;
+  String phoneNumber;
+  String city;
+  String address;
+  String role;
 
-    User({
-        required this.id,
-        required this.email,
-        required this.firstName,
-        required this.lastName,
-        required this.birthDate,
-        required this.phoneNumber,
-        required this.city,
-        required this.address,
-        required this.role,
-        required this.scopeId,
-        required this.jobPosition,
-    });
+  ///scopeId è utile a seconda del role dell'utente che esegue il login
+  int scopeId;
+  String jobPosition;
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+  User({
+    required this.id,
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.birthDate,
+    required this.phoneNumber,
+    required this.city,
+    required this.address,
+    required this.role,
+    required this.scopeId,
+    required this.jobPosition,
+  });
+
+  ///factory method che restituisce un'istanza di User.
+  ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+  ///e restituisce un nuovo oggetto User utilizzando i dati del JSON.
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         email: json["email"],
         firstName: json["firstName"],
@@ -50,19 +54,24 @@ class User {
         role: json["role"],
         scopeId: json["scopeId"],
         jobPosition: json["jobPosition"] ?? '',
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "email": email,
         "firstName": firstName,
         "lastName": lastName,
-        "birthDate": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
+
+        ///imposta il formato della stringa nel formato "YYYY-MM-DD"
+        ///utilizzando il metodo padLeft() così che i valori dei componenti
+        ///siano a due cifre
+        "birthDate":
+            "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
         "phoneNumber": phoneNumber,
         "city": city,
         "address": address,
         "role": role,
         "scopeId": scopeId,
         "jobPosition": jobPosition,
-    };
+      };
 }

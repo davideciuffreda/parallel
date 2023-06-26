@@ -1,6 +1,11 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/drawer/drawer_receptionist.dart';
@@ -14,6 +19,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  ///getUserInfo recupera le info dell'utente loggato dalla memoria locale
   Future<Map<String, String>> getUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String firstName = prefs.getString('firstName') ?? '';
@@ -69,6 +75,9 @@ class _AccountPageState extends State<AccountPage> {
           }
         },
       ),
+
+      ///Creazione di un layout scorrevole che può contenere widget che
+      ///potrebbero superare lo spazio disponibile su schermo
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -79,6 +88,8 @@ class _AccountPageState extends State<AccountPage> {
                   height: 130,
                   width: 130,
                   child: ClipRRect(
+                    ///Il widget figlio sarà ritagliato in un
+                    ///rettangolo arrotondato
                     borderRadius: BorderRadius.circular(100),
                     child: CircleAvatar(
                       backgroundImage: AssetImage("assets/images/profile.png"),
@@ -86,6 +97,9 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 SizedBox(height: 10),
+
+                ///Widget utilizzato per gestire il rendering dell'interfaccia
+                ///utente in base allo stato di un oggetto Future
                 FutureBuilder<Map<String, String>>(
                   future: getUserInfo(),
                   builder: (
@@ -95,10 +109,10 @@ class _AccountPageState extends State<AccountPage> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      // Gestione di eventuali errori
+                      ///Gestione di eventuali errori
                       return Text('Errore: ${snapshot.error}');
                     } else {
-                      // Se tutto è andato bene, visualizza le informazioni recuperate
+                      ///Se tutto è andato bene, visualizza le info recuperate
                       String firstName = snapshot.data?['firstName'] ?? '';
                       String lastName = snapshot.data?['lastName'] ?? '';
                       String email = snapshot.data?['email'] ?? '';

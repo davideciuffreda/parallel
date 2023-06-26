@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final company = companyFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -27,6 +29,9 @@ class Company {
     required this.websiteUrl,
   });
 
+  ///factory method che restituisce un'istanza di Company.
+    ///fromJson accetta un argomento json di tipo Map<String, dynamic>
+    ///e restituisce un nuovo oggetto Company utilizzando i dati del JSON.
   factory Company.fromJson(Map<String, dynamic> json) => Company(
         id: json["id"],
         name: json["name"],

@@ -1,8 +1,13 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
 import 'package:parallel/app_widgets/drawer/drawer_manager.dart';
 import 'package:parallel/app_widgets/headquarter/headquarter_description_card.dart';
@@ -27,7 +32,10 @@ class HeadquarterDetailsPage extends StatefulWidget {
 }
 
 class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
+  ///Definizione del controller per la data di prenotazione
   TextEditingController dateController = TextEditingController(text: '');
+
+  ///Definizione delle librerie di gestione della memoria locale
   FocusNode _focusNode = FocusNode();
   late SharedPreferences sharedPreferences;
   MainRepository mainRepository = MainRepository();
@@ -42,11 +50,13 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
     initSharedPreferences();
   }
 
+  ///Inizializzazione delle SharedPreferences
   void initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getUserRole();
   }
 
+  ///Ottenimento del role dell'utente loggato
   void getUserRole() {
     String? storedUserRole = sharedPreferences.getString('userRole');
     setState(() {
@@ -54,6 +64,7 @@ class _HeadquarterDetailsPageState extends State<HeadquarterDetailsPage> {
     });
   }
 
+  ///Imposta la sede correntemente visualizzata come preferita o meno
   Future<int> setFavorite(int id) async {
     int statusCode = 0;
     statusCode = await mainRepository.setFavoriteHeadquarter(id);

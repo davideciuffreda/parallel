@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -15,10 +21,12 @@ class EditPasswordPage extends StatefulWidget {
 }
 
 class _EditPasswordPage extends State<EditPasswordPage> {
+  ///Definizione dei controller per i campi del form
   TextEditingController currentPwdController = TextEditingController();
   TextEditingController newPwdController = TextEditingController();
   TextEditingController confirmNewPwdController = TextEditingController();
 
+  ///Dichiarazione delle librerie di gestione delle variabili locali
   final storage = FlutterSecureStorage();
   late SharedPreferences sharedPreferences;
   String? userRole;
@@ -31,11 +39,13 @@ class _EditPasswordPage extends State<EditPasswordPage> {
     getToken();
   }
 
+  ///Inizializzazione delle SharedPreferences
   void initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getUserRole();
   }
 
+  ///Ottenimento del role dell'utente
   void getUserRole() {
     String? storedUserRole = sharedPreferences.getString('userRole');
     setState(() {
@@ -43,6 +53,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
     });
   }
 
+  ///Ottenimento del token dell'utente
   void getToken() async {
     String? storedToken = await storage.read(key: 'userToken');
     setState(() {
@@ -50,6 +61,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
     });
   }
 
+  ///Pulizia dei controller dei campi del form
   void clearController() {
     currentPwdController.clear();
     newPwdController.clear();

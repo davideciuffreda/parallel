@@ -38,6 +38,7 @@ class _FavoritesHeadquartersPageState extends State<FavoriteHeadquartersPage> {
             return Center(child: CircularProgressIndicator());
           }
 
+          ///Lista di widget che rappresentano le sedi preferite
           return SingleChildScrollView(
             child: Column(
               children: state.headquarters.map((hq) {

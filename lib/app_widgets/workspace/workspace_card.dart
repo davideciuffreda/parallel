@@ -1,7 +1,12 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/headquarter/card_label.dart';
-
 import 'package:parallel/core/models/workspace/workspace.dart';
 import 'package:parallel/pages/bookings/bloc/booking_bloc.dart';
 import 'package:parallel/pages/workspace/workplaces_list.dart';

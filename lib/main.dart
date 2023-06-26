@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:parallel/app.dart';
 
 void main() async {
-  ///assicurarsi che tutti i widget siano inizializzati correttamente prima di 
+  ///Controllo che tutti i widget siano inizializzati correttamente prima di 
   ///eseguire l'applicazione
   WidgetsFlutterBinding.ensureInitialized();
 

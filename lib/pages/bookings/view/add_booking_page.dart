@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parallel/app_widgets/drawer/drawer_employee.dart';
@@ -38,6 +44,7 @@ class _AddBookingPage extends State<AddBookingPage> {
             return Center(child: CircularProgressIndicator());
           }
 
+          ///Lista di widget che rappresentano i workspace
           return SingleChildScrollView(
             child: Column(
               children: state.workspaces

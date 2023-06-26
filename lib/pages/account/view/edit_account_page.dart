@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -15,10 +21,12 @@ class EditAccountPage extends StatefulWidget {
 }
 
 class _EditAccountPageState extends State<EditAccountPage> {
+  ///Definizione dei controller per i campi del form
   TextEditingController cityController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
 
+  ///Dichiarazione delle librerie di gestione delle variabili locali
   final storage = FlutterSecureStorage();
   late SharedPreferences sharedPreferences;
   String? userRole;
@@ -31,11 +39,13 @@ class _EditAccountPageState extends State<EditAccountPage> {
     getToken();
   }
 
+  ///Inizializzazione delle SharedPreferences
   void initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getUserRole();
   }
 
+  ///Ottenimento del role dell'utente
   void getUserRole() {
     String? storedUserRole = sharedPreferences.getString('userRole');
     setState(() {
@@ -43,6 +53,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
     });
   }
 
+  ///Ottenimento del token dell'utente
   void getToken() async {
     String? storedToken = await storage.read(key: 'userToken');
     setState(() {
@@ -50,6 +61,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
     });
   }
 
+  ///Pulizia dei controller dei campi del form
   void clearController() {
     cityController.clear();
     addressController.clear();
@@ -58,6 +70,8 @@ class _EditAccountPageState extends State<EditAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    ///Widget utilizzato per rilevare e gestire gli input dell'utente,
+    ///come tocchi, pressioni prolungate, gesture etc.
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
