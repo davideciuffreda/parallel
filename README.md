@@ -7,6 +7,15 @@ Management for enhanced coworking spaces: palestre relazionali.
 * Dart v. >= 2.19.6
 
 ## Getting Started
+1. Clone _parallel_ repository
+```
+   /path/to/.../fe/ $ git clone
+```
+2. Download and install _flutter dependencies_*
+```
+   /path/to/.../fe/parallel $ flutter pub get
+```
+3. Run _android_ _emulator_ from desired IDE
 
 4. Run _parallel_ project
 ```
