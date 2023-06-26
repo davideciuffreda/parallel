@@ -1,16 +1,26 @@
 # parallel
+Management for enhanced coworking spaces: palestre relazionali.
 
-A new Flutter project.
+### Requirements
+* Android Studio v. >= Dolphin | 2021.3.1 Patch 1
+* Flutter v. = 3.7.12
+* Dart v. >= 2.19.6
 
-## Getting Started
+### Setup
+1. Clone _parallel_ repository
+```
+	$ git clone
+```
+2. Download and install _flutter dependencies_*
+```
+   /path/to/.../fe/parallel $ flutter pub get
+```
+3. Run _android emulator_ from desired IDE
 
-This project is a starting point for a Flutter application.
+4. Run _parallel_ project
+```
+   /path/to/.../fe/parallel $ flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<br>
+* If dependencies are missing in the '_pubspec.yaml_' file, they must be installed via the command '_flutter pub add [dependency_name]_'.

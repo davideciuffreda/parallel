@@ -17,7 +17,7 @@ class MainRepository {
 
   final storage = FlutterSecureStorage();
 
-  final String baseUrl = "http://172.16.216.51:8080/api/v1";
+  final String baseUrl = "http://172.16.219.94:8080/api/v1";
 
   Future<List<Headquarter>> getHeadquarters() async {
     List<Headquarter> headquarters = [];

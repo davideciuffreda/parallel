@@ -1,6 +1,8 @@
-// To parse this JSON data, do
+// Copyright - 2023 - Ciuffreda Davide
 //
-//     final user = userFromJson(jsonString);
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
 
 import 'dart:convert';
 
@@ -18,6 +20,7 @@ class User {
     String city;
     String address;
     String role;
+    ///ID utile a seconda del role dell'utente che esegue il login
     int scopeId;
     String jobPosition;
 

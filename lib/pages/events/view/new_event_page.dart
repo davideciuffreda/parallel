@@ -48,6 +48,16 @@ class _NewEventPage extends State<NewEventPage> {
                   if (state is EventHeadquartersByCompanyLoaded) {
                     return Column(
                       children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 12),
+                          child: Text(
+                            "Scegli in quale sede si terrà l'evento",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
                         SingleChildScrollView(
                           child: Column(
                             children: state.headquarters
@@ -151,7 +161,7 @@ class _NewEventPage extends State<NewEventPage> {
                           ),
                           SizedBox(height: 6),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               BlocListener<EventCubit, EventState>(
                                 listener: (context, state) {
@@ -240,8 +250,11 @@ class _NewEventPage extends State<NewEventPage> {
                     );
                   } else if (state is EventError) {
                     return TextButton(
-                      child: Center(
-                        child: Text('Qualcosa è andato storto, riprova!'),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 64),
+                        child: Center(
+                          child: Text('Qualcosa è andato storto, riprova!'),
+                        ),
                       ),
                       onPressed: () {
                         clearController();

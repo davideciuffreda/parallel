@@ -1,4 +1,10 @@
-///Definition of all the routes of the App
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
+///Definizione di tutte le routes possibili all'interno di Parallel
 const String loginPageRoute = '/login_page';
 const String homePageUserRoute = '/home_page_user';
 const String homePageManagerRoute = '/home_page_manager';

@@ -45,15 +45,16 @@ class _HeadquarterCompanyCard extends State<HeadquarterCompanyCard> {
             BlocBuilder<EventCubit, EventState>(
               builder: (context, state) {
                 return FloatingActionButton.small(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
                   onPressed: () {
                     BlocProvider.of<EventCubit>(context)
                         .emit(EventHqSelected(widget.hq.id));
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          widget.hq.city + ' | ' + widget.hq.address,
+                          'Sede scelta: ' +
+                              widget.hq.city +
+                              ' | ' +
+                              widget.hq.address,
                           style: TextStyle(
                             color: Colors.black,
                           ),
@@ -64,6 +65,8 @@ class _HeadquarterCompanyCard extends State<HeadquarterCompanyCard> {
                       ),
                     );
                   },
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
                   child: Icon(
                     Icons.check,
                     color: Colors.blue,

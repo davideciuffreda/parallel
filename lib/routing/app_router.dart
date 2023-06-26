@@ -1,3 +1,9 @@
+// Copyright - 2023 - Ciuffreda Davide
+//
+// Use of this source code is governed by an
+// MIT-style license that can be found at
+// https://opensource.org/licenses/MIT.
+
 import 'package:flutter/material.dart';
 import 'package:parallel/pages/account/view/account_page.dart';
 import 'package:parallel/pages/account/view/edit_account_page.dart';
@@ -16,43 +22,60 @@ import 'package:parallel/pages/login/view/login_page.dart';
 import 'package:parallel/routing/router_constants.dart';
 import 'package:parallel/pages/home/home_page_receptionist.dart';
 
+///AppRouter per l'applicazione, gestisce il reindirizzamento a una pagina
+///definita in base ad alcune impostazioni
 class AppRouter {
   Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case loginPageRoute:
         return MaterialPageRoute(builder: (context) => LoginPage());
+
       case homePageUserRoute:
         return MaterialPageRoute(builder: (context) => HomePageUser());
+
       case homePageReceptionistRoute:
         return MaterialPageRoute(builder: (context) => HomePageReceptionist());
+
       case homePageManagerRoute:
         return MaterialPageRoute(builder: (context) => HomePageManager());
+
       case headquartersPageRoute:
         return MaterialPageRoute(builder: (context) => HeadquartersPage());
+
       case headquarterDetailsPageRoute:
         var parameters = settings.arguments as Map<String, dynamic>;
         var headquarterId = parameters['headquarterId'];
         return MaterialPageRoute(
             builder: (context) => HeadquarterDetailsPage(id: headquarterId,));
+
       case favHeadquartersPageRoute:
         return MaterialPageRoute(
             builder: (context) => FavoriteHeadquartersPage());
+
       case eventsPageRoute:
         return MaterialPageRoute(builder: (context) => EventsPage());
+
       case bookingsPageRoute:
         return MaterialPageRoute(builder: (context) => BookingsPage());
+
       case addBookingPageRoute:
         return MaterialPageRoute(builder: (context) => AddBookingPage());
+
       case accountPageRoute:
         return MaterialPageRoute(builder: (context) => AccountPage());
+
       case editAccountPageRoute:
         return MaterialPageRoute(builder: (context) => EditAccountPage());
+
       case editPasswordPageRoute:
         return MaterialPageRoute(builder: (context) => EditPasswordPage());
+
       case newEventPageRoute:
         return MaterialPageRoute(builder: (context) => NewEventPage());
+
       case myEventsPageRoute:
         return MaterialPageRoute(builder: (context) => MyEventsPage());
+        
       default:
         return MaterialPageRoute(builder: (context) => LoginPage());
     }
