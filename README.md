@@ -23,4 +23,4 @@ Management for enhanced coworking spaces: palestre relazionali.
 ```
 
 <br>
-* If dependencies are missing in the _pubspec.yaml_ file, they must be installed via the command _flutter pub add [dependency_name]_.
+* If dependencies are missing in the 'pubspec.yaml' file, they must be installed via the command 'flutter pub add [dependency_name]'.
